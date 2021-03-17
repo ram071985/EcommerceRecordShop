@@ -4,9 +4,10 @@
 
 ## Authors
 
-### Brian Bastanza
 ### Reid Muchow
 
-www.brianbastanza.me
-
 www.reidmuchow.com
+
+### Brian Bastanza
+
+www.brianbastanza.me
