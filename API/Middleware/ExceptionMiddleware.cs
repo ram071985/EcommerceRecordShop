@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace API.MiddleWare
+namespace API.Middleware
 {
     public class ExceptionMiddleware
     {
