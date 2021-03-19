@@ -6,9 +6,10 @@ namespace Core.Entities
     public class Order
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
         public DateTime PurchaseDate { get; set; }
         public DateTime ShippingDate { get; set; }
-        public List<Album> Albums { get; set; }
+        public List<PurchasedAlbum> Albums { get; set; }
 
         public decimal TransactionPrice
         {
@@ -23,8 +24,9 @@ namespace Core.Entities
         }
     }
 
-    public class Album
+    public class PurchasedAlbum
     {
+        public short UserId { get; set; }
         public string ArtistName { get; set; }
         public string AlbumName { get; set; }
         public decimal PurchasePrice { get; set; }

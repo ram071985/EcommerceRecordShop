@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using API.Models;
+using Core.Entities;
 using Core.Services.UserServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,15 +28,6 @@ namespace API.Controllers
         public UserModel Get(string username)
         {
             return new UserModel();
-        }
-
-        // [Authorize]
-        [HttpGet]
-        [Route("{orders}/{username}")]
-        public List<object> GetOrders(string username)
-        {
-            // TODO should return List<Order>()
-            return new List<object>();
         }
 
         [HttpPost]
