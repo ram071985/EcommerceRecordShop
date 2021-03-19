@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace API.Controllers
+namespace API.Models
 {
     public class UserInputModel
     {
