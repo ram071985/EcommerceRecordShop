@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Core.Entities;
 
 namespace Core.Services.InventoryServices
@@ -8,7 +6,7 @@ namespace Core.Services.InventoryServices
 
     public interface IAlbumInventoryService
     {
-
+        List<Album> Get();
     }
 
     public class AlbumInventoryService : IAlbumInventoryService
@@ -27,7 +25,6 @@ namespace Core.Services.InventoryServices
             albums.Add(album);
 
             return albums;
-        }
-            
+        }           
     }
 }
