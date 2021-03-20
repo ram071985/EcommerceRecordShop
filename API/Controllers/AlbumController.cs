@@ -21,7 +21,7 @@ namespace API.Controllers
         }
 
         // Get current in-stock albums from database
-        [HttpGet("{albums}")]
+        [HttpGet]
         public List<AlbumModel> GetAlbums()
         {
             // TODO should return List<Albums>()
