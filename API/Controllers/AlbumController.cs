@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller")]
+    [Route("[controller]")]
 
-    public sealed class AlbumController : ControllerBase
+    public sealed class AlbumController : Controller
     {
         private readonly IAlbumInventoryService _albumInventoryService;
     
