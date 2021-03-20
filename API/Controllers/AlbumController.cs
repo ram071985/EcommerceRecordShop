@@ -4,21 +4,20 @@
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/albums")]
+    [Route("[controller")]
 
-    public class AlbumController : ControllerBase
+    public sealed class AlbumController : ControllerBase
     {
-
-
         public AlbumController()
         {
             
         }
-
+        // Get current in stock albums from database
         [HttpGet("albums")]
-        public void GetAllAlbums()
+        public void GetAlbums()
         {
-
+            // TODO should return List<Albums>()
+            
         }
     }
 }
