@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using API.Models;
 using Core.Services.InventoryServices;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,16 @@ namespace API.Controllers
         public List<AlbumModel> GetAlbums()
         {
             // TODO should return List<Albums>()
-            return new List<AlbumModel>();            
+            var albums = _albumInventoryService.Get();
+
+            var albumModels = albums.Select(album => new AlbumModel
+            {
+                Id = album.Id,
+                ArtistName = album.ArtistName,
+                AlbumName = album.AlbumName,
+                Price = album.Price
+            });
+            return albumModels.ToList();            
         }
     }
 }
