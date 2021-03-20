@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using API.Models;
+using Core.Services.InventoryServices;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace API.Controllers
@@ -8,16 +11,20 @@ namespace API.Controllers
 
     public sealed class AlbumController : ControllerBase
     {
-        public AlbumController()
+        private readonly IAlbumInventoryService _albumInventoryService;
+    
+        public AlbumController(IAlbumInventoryService albumInventoryService)
         {
-            
+            _albumInventoryService = albumInventoryService;
+
         }
-        // Get current in stock albums from database
+
+        // Get current in-stock albums from database
         [HttpGet("albums")]
-        public void GetAlbums()
+        public List<AlbumModel> GetAlbums()
         {
             // TODO should return List<Albums>()
-            
+            return new List<AlbumModel>();            
         }
     }
 }
