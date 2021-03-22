@@ -5,6 +5,7 @@ using API.Models;
 using Core.Entities;
 using Core.Services.OrderServices;
 using Core.Services.UserServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -24,12 +25,12 @@ namespace API.Controllers
             _path = Path.GetFullPath(ToString()!);
         }
 
-        // [Authorize]
+        [Authorize]
         [HttpGet("{username}")]
-        public List<Order> GetOrdersByUsername(string username)
+        public string GetOrdersByUsername(string username)
         {
             // TODO should return List<Order>()
-            return new List<Order>();
+            return username;
         }
 
         // [Authorize]

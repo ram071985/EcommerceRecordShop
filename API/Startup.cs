@@ -1,4 +1,5 @@
 using API.Middleware;
+using API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -24,6 +25,7 @@ namespace API
 
             InterfaceConfigReid.Configure(services, _configuration);
             InterfaceConfigBrian.Configure(services, _configuration);
+            JwtConfig.Configure(services, _configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,6 +40,8 @@ namespace API
             app.UseRouting();
 
             app.UseMiddleware<ExceptionMiddleware>();
+
+            app.UseAuthentication();
             
             app.UseAuthorization();
 

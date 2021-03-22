@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using API.Models;
+using Core.Services.AuthenticationServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,9 +26,10 @@ namespace API.Controllers
         public IActionResult Authenticate(UserAuthenticationInputModel user)
         {
             if (user.Username == null || user.Password == null)
-                throw new Exception( "Invalid Authentication input");
+                throw new Exception( $"Invalid Authentication input in {_path}.Authenticate()");
                     
             var token = _generateJwtToken.Authenticate(user.Username, user.Password);
+            
             if (token == null)
                 return Unauthorized();
 
