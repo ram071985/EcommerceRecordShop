@@ -8,6 +8,10 @@
 
 www.reidmuchow.com
 
+### Aliel Reyes
+
+alielreyes.netlify.app
+
 ### Brian Bastanza
 
 www.brianbastanza.me
