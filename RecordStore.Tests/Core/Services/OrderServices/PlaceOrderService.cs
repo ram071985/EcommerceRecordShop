@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Core.Entities;
 using Core.Services.OrderServices;
@@ -44,7 +43,6 @@ namespace RecordStore.Tests.Core.Services.OrderServices
             var transactionPrice = 0M;
             purchasedAlbums.ForEach(action: album => transactionPrice += album.PurchasePrice);
             var order = _sut.PlaceOrder(purchasedAlbums);
-
 
             Assert.That(order.TransactionPrice, Is.EqualTo(transactionPrice));
             Assert.That(order.Albums.Count, Is.EqualTo(4));

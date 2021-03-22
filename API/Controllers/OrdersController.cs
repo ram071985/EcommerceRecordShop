@@ -11,7 +11,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public sealed class OrdersController : Controller
+    public class OrdersController : Controller
     {
         private readonly IPlaceOrderService _orderService;
         private readonly string _path;
