@@ -14,6 +14,8 @@ namespace Core.Services.OrderServices
         // TODO should return void
         public Order PlaceOrder(List<PurchasedAlbum> albums)
         {
+            // TODO var user = [get user from database]
+            // user.WalletBalance -= order.TransactionPrice
             var order = new Order
             {
                 Albums = albums,

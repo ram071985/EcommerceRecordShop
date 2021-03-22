@@ -10,7 +10,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public sealed class UsersController : Controller
+    public class UsersController : Controller
     {
         private readonly IAddUserService _addUserService;
         private readonly string _path;
