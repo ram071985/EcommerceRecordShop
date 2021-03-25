@@ -29,9 +29,9 @@ namespace API.Controllers
                 throw new Exception( $"Invalid Authentication input in {_path}.Authenticate()");
                     
             var token = _generateJwtToken.Authenticate(user.Username, user.Password);
-            
+
             if (token == null)
-                return Unauthorized();
+                return BadRequest("bad request");
 
             return Ok(token);
         }

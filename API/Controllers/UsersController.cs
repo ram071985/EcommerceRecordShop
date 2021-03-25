@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using API.Models;
-using Core.Entities;
 using Core.Services.UserServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -15,21 +14,19 @@ namespace API.Controllers
         private readonly IAddUserService _addUserService;
         private readonly string _path;
 
-        public UsersController(
-            IAddUserService addUserService
-        )
+        public UsersController(IAddUserService addUserService)
         {
             _addUserService = addUserService;
             _path = Path.GetFullPath(ToString()!);
         }
 
         // [Authorize]
-        [HttpGet("{username}")]
+        [HttpGet("{username}")]// /users/aliel
         public UserModel Get(string username)
         {
             return new UserModel();
         }
-
+        
         [HttpPost]
         public void AddUser(UserInputModel userInput)
         {
@@ -51,4 +48,5 @@ namespace API.Controllers
         {
         }
     }
+    
 }
