@@ -37,7 +37,7 @@ namespace API.Controllers
         [HttpPost]
         public void PlaceOrder(List<AlbumPurchaseInputModel> purchasedAlbums)
         {
-            var albums = new List<PurchasedAlbum>();
+            var products = new List<Product>();
             purchasedAlbums.ForEach(distinctAlbum =>
             {
                 if (distinctAlbum.AlbumName == null ||
@@ -48,16 +48,12 @@ namespace API.Controllers
                     throw new Exception("invalid album");
                 
                 for (var i = 1; i <= distinctAlbum.Quantity; i++)
-                    albums.Add(new PurchasedAlbum
+                    products.Add(new Product
                     {
                         ArtistName = distinctAlbum.ArtistName,
                         AlbumName = distinctAlbum.AlbumName,
                         PurchasePrice = distinctAlbum.PurchasePrice,
-                        UserId = distinctAlbum.UserId,
-                    });
-            });
-
-            _orderService.PlaceOrder(albums);
+                        UserId = distinctAlbum.UserId, }); }); _orderService.PlaceOrder(albums);
         }
 
         // [Authorize]

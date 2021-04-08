@@ -13,5 +13,6 @@ namespace Core.Entities
         public string Email { get; set; }
         public DateTime? CreatedAt { get; set; }
         public decimal WalletBalance { get; set; }
+        public List<Order> Orders {get;set;}
     }
 }

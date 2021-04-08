@@ -19,8 +19,6 @@ namespace Core.Services.InventoryServices
             {
                 Id = 1,
                 ArtistName = "Stevie Wonder",
-                AlbumName = "Innervisions",
-                Price = 15.00M
             };
             albums.Add(album);
 
