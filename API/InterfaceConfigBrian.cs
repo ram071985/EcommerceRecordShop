@@ -13,6 +13,7 @@ namespace API
             services.AddScoped<IAddUserService, AddUserService>();
             services.AddScoped<IPlaceOrderService, PlaceOrderService>();
             services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
+            services.AddScoped<ISpotifyAlbumService, SpotifyAlbumService>();
         }
     }
 }

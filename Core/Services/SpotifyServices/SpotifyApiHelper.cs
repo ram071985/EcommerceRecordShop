@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -36,7 +37,7 @@ namespace Core.Services.SpotifyServices
             apiClient.DefaultRequestHeaders.Accept.Clear();
             
             apiClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("bearer", tokenResponse.AccessToken);
+                new AuthenticationHeaderValue("Bearer", tokenResponse.AccessToken);
             
             apiClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));

@@ -1,54 +1,56 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Core.Entities
 {
-    public class SpotifyAlbumData
+    public class AlbumData
     {
-
-        [JsonProperty("items")] public List<Track> Items { get; set; }
-
-        [JsonProperty("total")] public long Total { get; set; }
+        [JsonProperty("artists")]
+        public List<Artist> Artists { get; set; }
+        [JsonProperty("images")]
+        public List<Image> Images { get; set; }
+        [JsonProperty("label")]
+        public string RecordLabel { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("release_date")]
+        public string ReleaseDate { get; set; }
+        [JsonProperty("total_tracks")]
+        public int TotalTracks { get; set; }
+        [JsonProperty("tracks")]
+        public Tracks Tracks { get; set; }
+    }
+    
+    public class Artist
+    {
+        [JsonProperty("name")]
+        public string Name { get; set; }
     }
 
-    public partial class Track
+    public class Image
     {
-        [JsonProperty("artists")] public List<Artist> Artists { get; set; }
-
-        [JsonProperty("disc_number")] public long DiscNumber { get; set; }
-
-        [JsonProperty("duration_ms")] public long DurationMs { get; set; }
-
-        [JsonProperty("explicit")] public bool Explicit { get; set; }
-
-        [JsonProperty("href")] public Uri Href { get; set; }
-
-        [JsonProperty("id")] public string Id { get; set; }
-
-        [JsonProperty("is_local")] public bool IsLocal { get; set; }
-
-        [JsonProperty("name")] public string Name { get; set; }
-
-        [JsonProperty("preview_url")] public Uri PreviewUrl { get; set; }
-
-        [JsonProperty("track_number")] public long TrackNumber { get; set; }
-
-        [JsonProperty("type")] public string Type { get; set; }
-
-        [JsonProperty("uri")] public string Uri { get; set; }
+        [JsonProperty("Url")]
+        public string Url { get; set; }
     }
 
-    public partial class Artist
+    public class Tracks
     {
-        [JsonProperty("id")] public string Id { get; set; }
+        [JsonProperty("items")]
+        public List<Item> Items { get; set; }
+    }
 
-        [JsonProperty("name")] public string Name { get; set; }
-
-        [JsonProperty("type")] public string Type { get; set; }
-
-        [JsonProperty("uri")] public string Uri { get; set; }
+    public class Item
+    {
+        [JsonProperty("artists")]
+        public List<Artist> Artists { get; set; }
+        [JsonProperty("explicit")]
+        public bool Explicit { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("track_number")]
+        public int TrackNumber { get; set; }
+        [JsonProperty("duration_ms")]
+        public int Duration { get; set; }
     }
 }
