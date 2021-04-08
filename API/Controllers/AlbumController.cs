@@ -31,8 +31,8 @@ namespace API.Controllers
             {
                 Id = album.Id,
                 ArtistName = album.ArtistName,
-                AlbumName = album.AlbumName,
-                Price = album.Price
+                // AlbumName = album.AlbumName,
+                // Price = album.Price
             });
             return albumModels.ToList();            
         }

@@ -5,6 +5,7 @@ using Core.Services.UserServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+        // [Authorize]
 namespace API.Controllers
 {
     [ApiController]
@@ -20,7 +21,6 @@ namespace API.Controllers
             _path = Path.GetFullPath(ToString()!);
         }
 
-        // [Authorize]
         [HttpGet("{username}")]// /users/aliel
         public UserModel Get(string username)
         {

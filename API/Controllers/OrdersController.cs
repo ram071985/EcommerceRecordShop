@@ -38,22 +38,22 @@ namespace API.Controllers
         public void PlaceOrder(List<AlbumPurchaseInputModel> purchasedAlbums)
         {
             var products = new List<Product>();
-            purchasedAlbums.ForEach(distinctAlbum =>
-            {
-                if (distinctAlbum.AlbumName == null ||
-                    distinctAlbum.ArtistName == null ||
-                    distinctAlbum.Quantity < 1 ||
-                    distinctAlbum.PurchasePrice == 0 ||
-                    distinctAlbum.UserId == 0)
-                    throw new Exception("invalid album");
+            // purchasedAlbums.ForEach(distinctAlbum =>
+            // {
+            //     if (distinctAlbum.AlbumName == null ||
+            //         distinctAlbum.ArtistName == null ||
+            //         distinctAlbum.Quantity < 1 ||
+            //         distinctAlbum.PurchasePrice == 0 ||
+            //         distinctAlbum.UserId == 0)
+            //         throw new Exception("invalid album");
                 
-                for (var i = 1; i <= distinctAlbum.Quantity; i++)
-                    products.Add(new Product
-                    {
-                        ArtistName = distinctAlbum.ArtistName,
-                        AlbumName = distinctAlbum.AlbumName,
-                        PurchasePrice = distinctAlbum.PurchasePrice,
-                        UserId = distinctAlbum.UserId, }); }); _orderService.PlaceOrder(albums);
+                // for (var i = 1; i <= distinctAlbum.Quantity; i++)
+                //     products.Add(new Product
+                    // {
+                        // ArtistName = distinctAlbum.ArtistName,
+                        // AlbumName = distinctAlbum.AlbumName,
+                        // PurchasePrice = distinctAlbum.PurchasePrice,
+                        // UserId = distinctAlbum.UserId, }); }); _orderService.PlaceOrder(albums);
         }
 
         // [Authorize]

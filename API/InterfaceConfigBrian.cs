@@ -1,4 +1,5 @@
 using Core.Services.OrderServices;
+using Core.Services.SpotifyServices;
 using Core.Services.UserServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ namespace API
         {
             services.AddScoped<IAddUserService, AddUserService>();
             services.AddScoped<IPlaceOrderService, PlaceOrderService>();
+            services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
         }
     }
 }

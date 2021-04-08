@@ -18,7 +18,7 @@ namespace Core.Entities
         public string ArtistName { get; set; }
         public List<string> Collaborators { get; set; }
         public string Description { get; set; }
-        public Date ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
         public string ImageUrl { get; set; }
     }
     public class SpotifyAlbum
