@@ -20,9 +20,9 @@ namespace API.Controllers
         }
 
         [HttpGet("{albumId}")]
-        public async Task<Album> Get(string albumId)
+        public Album Get(string albumId)
         {
-            return await _albumService.GetAlbumBySpotifyId(albumId);
+            return _albumService.GetAlbumBySpotifyId(albumId);
         }
     }
 }

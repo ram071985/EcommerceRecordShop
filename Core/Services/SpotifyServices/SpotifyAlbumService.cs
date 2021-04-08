@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Core.Entities;
 using Newtonsoft.Json;
@@ -9,10 +8,10 @@ namespace Core.Services.SpotifyServices
 {
     public interface ISpotifyAlbumService
     {
-        Task<Album> GetAlbumBySpotifyId(string spotifyId);
+        Album GetAlbumBySpotifyId(string spotifyId);
     }
 
-    public class SpotifyAlbumService : ISpotifyAlbumService
+    public class SpotifyAlbumService: ISpotifyAlbumService
     {
         private readonly ISpotifyApiHelper _apiHelper;
 
@@ -21,14 +20,9 @@ namespace Core.Services.SpotifyServices
             _apiHelper = apiHelper;
         }
 
-        public async Task<Album> GetAlbumBySpotifyId(string spotifyId)
+        public Album GetAlbumBySpotifyId(string spotifyId)
         {
-            var url = $"https://api.spotify.com/v1/albums/{spotifyId}";
-            var client = await GetClient();
-
-            var response = await client.GetAsync(url);
-            var albumData = await response.Content.ReadAsStringAsync();
-            var spotifyAlbumData = JsonConvert.DeserializeObject<AlbumData>(albumData);
+            var spotifyAlbumData = JsonConvert.DeserializeObject<AlbumData>(GetAlbumFromSpotify(spotifyId).Result);
 
             var tracks = new List<Track>();
             spotifyAlbumData.Tracks.Items.ForEach(track => tracks.Add(
@@ -55,14 +49,19 @@ namespace Core.Services.SpotifyServices
                 RecordLabel = spotifyAlbumData.RecordLabel,
                 SpotifyId = spotifyId
             };
-
             return album;
         }
 
-        private async Task<HttpClient> GetClient()
+        private async Task<string> GetAlbumFromSpotify(string spotifyId)
         {
+            var url = $"https://api.spotify.com/v1/albums/{spotifyId}";
             var client = await _apiHelper.InitializeClient();
-            return client;
+
+            var response = await client.GetAsync(url);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("invalid response from spotify");
+
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }
