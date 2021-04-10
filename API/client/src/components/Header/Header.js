@@ -14,40 +14,67 @@ import {
   CNavbarBrand,
 } from "@coreui/react";
 import React, { useState } from "react";
+import "./Header.scss";
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogoLink = () => {
+    console.log("Load Home Page");
+  };
+
+  const handleShopLink = () => {
+    console.log("Load Shop Page");
+  };
+
+  const handleSearch = () => {
+    console.log("Show Search bar");
+  };
+
+  const handleCartLink = () => {
+    console.log("Load Cart");
+  };
   return (
     <div>
       <CNavbar expandable="sm" color="info">
         <CToggler inNavbar onClick={() => setIsOpen(!isOpen)} />
-        <CNavbarBrand>NavbarBrand</CNavbarBrand>
+        <CNavbarBrand style={{ cursor: "pointer" }} onClick={handleLogoLink}>
+          NavbarBrand
+        </CNavbarBrand>
         <CCollapse show={isOpen} navbar>
           <CNavbarNav>
-            <CNavLink>Home</CNavLink>
-            <CNavLink>Link</CNavLink>
+            <CNavLink onClick={handleShopLink}>Shop</CNavLink>
           </CNavbarNav>
-          <CNavbarNav className="ml-auto">
-            <CForm inline>
-              <CInput className="mr-sm-2" placeholder="Search" size="sm" />
-              <CButton color="light" className="my-2 my-sm-0" type="submit">
-                Search
-              </CButton>
-            </CForm>
+          <CNavbarNav style={{ alignItems: "center" }} className="ml-auto">
+            <CButton
+              onClick={handleSearch}
+              style={{ width: "50px", height: "37px" }}
+            >
+              <ion-icon name="search"></ion-icon>{" "}
+            </CButton>
+            <CNavLink
+              style={{ width: "50px", height: "37px" }}
+              onClick={handleCartLink}
+            >
+              <ion-icon name="cart"></ion-icon>
+            </CNavLink>
+            <CNavLink
+              style={{ width: "50px", height: "37px" }}
+              onClick={handleCartLink}
+            >
+              <ion-icon name="heart"></ion-icon>
+            </CNavLink>
             <CDropdown inNav>
-              <CDropdownToggle color="primary">Lang</CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem>EN</CDropdownItem>
-                <CDropdownItem>ES</CDropdownItem>
-                <CDropdownItem>RU</CDropdownItem>
-                <CDropdownItem>FA</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-            <CDropdown inNav>
-              <CDropdownToggle color="primary">User</CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem>Account</CDropdownItem>
-                <CDropdownItem>Settings</CDropdownItem>
+              <CDropdownToggle caret={false} color="primary">
+                <div className="profile-pic-no-img">AR</div>
+              </CDropdownToggle>
+              <CDropdownMenu placement="bottom">
+                <CDropdownItem onClick={() => console.log("Transaction btn")}>
+                  Transaction History
+                </CDropdownItem>
+                <CDropdownItem onClick={() => console.log("Logout Btn")}>
+                  Logout
+                </CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
           </CNavbarNav>
