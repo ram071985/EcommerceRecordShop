@@ -25,7 +25,7 @@ namespace API
 
             InterfaceConfigReid.Configure(services, _configuration);
             InterfaceConfigBrian.Configure(services, _configuration);
-            JwtConfig.Configure(services, _configuration);
+            //JwtConfig.Configure(services, _configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
