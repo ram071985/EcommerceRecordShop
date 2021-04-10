@@ -11,5 +11,6 @@
 
   <ItemGroup>
     <Folder Include="Services\InventoryServices\" />
+    <Folder Include="Services\AuthenticationServices\" />
   </ItemGroup>
 </Project>
