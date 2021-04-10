@@ -22,6 +22,9 @@ tags
 *.userosscache
 *.sln.docstates
 
+CORE UI
+coreui-free-bootstrap-admin-template-master.zip
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
