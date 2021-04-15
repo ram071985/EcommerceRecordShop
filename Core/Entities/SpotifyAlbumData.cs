@@ -20,6 +20,8 @@ namespace Core.Entities
         public int TotalTracks { get; set; }
         [JsonProperty("tracks")]
         public Tracks Tracks { get; set; }
+        [JsonProperty("popularity")]
+        public int Popularity { get; set; }
     }
     
     public class Artist

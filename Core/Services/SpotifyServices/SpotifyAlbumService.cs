@@ -11,7 +11,7 @@ namespace Core.Services.SpotifyServices
         Album GetAlbumBySpotifyId(string spotifyId);
     }
 
-    public class SpotifyAlbumService: ISpotifyAlbumService
+    public class SpotifyAlbumService : ISpotifyAlbumService
     {
         private readonly ISpotifyApiHelper _apiHelper;
 
@@ -47,17 +47,20 @@ namespace Core.Services.SpotifyServices
                 ReleaseDate = Convert.ToDateTime(spotifyAlbumData.ReleaseDate),
                 ImageUrl = spotifyAlbumData.Images[0].Url,
                 RecordLabel = spotifyAlbumData.RecordLabel,
-                SpotifyId = spotifyId
+                SpotifyId = spotifyId,
+                Popularity = spotifyAlbumData.Popularity
             };
             return album;
         }
 
         private async Task<string> GetAlbumFromSpotify(string spotifyId)
         {
-            var url = $"https://api.spotify.com/v1/albums/{spotifyId}";
             var client = await _apiHelper.InitializeClient();
 
+            var url = $"https://api.spotify.com/v1/albums/{spotifyId}";
+
             var response = await client.GetAsync(url);
+            
             if (!response.IsSuccessStatusCode)
                 throw new Exception("invalid response from spotify");
 
