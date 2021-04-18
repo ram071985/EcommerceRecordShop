@@ -26,26 +26,37 @@ const ProductLayout = () => {
       });
   };
   return (
-    <Container className="main-container" fluid>
-      <div>
-        <Col className="left-col d-inline">
-          <img id="album-img" className="img-fluid" src={image} />
-        </Col>
+    <div className="main-container d-flex">
+      <div classname="left-container">
+        <img id="album-img" className="img-fluid" src={image} />
       </div>
       <div>
-        <Col className="d-inline right-col" md={4}>
-          <span className="product-titles" id="artist-name">
-            {artistName}
-            <span className="product-titles" id="album-name">
-              {albumName}
-            </span>
-          </span>
-          <h3 className="product-titles mt-1" id="price">
-            $20
-          </h3>
-        </Col>
+        <h1 className="product-details" id="artist-name">Kiefer</h1>
       </div>
-    </Container>
+    </div>
+    // <Container className="main-container">
+    //   <div>
+    //     <Col className="left-col d-inline">
+    //       <img id="album-img" className="img-fluid" src={image} />
+    //     </Col>
+    //   </div>
+    //   <div>
+    //     <Col className="d-inline right-col" md={4}>
+    //       <div className="album-content">
+    //         {" "}
+    //         <span className="product-titles" id="artist-name">
+    //           {artistName}
+    //           <span className="product-titles" id="album-name">
+    //             {albumName}
+    //           </span>
+    //         </span>
+    //         <span className="product-titles mt-1" id="price">
+    //           $20
+    //         </span>
+    //       </div>
+    //     </Col>
+    //   </div>
+    // </Container>
   );
 };
 

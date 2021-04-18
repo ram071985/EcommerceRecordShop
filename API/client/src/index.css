@@ -2,8 +2,9 @@
 
 /*  main-containers */
 .main-container {
-  display: flex;
   padding: 20px 15px;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 .left-container {
   display: inline;
@@ -13,20 +14,19 @@
   display: inline;
 }
 
-
 .left-col {
   display: block;
   max-width: 700px !important;
   padding: 0 !important;
 }
 
-.product-titles {
+.product-details {
   font-family: "Archivo", sans-serif !important;
   line-height: 1.1;
+  padding: 0px 15px;
 }
 
 #artist-name {
-  margin-top: 1.2rem !important;
   font-size: 2.5rem;
   font-weight: 700;
 }
@@ -40,37 +40,31 @@
   line-height: 1.1;
   display: block;
   font-size: 2rem;
-  padding-left: 10px;
 }
 
-.album-items-row {
- display: inline;
- max-width: 700px !important;
+.album-content {
+  margin: 10px;
 }
 
-.album-items-right-row {
-  display: inline;
-  max-width: 30% !important;
- }
+@media screen and (max-width: 1500px) {
+.main-container {
+  margin: 0 !important;
+}
 
-@media screen and (min-width: 960px) {
+#album-img {
+}
+}
+
+
+/* @media screen and (min-width: 960px) {
   /* .album-items-row {
     margin: auto !important;
-  } */
-  .main-container {
-    padding: 75px 100px !important;
-  }
-}
+  } 
+} */
 
-@media screen and (max-width: 670px) {
- 
+/* @media screen and (max-width: 670px) {
   .album-items-row {
-    
     display: block !important;
-  }
-
-  .album-items-row {
-    margin: 0 !important;
   }
 
   .right-container {
@@ -80,4 +74,4 @@
   .main-container {
     display: block;
   }
-}
+} */
