@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
+import { CIcon } from "@coreui/icons-react";
+import { freeSet } from "@coreui/icons";
 
 const ProductLayout = () => {
   const [artistName, setArtistName] = useState("Kiefer");
@@ -27,36 +29,24 @@ const ProductLayout = () => {
   };
   return (
     <div className="main-container d-flex">
-      <div classname="left-container">
+      <div classname="left-container container-fluid">
         <img id="album-img" className="img-fluid" src={image} />
       </div>
-      <div>
-        <h1 className="product-details" id="artist-name">Kiefer</h1>
+      <div className="right-container">
+        {" "}
+        <div className="pname-container container-fluid d-flex flex-wrap">
+          <h1 className="product-details" id="artist-name">
+            Kiefer
+          </h1>
+          <span>
+            <CIcon className="ml-4" content={freeSet.cilBookmark} />
+          </span>
+        </div>
+        <div className="price-container">
+          <h3>$20</h3>
+        </div>
       </div>
     </div>
-    // <Container className="main-container">
-    //   <div>
-    //     <Col className="left-col d-inline">
-    //       <img id="album-img" className="img-fluid" src={image} />
-    //     </Col>
-    //   </div>
-    //   <div>
-    //     <Col className="d-inline right-col" md={4}>
-    //       <div className="album-content">
-    //         {" "}
-    //         <span className="product-titles" id="artist-name">
-    //           {artistName}
-    //           <span className="product-titles" id="album-name">
-    //             {albumName}
-    //           </span>
-    //         </span>
-    //         <span className="product-titles mt-1" id="price">
-    //           $20
-    //         </span>
-    //       </div>
-    //     </Col>
-    //   </div>
-    // </Container>
   );
 };
 

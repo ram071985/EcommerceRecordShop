@@ -4,14 +4,23 @@
 .main-container {
   padding: 20px 15px;
   margin-left: 25%;
-  margin-right: 25%;
+}
+
+.right-container {
+  padding: 0px 35px;
 }
 .left-container {
   display: inline;
 }
 
-.right-container {
+.pname-container {
   display: inline;
+  max-height: 3rem;
+  padding: 0px !important;
+}
+
+.price-container {
+  display: inline-block !important;
 }
 
 .left-col {
@@ -23,11 +32,10 @@
 .product-details {
   font-family: "Archivo", sans-serif !important;
   line-height: 1.1;
-  padding: 0px 15px;
 }
 
 #artist-name {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
 }
 
@@ -46,12 +54,30 @@
   margin: 10px;
 }
 
-@media screen and (max-width: 1500px) {
-.main-container {
-  margin: 0 !important;
+@media screen and (max-width: 640px) {
+ .main-container {
+   flex-direction: column !important;
+ }
+
+ .product-details {
+   margin-top: 2rem;
+ }
+
+ #album-img {
+   margin: 0 auto !important;
+}
 }
 
-#album-img {
+@media screen and (max-width: 800px) {
+  #artist-name {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+.main-container {
+  margin: 0 !important;
 }
 }
 
