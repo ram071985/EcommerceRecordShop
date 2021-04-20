@@ -3,7 +3,7 @@ import { CNavbarNav, CNavLink, CNavbarBrand } from "@coreui/react";
 import { useHistory } from "react-router-dom";
 import useWindowDimensions from "../../../../hooks/useWindowDimensions/useWindowDimensions";
 
-const NavbarLeftHalf = (props) => {
+const NavbarLinksLeftHalf = (props) => {
   const { width } = useWindowDimensions();
   const history = useHistory();
 
@@ -31,4 +31,4 @@ const NavbarLeftHalf = (props) => {
   );
 };
 
-export default NavbarLeftHalf;
+export default NavbarLinksLeftHalf;

@@ -10,7 +10,7 @@ import {
   CDropdownItem,
 } from "@coreui/react";
 
-const NavbarRightHalf = (props) => {
+const NavbarLinksRightHalf = (props) => {
   const history = useHistory();
 
   const handleSearch = () => {
@@ -58,4 +58,4 @@ const NavbarRightHalf = (props) => {
   );
 };
 
-export default NavbarRightHalf;
+export default NavbarLinksRightHalf;
