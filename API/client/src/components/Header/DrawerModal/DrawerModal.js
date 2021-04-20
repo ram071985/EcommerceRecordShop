@@ -19,7 +19,7 @@ const DrawerModal = (props) => {
         </button>
         <div className="content">{props.children}</div>
       </div>
-      <div className="shadowBox"></div>
+      <div className="shadowBox" onClick={props.close}></div>
     </div>
   );
 };
