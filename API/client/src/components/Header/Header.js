@@ -10,9 +10,7 @@ import DrawerMenu from "./DrawerMenu/DrawerMenu";
 // TODO: Remove shop from navbar when the drawer is open. Copy the logic similar to Collapsible Navbar.
 
 const Header = (props) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [loggedIn, setLoggedIn] = useState(true);
-  let history = useHistory();
+  const [isOpen, setIsOpen] = useState(false);
 
   const drawerLinks = [
     {
@@ -27,13 +25,7 @@ const Header = (props) => {
     <div>
       <CNavbar expandable="sm" color="info">
         <CToggler inNavbar onClick={() => setIsOpen(true)} />
-        <CNavbarBrand
-          style={{ cursor: "pointer" }}
-          onClick={() => history.push("/home")}
-        >
-          NavbarBrand
-        </CNavbarBrand>
-        <Navbar drawerIsOpen={isOpen} />
+        <Navbar drawerIsOpen={isOpen} links={drawerLinks} />
       </CNavbar>
       <DrawerModal isOpen={isOpen} close={() => setIsOpen(false)}>
         <DrawerMenu links={drawerLinks} />
