@@ -1,9 +1,8 @@
-import { CNavbar, CToggler, CNavbarBrand } from "@coreui/react";
+import { CNavbar, CToggler } from "@coreui/react";
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import "./Header.scss";
 
-import Navbar from "./Navbar/Navbar";
+import NavbarLinks from "./NavbarLinks/NavbarLinks";
 import DrawerModal from "./DrawerModal/DrawerModal";
 import DrawerMenu from "./DrawerMenu/DrawerMenu";
 
@@ -25,7 +24,7 @@ const Header = (props) => {
     <div>
       <CNavbar expandable="sm" color="info">
         <CToggler inNavbar onClick={() => setIsOpen(true)} />
-        <Navbar drawerIsOpen={isOpen} links={drawerLinks} />
+        <NavbarLinks drawerIsOpen={isOpen} links={drawerLinks} />
       </CNavbar>
       <DrawerModal isOpen={isOpen} close={() => setIsOpen(false)}>
         <DrawerMenu links={drawerLinks} />
