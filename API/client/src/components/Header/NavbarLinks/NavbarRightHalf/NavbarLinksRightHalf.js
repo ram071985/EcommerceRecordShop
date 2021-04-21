@@ -13,9 +13,9 @@ import {
 const NavbarLinksRightHalf = (props) => {
   const history = useHistory();
 
-  const handleSearch = () => {
-    console.log("Show Search bar");
-  };
+  // const handleSearch = () => {
+  //   console.log("Show Search bar");
+  // };
   const handleCartLink = () => {
     console.log("Load Cart");
   };
@@ -28,8 +28,11 @@ const NavbarLinksRightHalf = (props) => {
       style={{ alignItems: "center", flexDirection: "row" }}
       className="ml-auto"
     >
-      <CButton onClick={handleSearch} style={{ width: "50px", height: "37px" }}>
-        <ion-icon name="search"></ion-icon>{" "}
+      <CButton
+        onClick={props.showSearchbar}
+        style={{ width: "50px", height: "37px" }}
+      >
+        <ion-icon name="search"></ion-icon>
       </CButton>
       <CNavLink
         style={{ width: "50px", height: "37px" }}

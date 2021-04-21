@@ -6,7 +6,7 @@ const Navbar = (props) => {
   return (
     <>
       <NavbarLinksLeftHalf links={props.links} />
-      <NavbarLinksRightHalf />
+      <NavbarLinksRightHalf showSearchbar={props.showSearchbar} />
     </>
   );
 };
