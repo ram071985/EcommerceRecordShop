@@ -7,6 +7,21 @@ const NavbarLinksLeftHalf = (props) => {
   const { width } = useWindowDimensions();
   const history = useHistory();
 
+  const navbarLinksComponent = (
+    <CNavbarNav
+      style={{
+        display: width > 576 ? "flex" : "none",
+        flexDirection: "row",
+      }}
+    >
+      {props.links.map((link) => (
+        <CNavLink key={link.id} onClick={() => history.push(link.path)}>
+          {link.name}
+        </CNavLink>
+      ))}
+    </CNavbarNav>
+  );
+
   return (
     <>
       <CNavbarBrand
@@ -15,18 +30,8 @@ const NavbarLinksLeftHalf = (props) => {
       >
         NavbarBrand
       </CNavbarBrand>
-      <CNavbarNav
-        style={{
-          display: width > 576 ? "flex" : "none",
-          flexDirection: "row",
-        }}
-      >
-        {props.links.map((link) => (
-          <CNavLink key={link.id} onClick={() => history.push(link.path)}>
-            {link.name}
-          </CNavLink>
-        ))}
-      </CNavbarNav>
+
+      {props.loggedIn ? navbarLinksComponent : null}
     </>
   );
 };
