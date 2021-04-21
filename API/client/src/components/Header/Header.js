@@ -13,6 +13,8 @@ const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showSearchbar, setShowSearchbar] = useState(false);
 
+  const [loggedIn, setLoggedIn] = useState(true);
+
   const drawerLinks = [
     {
       id: "shop",
@@ -30,15 +32,18 @@ const Header = (props) => {
   return (
     <div>
       <CNavbar expandable="sm" color="info">
-        <CToggler inNavbar onClick={() => setIsOpen(true)} />
+        {loggedIn ? (
+          <CToggler inNavbar onClick={() => setIsOpen(true)} />
+        ) : null}
         <NavbarLinks
+          loggedIn={loggedIn}
           drawerIsOpen={isOpen}
           links={drawerLinks}
           showSearchbar={toggleSearchbar}
         />
       </CNavbar>
 
-      <Searchbar active={showSearchbar} />
+      {loggedIn ? <Searchbar active={showSearchbar} /> : null}
 
       <DrawerModal isOpen={isOpen} close={() => setIsOpen(false)}>
         <DrawerMenu links={drawerLinks} />
