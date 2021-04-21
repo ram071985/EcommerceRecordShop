@@ -35,15 +35,18 @@ const ProductLayout = () => {
       <div className="right-container">
         {" "}
         <div className="pname-container container-fluid d-flex flex-wrap">
-          <h1 className="product-details" id="artist-name">
+          <h1 className="product-details mb-0" id="artist-name">
             Kiefer
           </h1>
-          <span>
-            <CIcon className="ml-4" content={freeSet.cilBookmark} />
+          <span className="icon">
+            <CIcon className="ml-5" content={freeSet.cilBookmark} />
           </span>
         </div>
+        <h1 className="product-details d-inline mr-5" id="album-name">
+          Happysad
+        </h1>
         <div className="price-container">
-          <h3>$20</h3>
+          <h3 id="price">$20</h3>
         </div>
       </div>
     </div>

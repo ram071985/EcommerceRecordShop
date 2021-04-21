@@ -7,7 +7,8 @@
 }
 
 .right-container {
-  padding: 0px 35px;
+  padding: 0px 0px 0px 35px;
+  width: 800px;
 }
 .left-container {
   display: inline;
@@ -20,7 +21,7 @@
 }
 
 .price-container {
-  display: inline-block !important;
+  display: block !important;
 }
 
 .left-col {
@@ -40,14 +41,16 @@
 }
 
 #album-name {
-  font-size: 2.3rem;
-  font-weight: 100;
+  font-size: 2.6rem;
+  font-weight: 300;
 }
 
 #price {
   line-height: 1.1;
   display: block;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  font-weight: 400;
 }
 
 .album-content {
@@ -55,32 +58,71 @@
 }
 
 @media screen and (max-width: 640px) {
- .main-container {
-   flex-direction: column !important;
- }
+  .main-container {
+    flex-direction: column !important;
+  }
 
- .product-details {
-   margin-top: 2rem;
- }
+  .product-details {
+    margin-top: 2rem;
+  }
 
- #album-img {
-   margin: 0 auto !important;
+  #album-img {
+    margin: 0 auto !important;
+  }
+
+  #artist-name {
+    margin: 0 !important;
+    font-size: 1.5rem !important;
+  }
+
+  .right-container {
+    padding-top: 30px !important;
+  }
+
+  #price {
+    font-size: 1rem !important;
+    display: block !important;
+  }
 }
-}
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   #artist-name {
     font-size: 2rem;
     font-weight: 700;
   }
+
+  .right-container {
+    padding: 0px 0px 0px 10px;
+    margin-right: 7rem !important;
+  }
+
+  #price {
+    font-size: 1.5rem;
+  }
+
+  #album-name {
+    font-size: 1.4rem;
+  }
+
+  .right-container {
+    padding: 0px 0px 0px 35px;
+    width: 625px;
+  }
+
+  .icon {
+    display: inline;
+  }
+
+  .album-name-div {
+    display: block;
+  }
 }
 
-@media screen and (max-width: 1200px) {
-.main-container {
-  margin: 0 !important;
+@media screen and (max-width: 1300px) {
+  .main-container {
+    margin: 0 !important;
+  }
 }
-}
-
 
 /* @media screen and (min-width: 960px) {
   /* .album-items-row {
