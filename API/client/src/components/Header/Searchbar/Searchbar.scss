@@ -1,0 +1,18 @@
+.searchBar {
+  display: block;
+
+  .searchInput {
+    border-radius: 0;
+    text-indent: 40px;
+  }
+  .searchInput:focus {
+    border-color: #d8dbe0;
+    box-shadow: none;
+  }
+  .searchBtn {
+    position: absolute;
+    left: 0;
+    width: 50px;
+    height: 37px;
+  }
+}
