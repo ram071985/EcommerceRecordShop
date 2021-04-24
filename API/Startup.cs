@@ -23,8 +23,7 @@ namespace API
             services.AddControllers();
             services.AddSpaStaticFiles(config => { config.RootPath = "client/build"; });
 
-            InterfaceConfigReid.Configure(services, _configuration);
-            InterfaceConfigBrian.Configure(services, _configuration);
+            InterfaceConfig.Configure(services, _configuration);
             JwtConfig.Configure(services, _configuration);
         }
 
