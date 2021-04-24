@@ -1,15 +1,30 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entities
 {
     public class Order
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid UserId { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(50)")]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        
+        [Required]
+        [Column(TypeName = "varchar(50)")]
+        public string UserId { get; set; }
+        
+        [Required]
         public DateTime PurchaseDate { get; set; } = DateTime.Now;
+        
+        [Required]
         public DateTime ShippingDate { get; set; } = DateTime.Now.AddDays(3);
+        
+        [Required]
         public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
+        
+        [Required]
         public List<Product> Products { get; set; }
 
         // public decimal TransactionPrice
