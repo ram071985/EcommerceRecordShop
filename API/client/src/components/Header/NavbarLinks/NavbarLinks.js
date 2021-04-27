@@ -1,15 +1,29 @@
 import React from "react";
-import NavbarLinksRightHalf from "./NavbarRightHalf/NavbarLinksRightHalf";
-import NavbarLinksLeftHalf from "./NavbarLeftHalf/NavbarLinksLeftHalf";
+import { CNavbarBrand } from "@coreui/react";
+import LoggedInNavbar from "./LoggedInNavbar/LoggedInNavbar";
+import LoggedOutNavbar from "./LoggedOutNavbar/LoggedOutNavbar";
+import { useHistory } from "react-router-dom";
 
 const Navbar = (props) => {
+  const history = useHistory();
+
   return (
     <>
-      <NavbarLinksLeftHalf links={props.links} loggedIn={props.loggedIn} />
-      <NavbarLinksRightHalf
-        loggedIn={props.loggedIn}
-        showSearchbar={props.showSearchbar}
-      />
+      <CNavbarBrand
+        style={{ cursor: "pointer" }}
+        onClick={() => history.push("/home")}
+      >
+        NavbarBrand
+      </CNavbarBrand>
+
+      {props.loggedIn ? (
+        <LoggedInNavbar
+          links={props.links}
+          showSearchbar={props.showSearchbar}
+        />
+      ) : (
+        <LoggedOutNavbar />
+      )}
     </>
   );
 };

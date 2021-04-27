@@ -9,9 +9,11 @@ import {
   CDropdownItem,
 } from "@coreui/react";
 import { useHistory } from "react-router-dom";
+import useWindowDimensions from "../../../../hooks/useWindowDimensions/useWindowDimensions";
 
 const LoggedInNavbar = (props) => {
   const history = useHistory();
+  const { width } = useWindowDimensions();
 
   const handleCartLink = () => {
     console.log("Load Cart");
@@ -20,7 +22,23 @@ const LoggedInNavbar = (props) => {
   const handleLogOut = () => {
     console.log("Loggin out");
   };
-  return (
+
+  const navbarLeft = (
+    <CNavbarNav
+      style={{
+        display: width > 576 ? "flex" : "none",
+        flexDirection: "row",
+      }}
+    >
+      {props.links.map((link) => (
+        <CNavLink key={link.id} onClick={() => history.push(link.path)}>
+          {link.name}
+        </CNavLink>
+      ))}
+    </CNavbarNav>
+  );
+
+  const navbarRight = (
     <CNavbarNav
       style={{ alignItems: "center", flexDirection: "row" }}
       className="ml-auto"
@@ -55,6 +73,12 @@ const LoggedInNavbar = (props) => {
         </CDropdownMenu>
       </CDropdown>
     </CNavbarNav>
+  );
+  return (
+    <>
+      {navbarLeft}
+      {navbarRight}
+    </>
   );
 };
 
