@@ -1,7 +1,20 @@
+@import "../../../scss//variables";
+
 .DrawerMenu {
   padding: 0;
   li {
     list-style-type: none;
     margin: 20px 0;
+
+    .link {
+      color: $primaryColor;
+      text-decoration: none;
+    }
+
+    .link:hover,
+    link:active,
+    link:focus {
+      color: $accentColor;
+    }
   }
 }

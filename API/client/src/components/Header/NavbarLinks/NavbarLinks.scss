@@ -1,0 +1,8 @@
+@import "../../../scss//variables";
+
+.navbar.navbar-dark .navbar-brand,
+.navbar.navbar-dark .navbar-brand:focus,
+.navbar.navbar-dark .navbar-brand:hover {
+  color: $primaryColor;
+  cursor: pointer;
+}

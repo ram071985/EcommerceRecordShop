@@ -8,7 +8,7 @@ const DrawerMenu = (props) => {
       {props.links.map((link) => {
         return (
           <li key={link.id}>
-            <Link to={link.path} onClick={link.clicked}>
+            <Link className={"link"} to={link.path} onClick={link.clicked}>
               {link.name}
             </Link>
           </li>

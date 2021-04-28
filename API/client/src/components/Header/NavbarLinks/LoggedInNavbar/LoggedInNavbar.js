@@ -1,4 +1,5 @@
 import React from "react";
+import "./LoggedInNavbar.scss";
 import {
   CNavbarNav,
   CNavLink,

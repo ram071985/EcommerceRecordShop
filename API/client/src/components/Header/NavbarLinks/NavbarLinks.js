@@ -3,16 +3,14 @@ import { CNavbarBrand } from "@coreui/react";
 import LoggedInNavbar from "./LoggedInNavbar/LoggedInNavbar";
 import LoggedOutNavbar from "./LoggedOutNavbar/LoggedOutNavbar";
 import { useHistory } from "react-router-dom";
+import "./NavbarLinks.scss";
 
-const Navbar = (props) => {
+const NavbarLinks = (props) => {
   const history = useHistory();
 
   return (
     <>
-      <CNavbarBrand
-        style={{ cursor: "pointer" }}
-        onClick={() => history.push("/home")}
-      >
+      <CNavbarBrand onClick={() => history.push("/home")}>
         NavbarBrand
       </CNavbarBrand>
 
@@ -28,4 +26,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+export default NavbarLinks;

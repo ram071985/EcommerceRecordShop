@@ -1,18 +1,28 @@
-ion-icon {
+@import "./../../scss/variables";
+
+header {
   width: 100%;
-  height: 100%;
+  .headerContent {
+    max-width: 1440px;
+    margin: auto;
+  }
+  ion-icon {
+    color: $primaryColor;
+    width: 100%;
+    height: 100%;
+  }
+  ion-icon:hover,
+  ion-icon:focus {
+    color: $accentColor;
+  }
 }
 
-.profile-pic-no-img {
-  display: inline;
-  border-radius: 50%;
-  background-color: #cccccc;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: #ffffff;
-  box-shadow: 0px 0px 6px rgba(20, 20, 20, 0.4);
+.navbar.navbar-light .navbar-toggler {
+  border-color: rgba($color: #000000, $alpha: 0);
+  outline: none;
+}
+
+.customNavbar {
+  color: $primaryColor;
+  background-color: $secondaryColor;
 }
