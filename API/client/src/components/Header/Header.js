@@ -30,25 +30,27 @@ const Header = (props) => {
   };
 
   return (
-    <div>
-      <CNavbar expandable="sm" color="info">
-        {loggedIn ? (
-          <CToggler inNavbar onClick={() => setIsOpen(true)} />
-        ) : null}
-        <NavbarLinks
-          loggedIn={loggedIn}
-          drawerIsOpen={isOpen}
-          links={drawerLinks}
-          showSearchbar={toggleSearchbar}
-        />
-      </CNavbar>
+    <header>
+      <div className="headerContent">
+        <CNavbar className="customNavbar" sticky light expandable="sm">
+          {loggedIn ? (
+            <CToggler inNavbar onClick={() => setIsOpen(true)} />
+          ) : null}
+          <NavbarLinks
+            loggedIn={loggedIn}
+            drawerIsOpen={isOpen}
+            links={drawerLinks}
+            showSearchbar={toggleSearchbar}
+          />
+        </CNavbar>
 
-      {loggedIn ? <Searchbar active={showSearchbar} /> : null}
+        {loggedIn ? <Searchbar active={showSearchbar} /> : null}
 
-      <DrawerModal isOpen={isOpen} close={() => setIsOpen(false)}>
-        <DrawerMenu links={drawerLinks} />
-      </DrawerModal>
-    </div>
+        <DrawerModal isOpen={isOpen} close={() => setIsOpen(false)}>
+          <DrawerMenu links={drawerLinks} />
+        </DrawerModal>
+      </div>
+    </header>
   );
 };
 
