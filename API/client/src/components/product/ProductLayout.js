@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Link } from "react-bootstrap";
 import axios from "axios";
 import { CIcon } from "@coreui/icons-react";
 import { freeSet } from "@coreui/icons";
+import { CPopover, CLink } from "@coreui/react";
 
 const ProductLayout = () => {
   const [artistName, setArtistName] = useState("Kiefer");
@@ -38,9 +39,15 @@ const ProductLayout = () => {
           <h1 className="product-details mb-0" id="artist-name">
             Kiefer
           </h1>
-          <span className="icon">
-            <CIcon className="ml-5" content={freeSet.cilBookmark} />
+          <div className="favorite-container">
+          <span className="icon ml-5">
+            <CPopover placement="bottom" className="favorites-popover" content="Add To Wishlist">
+              <CLink >
+                <CIcon className="ml-1" content={freeSet.cilBookmark} />
+              </CLink>
+            </CPopover>
           </span>
+          </div>
         </div>
         <h1 className="product-details d-inline mr-5" id="album-name">
           Happysad

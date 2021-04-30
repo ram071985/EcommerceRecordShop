@@ -57,6 +57,22 @@
   margin: 10px;
 }
 
+.favorites-popover {
+  margin-left: 0 !important;
+  color: white !important;
+}
+
+.popover-body {
+  color: white !important;
+  font-family: "Archivo", sans-serif !important;
+  font-size: .7rem;
+  padding: 1px !important;
+}
+
+.favorite-container {
+  color: white !important;
+}
+
 @media screen and (max-width: 640px) {
   .main-container {
     flex-direction: column !important;
