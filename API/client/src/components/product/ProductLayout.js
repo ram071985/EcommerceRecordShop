@@ -14,7 +14,6 @@ import {
   CDropdownToggle,
   CDataTable,
 } from "@coreui/react";
-import moment from "moment";
 
 const ProductLayout = () => {
   const [artistName, setArtistName] = useState("Kiefer");
@@ -48,7 +47,7 @@ const ProductLayout = () => {
     }
     return minutes + ":" + second;
   };
-  
+
   return (
     <div className="main-container d-flex">
       <div className="left-container container-fluid">
@@ -75,8 +74,8 @@ const ProductLayout = () => {
         <div className="price-container">
           <h3 id="price">$20</h3>
         </div>
-        <CDropdown>
-          <CDropdownToggle color="secondary">View tracks</CDropdownToggle>
+        <CDropdown data-dropup-auto="false">
+          <CDropdownToggle data-dropup-auto="false"color="secondary">View tracks</CDropdownToggle>
           <CDropdownMenu className="tracks-dropdown">
             <Table>
               <thead>

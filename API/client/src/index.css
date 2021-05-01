@@ -82,47 +82,53 @@
 }
 
 button.dropdown-toggle {
-  background: rgb(225, 225, 225) !important;
+  background: rgb(254, 254, 254) !important;
   border-radius: 0px;
   color: black;
   font-family: "Archivo", sans-serif !important;
-  font-size: .9rem;
+  font-size: .8rem;
   font-weight: 400 !important;
-  padding: 1px 40px;
+  padding: 3px 40px;
   margin-top: 10px;
+  width: 175px;
 }
 
-.btn-secondary.dropdown-toggle:focus, button.dropdown-toggle:hover {
+.btn-secondary.dropdown-toggle:focus {
   color: rgb(55, 55, 55) !important;
+  box-shadow: none !important;
+}
+
+.btn-secondary.dropdown-toggle:hover {
+  background: rgb(242, 242, 242) !important;
 }
 
 button, select {
   color: rgb(55, 55, 55) !important;
 }
 
-.dropdown-item {
-  font-size: .9rem !important;
-}
-
-p.track-list {
-  margin: 0px 1px 2px 5px;
-  font-size: .9rem;
-}
-
 hr {
   width: 100%;
 }
 
-.tracks-dropdown {
+.tracks-dropdown.dropdown-menu.show {
   padding: 0 !important;
+  border-radius: 0 !important;
 }
 
 td, th {
-  border: 1px solid black;
+  border: .5px solid black;
   text-align: left;    
   padding: 3px 4px !important;
-  font-size: .9rem;
   border: none;
+}
+
+td {
+  font-size: .8rem;
+}
+
+th {
+  font-weight: 500 !important;
+  font-size: .8rem;
 }
 
 table {

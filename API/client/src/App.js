@@ -2,7 +2,7 @@ import ProductLayout from './components/product/ProductLayout';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App h-100">
       <ProductLayout />
     </div>
   );
