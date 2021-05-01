@@ -14,7 +14,7 @@ import {
   CDropdownToggle,
   CDataTable,
 } from "@coreui/react";
-import moment from 'moment';
+import moment from "moment";
 
 const ProductLayout = () => {
   const [artistName, setArtistName] = useState("Kiefer");
@@ -39,7 +39,16 @@ const ProductLayout = () => {
     getData();
     albumResults.tracks.map((track, index) => track.name);
   };
-  console.log(albumResults);
+
+  const convertSecondsToMinutes = (seconds) => {
+    let minutes = Math.floor(seconds / 60);
+    let second = seconds - 60 * minutes;
+    if (second.toString().length < 2) {
+      second = second + "0";
+    }
+    return minutes + ":" + second;
+  };
+  
   return (
     <div className="main-container d-flex">
       <div className="left-container container-fluid">
@@ -79,9 +88,9 @@ const ProductLayout = () => {
               <tbody>
                 {albumResults.tracks &&
                   albumResults.tracks.map((item, index) => (
-                    <tr>
-                      <td key={index}>{item.name}</td>
-                      <td key={index}>{item.duration}</td>
+                    <tr key={index}>
+                      <td>{item.name}</td>
+                      <td>{convertSecondsToMinutes(item.duration)}</td>
                     </tr>
                   ))}
               </tbody>
