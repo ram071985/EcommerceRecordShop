@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Link } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import axios from "axios";
 import { CIcon } from "@coreui/icons-react";
 import { freeSet } from "@coreui/icons";
@@ -14,6 +14,7 @@ import {
   CDropdownToggle,
   CDataTable,
 } from "@coreui/react";
+import moment from 'moment';
 
 const ProductLayout = () => {
   const [artistName, setArtistName] = useState("Kiefer");
@@ -68,21 +69,23 @@ const ProductLayout = () => {
         <CDropdown>
           <CDropdownToggle color="secondary">View tracks</CDropdownToggle>
           <CDropdownMenu className="tracks-dropdown">
-            <table>
-              <tr>
-                <th>Name</th>
-                <th colspan="2">Duration</th>
-              </tr>
-              {albumResults.tracks &&
-                albumResults.tracks.map((item, index) => (
-                  <div>
+            <Table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th colspan="2">Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                {albumResults.tracks &&
+                  albumResults.tracks.map((item, index) => (
                     <tr>
                       <td key={index}>{item.name}</td>
                       <td key={index}>{item.duration}</td>
                     </tr>
-                  </div>
-                ))}
-            </table>
+                  ))}
+              </tbody>
+            </Table>
           </CDropdownMenu>
         </CDropdown>
       </div>

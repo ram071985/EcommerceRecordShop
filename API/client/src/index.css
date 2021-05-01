@@ -114,12 +114,19 @@ hr {
 }
 
 .tracks-dropdown {
-
+  padding: 0 !important;
 }
 
 td, th {
   border: 1px solid black;
   text-align: left;    
+  padding: 3px 4px !important;
+  font-size: .9rem;
+  border: none;
+}
+
+table {
+  margin-bottom: 0px !important;
 }
 @media screen and (max-width: 640px) {
   .main-container {
