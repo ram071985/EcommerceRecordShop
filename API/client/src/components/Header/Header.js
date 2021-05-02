@@ -10,17 +10,17 @@ import Searchbar from "./Searchbar/Searchbar";
 // TODO: Remove shop from navbar when the drawer is open. Copy the logic similar to Collapsible Navbar.
 
 const Header = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [showDrawer, setShowDrawer] = useState(false);
   const [showSearchbar, setShowSearchbar] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn] = useState(true);
 
   const drawerLinks = [
     {
       id: "shop",
       name: "Shop",
       path: "/shop",
-      clicked: () => setIsOpen(false),
+      clicked: () => setShowDrawer(false),
     },
   ];
 
@@ -29,16 +29,19 @@ const Header = (props) => {
     setShowSearchbar(newValue);
   };
 
+  const toggleDrawer = () => {
+    const newValue = !showDrawer;
+    setShowDrawer(newValue);
+  };
+
   return (
     <header>
       <div className="headerContent">
         <CNavbar className="customNavbar" sticky light expandable="sm">
-          {loggedIn ? (
-            <CToggler inNavbar onClick={() => setIsOpen(true)} />
-          ) : null}
+          {loggedIn ? <CToggler inNavbar onClick={toggleDrawer} /> : null}
           <NavbarLinks
             loggedIn={loggedIn}
-            drawerIsOpen={isOpen}
+            drawerIsOpen={showDrawer}
             links={drawerLinks}
             showSearchbar={toggleSearchbar}
           />
@@ -46,7 +49,7 @@ const Header = (props) => {
 
         {loggedIn ? <Searchbar active={showSearchbar} /> : null}
 
-        <DrawerModal isOpen={isOpen} close={() => setIsOpen(false)}>
+        <DrawerModal isOpen={showDrawer} close={() => setShowDrawer(false)}>
           <DrawerMenu links={drawerLinks} />
         </DrawerModal>
       </div>

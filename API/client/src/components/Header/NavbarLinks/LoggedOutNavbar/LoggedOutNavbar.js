@@ -7,8 +7,18 @@ const LoggedOutNavbar = () => {
       style={{ alignItems: "center", flexDirection: "row" }}
       className="ml-auto"
     >
-      <CNavLink onClick={() => console.log("Sign up")}>Sign Up</CNavLink>
-      <CNavLink onClick={() => console.log("Log In")}>Log In</CNavLink>
+      <CNavLink
+        style={{ padding: "0 15px" }}
+        onClick={() => console.log("Sign up")}
+      >
+        Sign Up
+      </CNavLink>
+      <CNavLink
+        style={{ padding: "0 15px" }}
+        onClick={() => console.log("Log In")}
+      >
+        Log In
+      </CNavLink>
     </CNavbarNav>
   );
 };
