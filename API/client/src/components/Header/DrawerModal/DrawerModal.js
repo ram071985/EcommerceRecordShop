@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./DrawerModal.scss";
 
 import useWindowDimensions from "../../../hooks/useWindowDimensions/useWindowDimensions";
@@ -7,9 +7,14 @@ const DrawerModal = (props) => {
   const { width } = useWindowDimensions();
 
   let modalStyle = { display: props.isOpen ? "flex" : "none" };
-  if (props.isOpen && width >= 576) {
-    props.close();
-  }
+
+  useEffect(() => {
+    return () => {
+      if (props.isOpen && width >= 576) {
+        props.close();
+      }
+    };
+  });
 
   return (
     <div className="DrawerModal" style={modalStyle}>

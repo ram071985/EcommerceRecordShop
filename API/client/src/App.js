@@ -6,14 +6,12 @@ import Shop from "./components/Pages/Shop/Shop";
 import Product from "./components/Pages/Product/Product";
 import Payment from "./components/Pages/Payment/Payment";
 import TransactionHistory from "./components/Pages/TransactionHistory/TransactionHistory";
-import CIcon from "@coreui/icons-react";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <CIcon size={"sm"} name={"cilSettings"} />
-      <h1>HELLO</h1>
+
       <Switch>
         <Route path="/home" component={Home} />
         <Route path="/shop" component={Shop} />

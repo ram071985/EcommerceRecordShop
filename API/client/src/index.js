@@ -4,6 +4,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
+//Global CoreUI icons
+import { icons } from "./assets/icons";
+React.icons = icons;
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
