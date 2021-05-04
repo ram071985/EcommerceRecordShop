@@ -11,7 +11,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-
       <Switch>
         <Route path="/home" component={Home} />
         <Route path="/shop" component={Shop} />
