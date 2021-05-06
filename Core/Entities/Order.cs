@@ -10,34 +10,31 @@ namespace Core.Entities
         [Required]
         [Column(TypeName = "varchar(50)")]
         public string Id { get; set; } = Guid.NewGuid().ToString();
-        
+
         [Required]
         [Column(TypeName = "varchar(50)")]
         public string UserId { get; set; }
-        
-        [Required]
+
+        [Required] 
         public DateTime PurchaseDate { get; set; } = DateTime.Now;
-        
-        [Required]
+
+        [Required] 
         public DateTime ShippingDate { get; set; } = DateTime.Now.AddDays(3);
-        
-        [Required]
+
+        [Required] 
         public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
-        
+
         [Required]
+        public decimal TotalPrice
+        {
+            get
+            {
+                decimal totalPrice = 0;
+                Products.ForEach(product => totalPrice += product.Price);
+                return totalPrice;
+            }
+        }
+        [Required] 
         public List<Product> Products { get; set; }
-
-        // public decimal TransactionPrice
-        // {
-        //     get
-        //     {
-        //         decimal totalPrice = 0;
-        //         Albums.ForEach(album =>
-        //             totalPrice += album.PurchasePrice);
-
-        //         return totalPrice;
-        //     }
-        // }
     }
-
 }

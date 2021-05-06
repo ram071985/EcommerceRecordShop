@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using API.Models;
 using Core.Entities;
 using Core.Services.OrderServices;
+using Core.Services.SpotifyServices;
 using Core.Services.UserServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,16 +14,19 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class OrdersController : Controller
+    public sealed class OrderController : Controller
     {
         private readonly IPlaceOrderService _orderService;
+        private readonly ISpotifyAlbumService _albumService;
         private readonly string _path;
 
-        public OrdersController(
-            IPlaceOrderService orderService
+        public OrderController(
+            IPlaceOrderService orderService,
+            ISpotifyAlbumService albumService
         )
         {
             _orderService = orderService;
+            _albumService = albumService;
             _path = Path.GetFullPath(ToString()!);
         }
 
@@ -35,25 +40,22 @@ namespace API.Controllers
 
         // [Authorize]
         [HttpPost]
-        public void PlaceOrder(List<AlbumPurchaseInputModel> purchasedAlbums)
+        public Order PlaceOrder([FromBody] PurchaseInputModel purchaseInputModel)
         {
-            var products = new List<Product>();
-            // purchasedAlbums.ForEach(distinctAlbum =>
-            // {
-            //     if (distinctAlbum.AlbumName == null ||
-            //         distinctAlbum.ArtistName == null ||
-            //         distinctAlbum.Quantity < 1 ||
-            //         distinctAlbum.PurchasePrice == 0 ||
-            //         distinctAlbum.UserId == 0)
-            //         throw new Exception("invalid album");
-                
-                // for (var i = 1; i <= distinctAlbum.Quantity; i++)
-                //     products.Add(new Product
-                    // {
-                        // ArtistName = distinctAlbum.ArtistName,
-                        // AlbumName = distinctAlbum.AlbumName,
-                        // PurchasePrice = distinctAlbum.PurchasePrice,
-                        // UserId = distinctAlbum.UserId, }); }); _orderService.PlaceOrder(albums);
+            Console.WriteLine(purchaseInputModel.UserId);
+            Console.WriteLine(purchaseInputModel.Albums[0].Quantity);
+            var purchasedAlbums = new List<PurchaseAlbum>();
+            purchaseInputModel.Albums.ForEach(album =>
+            {
+                purchasedAlbums.Add(new PurchaseAlbum
+                {
+                    Quantity = album.Quantity,
+                    PurchasePrice = album.Price,
+                    SpotifyId = album.SpotifyId,
+                    UserId = purchaseInputModel.UserId
+                });
+            });
+            return _orderService.PlaceOrder(purchasedAlbums, purchaseInputModel.UserId);
         }
 
         // [Authorize]

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace API.Models
@@ -7,16 +8,20 @@ namespace API.Models
         [JsonPropertyName("quantity")] 
         public short Quantity { get; set; }
 
-        [JsonPropertyName("artistName")] 
-        public string ArtistName { get; set; }
+        [JsonPropertyName("price")] 
+        public decimal Price { get; set; }
+        
+        [JsonPropertyName("spotifyId")] 
+        public string SpotifyId { get; set; }
+    }
 
-        [JsonPropertyName("albumName")] 
-        public string AlbumName { get; set; }
-
-        [JsonPropertyName("purchasePrice")] 
-        public decimal PurchasePrice { get; set; }
+    public class PurchaseInputModel
+    {
+        [JsonPropertyName("purchasedAlbumsInput")] 
+        public List<AlbumPurchaseInputModel> Albums { get; set; }
         
         [JsonPropertyName("userId")] 
-        public short UserId { get; set; }
+        public string UserId { get; set; }
     }
 }
+

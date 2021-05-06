@@ -1,5 +1,5 @@
+using System;
 using System.IO;
-using System.Threading.Tasks;
 using Core.Entities;
 using Core.Services.SpotifyServices;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SpotifyController : Controller
+    public sealed class SpotifyController : Controller
     {
         private readonly ISpotifyAlbumService _albumService;
         private readonly string _path;

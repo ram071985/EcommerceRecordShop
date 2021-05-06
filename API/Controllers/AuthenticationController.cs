@@ -10,7 +10,7 @@ namespace API.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class AuthenticationController : Controller
+    public sealed class AuthenticationController : Controller
     {
         private readonly IGenerateJwtToken _generateJwtToken;
         private readonly string _path;

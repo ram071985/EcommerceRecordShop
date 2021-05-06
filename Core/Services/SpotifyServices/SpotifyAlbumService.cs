@@ -22,7 +22,8 @@ namespace Core.Services.SpotifyServices
 
         public Album GetAlbumBySpotifyId(string spotifyId)
         {
-            var spotifyAlbumData = JsonConvert.DeserializeObject<AlbumData>(GetAlbumFromSpotify(spotifyId).Result);
+            var data = GetAlbumFromSpotify(spotifyId).Result;
+            var spotifyAlbumData = JsonConvert.DeserializeObject<AlbumData>(data);
 
             var tracks = new List<Track>();
             spotifyAlbumData.Tracks.Items.ForEach(track => tracks.Add(
