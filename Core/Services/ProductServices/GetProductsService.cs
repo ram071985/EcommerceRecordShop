@@ -35,6 +35,8 @@ namespace Core.Services.ProductServices
                     SpotifyId = "3ZpoX3ij0YBUeJoGfbVH0Q"
                 }
             };
+            // TODO ^^^^ change this to call something like _dbServices.GetProducts from db
+            // TODO May need to make a GetProductsByGenre Service
 
             return products;
         }
