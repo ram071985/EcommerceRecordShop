@@ -27,5 +27,15 @@ namespace Core.Entities
         public DateTime? CreatedAt { get; set; }
         public decimal WalletBalance { get; set; }
         public List<Order> Orders { get; set; }
+
+        public decimal TotalSpent
+        {
+            get
+            {
+                decimal totalSpent = 0;
+                Orders.ForEach(order => totalSpent += order.TotalPrice);
+                return totalSpent;
+            }
+        }
     }
 }

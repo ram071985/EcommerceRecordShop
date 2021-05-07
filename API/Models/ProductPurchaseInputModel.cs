@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace API.Models
 {
-    public class AlbumPurchaseInputModel
+    public class ProductPurchaseInputModel
     {
         [JsonPropertyName("quantity")] 
         public short Quantity { get; set; }
@@ -13,15 +13,10 @@ namespace API.Models
         
         [JsonPropertyName("spotifyId")] 
         public string SpotifyId { get; set; }
-    }
-
-    public class PurchaseInputModel
-    {
-        [JsonPropertyName("purchasedAlbumsInput")] 
-        public List<AlbumPurchaseInputModel> Albums { get; set; }
         
-        [JsonPropertyName("userId")] 
-        public string UserId { get; set; }
+        //TODO should get productId from frontend, which will get the "Product" from the DB
+        [JsonPropertyName("productId")]
+        public string ProductId { get; set; }
     }
 }
 

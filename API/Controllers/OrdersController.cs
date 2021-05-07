@@ -40,27 +40,25 @@ namespace API.Controllers
 
         // [Authorize]
         [HttpPost]
-        public Order PlaceOrder([FromBody] PurchaseInputModel purchaseInputModel)
+        public Order PlaceOrder([FromBody] OrderInputModel orderInputModel)
         {
-            Console.WriteLine(purchaseInputModel.UserId);
-            Console.WriteLine(purchaseInputModel.Albums[0].Quantity);
             var purchasedAlbums = new List<PurchaseAlbum>();
-            purchaseInputModel.Albums.ForEach(album =>
+            orderInputModel.Albums.ForEach(album =>
             {
                 purchasedAlbums.Add(new PurchaseAlbum
                 {
                     Quantity = album.Quantity,
                     PurchasePrice = album.Price,
                     SpotifyId = album.SpotifyId,
-                    UserId = purchaseInputModel.UserId
+                    UserId = orderInputModel.UserId
                 });
             });
-            return _orderService.PlaceOrder(purchasedAlbums, purchaseInputModel.UserId);
+            return _orderService.PlaceOrder(purchasedAlbums, orderInputModel.UserId);
         }
 
         // [Authorize]
         [HttpPatch("{orderNumber}")]
-        public void ChangeOrder(string orderNumber, [FromBody] List<AlbumPurchaseInputModel> orders)
+        public void ChangeOrder(string orderNumber, [FromBody] List<ProductPurchaseInputModel> orders)
         {
             // TODO do we need this endpoint?
         }

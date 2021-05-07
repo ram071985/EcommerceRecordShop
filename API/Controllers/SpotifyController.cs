@@ -19,6 +19,7 @@ namespace API.Controllers
             _path = Path.GetFullPath(ToString()!);
         }
 
+        // TODO We shouldn't actually need this controller or endpoint
         [HttpGet("{albumId}")]
         public Album Get(string albumId)
         {

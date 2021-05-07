@@ -25,7 +25,7 @@ namespace Core.Entities
         public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
         
         [Required]
-        public List<Product> Products { get; set; }
+        public List<PurchaseAlbum> PurchasedAlbums { get; set; }
 
         [Required]
         public decimal TotalPrice
@@ -33,7 +33,7 @@ namespace Core.Entities
             get
             {
                 decimal totalPrice = 0;
-                Products.ForEach(product => totalPrice += product.Price);
+                PurchasedAlbums.ForEach(distinctAlbum => totalPrice += distinctAlbum.PurchasePrice * distinctAlbum.Quantity);
                 return totalPrice;
             }
         }

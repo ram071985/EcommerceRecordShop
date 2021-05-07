@@ -22,25 +22,14 @@ namespace Core.Services.OrderServices
         // TODO should return void
         public Order PlaceOrder(List<PurchaseAlbum> purchasedAlbums, string userId)
         {
-            var products = new List<Product>();
-            purchasedAlbums.ForEach(action: distinctAlbum =>
-            {
-                for (var i = 1; i <= distinctAlbum.Quantity; i++)
-                    products.Add(new Product
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Price = distinctAlbum.PurchasePrice,
-                        Album = _albumService.GetAlbumBySpotifyId(distinctAlbum.SpotifyId)
-                    });
-            });
             var order = new Order
             {
                 PurchaseDate = DateTime.Now,
                 UserId = userId,
-                Products = products
+                PurchasedAlbums = purchasedAlbums
             };
             
-            // TODO subtract order.TotalPrice from user.Baslance
+            // TODO subtract order.TotalPrice from user.Balance
             return order;
         }
     }

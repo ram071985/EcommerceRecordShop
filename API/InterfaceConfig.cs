@@ -1,6 +1,6 @@
 using Core.DataAccess;
-using Core.Services.InventoryServices;
 using Core.Services.OrderServices;
+using Core.Services.ProductServices;
 using Core.Services.SpotifyServices;
 using Core.Services.UserServices;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +13,11 @@ namespace API
     {
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IAlbumInventoryService, AlbumInventoryService>();
             services.AddScoped<IAddUserService, AddUserService>();
             services.AddScoped<IPlaceOrderService, PlaceOrderService>();
             services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
             services.AddScoped<ISpotifyAlbumService, SpotifyAlbumService>();
+            services.AddScoped<IGetProductsService, GetProductsService>();
             services.AddDbContext<OrderContext>(options =>
             {
                 options.UseSqlServer(configuration["ConnectionStrings:Default"]);
