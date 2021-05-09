@@ -1,11 +1,6 @@
 @import "./../../scss/variables";
 
 header {
-  width: 100%;
-  .headerContent {
-    max-width: 1440px;
-    margin: auto;
-  }
   ion-icon {
     color: $primaryColor;
     width: 100%;
