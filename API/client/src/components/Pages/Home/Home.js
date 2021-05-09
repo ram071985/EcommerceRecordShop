@@ -1,11 +1,11 @@
 import React from "react";
-import Carousel from "../../Carousel/Carousel";
+import DynamicBanner from "../../DynamicBanner/DynamicBanner";
 
 const Home = () => {
   return (
     <div>
       <div>Home Page</div>
-      <Carousel />
+      <DynamicBanner />
     </div>
   );
 };

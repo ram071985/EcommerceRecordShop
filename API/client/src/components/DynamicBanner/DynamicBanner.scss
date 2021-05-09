@@ -1,0 +1,17 @@
+$maxImageHeight: 589px;
+$minImageHeight: 400px;
+
+.DynamicBanner {
+  box-sizing: border-box;
+  margin-left: 20%;
+
+  .carousel-inner > .carousel-item {
+    max-height: $maxImageHeight;
+    min-height: $minImageHeight;
+  }
+
+  img {
+    max-height: $maxImageHeight;
+    min-height: $minImageHeight;
+  }
+}
