@@ -11,14 +11,14 @@ import {
 } from "@coreui/react";
 
 const Carousel = (props) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  // const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <div>
       <CRow>
         <CCol sm={12}>
-          <CCarousel activeIndex={activeIndex}>
-            <CCarouselIndicators />
+          <CCarousel activeIndex={props.activeIndex}>
+            {/* <CCarouselIndicators /> */}
             <CCarouselInner>
               <CCarouselItem>
                 <img
@@ -54,8 +54,12 @@ const Carousel = (props) => {
                 </CCarouselCaption>
               </CCarouselItem>
             </CCarouselInner>
-            <CCarouselControl direction="prev" />
-            <CCarouselControl direction="next" />
+            {props.hideDefaultControls ? null : (
+              <>
+                <CCarouselControl direction="prev" />
+                <CCarouselControl direction="next" />
+              </>
+            )}
           </CCarousel>
         </CCol>
       </CRow>
