@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entities
 {
@@ -20,13 +22,24 @@ namespace Core.Entities
             Orders = new List<Order>();
         }
 
+        [Key]
+        [Column(TypeName = "varchar(50)")]
         public string Id { get; set; }
+        
+        [Column(TypeName = "varchar(50)")]
         public string Username { get; set; }
+        
+        [Column(TypeName = "varchar(50)")]
         public string Password { get; set; }
+        
+        [Column(TypeName = "varchar(50)")]
         public string Email { get; set; }
-        public DateTime? CreatedAt { get; set; }
+        
+        public DateTime CreatedAt { get; set; }
+        
         public decimal WalletBalance { get; set; }
-        public List<Order> Orders { get; set; }
+
+        public List<Order> Orders { get; set; } = new List<Order>();
 
         public decimal TotalSpent
         {

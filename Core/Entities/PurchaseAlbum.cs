@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Core.Entities
 {
     public class PurchaseAlbum
     {
+        [Key]
+        public int Id { get; set; }
         public short Quantity { get; set; }
         public decimal PurchasePrice { get; set; }
         public string SpotifyId { get; set; }

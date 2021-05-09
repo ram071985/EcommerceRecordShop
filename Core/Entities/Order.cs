@@ -7,27 +7,20 @@ namespace Core.Entities
 {
     public class Order
     {
-        [Required]
+        [Key]
         [Column(TypeName = "varchar(50)")]
         public string Id { get; set; } = Guid.NewGuid().ToString();
         
-        [Required]
         [Column(TypeName = "varchar(50)")]
         public string UserId { get; set; }
         
-        [Required]
         public DateTime PurchaseDate { get; set; } = DateTime.Now;
         
-        [Required]
         public DateTime ShippingDate { get; set; } = DateTime.Now.AddDays(3);
         
-        [Required]
         public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
-        
-        [Required]
-        public List<PurchaseAlbum> PurchasedAlbums { get; set; }
+        public List<PurchaseAlbum> PurchasedAlbums { get; set; } = new List<PurchaseAlbum>();
 
-        [Required]
         public decimal TotalPrice
         {
             get

@@ -4,11 +4,11 @@ namespace Core.DataAccess
 {
     public class ContextFactory
     {
-        public OrderContext CreateDbContext(string[] args)
+        public RecordStoreContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<OrderContext>();
-            optionsBuilder.UseSqlServer(@"Data Source =.\SQLSERVER;Initial Catalog = YourDBName; Integrated Security = True;");
-            return new OrderContext(optionsBuilder.Options);
+            var optionsBuilder = new DbContextOptionsBuilder<RecordStoreContext>();
+            optionsBuilder.UseSqlServer(@"Data Source =@localhost;Initial Catalog = record_store_db; Integrated Security = True;");
+            return new RecordStoreContext(optionsBuilder.Options);
         } 
     }
 }

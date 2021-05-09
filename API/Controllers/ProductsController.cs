@@ -23,7 +23,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<ProductModel> GetAlbums()
+        public List<ProductModel> GetProducts()
         {
             var products = _productsService.GetAvailableProducts();
             

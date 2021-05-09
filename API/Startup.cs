@@ -1,8 +1,10 @@
 using API.Middleware;
 using API.Models;
+using Core.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +24,10 @@ namespace API
         {
             services.AddControllers();
             services.AddSpaStaticFiles(config => { config.RootPath = "client/build"; });
+            services.AddDbContext<RecordStoreContext>(options =>
+            {
+                options.UseSqlServer(_configuration["ConnectionStrings:Default"]);
+            });
 
             InterfaceConfig.Configure(services, _configuration);
             JwtConfig.Configure(services, _configuration);
@@ -33,7 +39,7 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();

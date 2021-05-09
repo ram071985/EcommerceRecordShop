@@ -18,10 +18,6 @@ namespace API
             services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
             services.AddScoped<ISpotifyAlbumService, SpotifyAlbumService>();
             services.AddScoped<IGetProductsService, GetProductsService>();
-            services.AddDbContext<OrderContext>(options =>
-            {
-                options.UseSqlServer(configuration["ConnectionStrings:Default"]);
-            });
         }
     }
 }
