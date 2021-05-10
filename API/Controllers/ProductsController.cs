@@ -24,27 +24,23 @@ namespace API.Controllers
             _spotifyService = spotifyService;
         }
 
-        [HttpGet("{count}")]
-        public List<ProductModel> GetProducts(int? count)
+        [HttpGet("{count:int}")]
+        public List<ProductModel> GetProducts(int count = 10)
         {
-            var productCount = ParseCount(count);
-
-            var products = _productsService.GetAvailableProducts(productCount);
+            var products = _productsService.GetAvailableProducts(count);
 
             var productModels = TransformProductsToModels(products);
 
             return productModels;
         }
 
-        [HttpGet("{genre}/{count}")]
-        public List<ProductModel> GetProductsByGenre(string genre, int? count)
+        [HttpGet("{genre}/{count:int}")]
+        public List<ProductModel> GetProductsByGenre(string genre, int count = 10)
         {
             if (genre == null)
                 throw new Exception("No Genre Specified");
 
-            var productCount = ParseCount(count);
-
-            var products = _productsService.GetAvailableProductsByGenre(productCount, genre);
+            var products = _productsService.GetAvailableProductsByGenre(count, genre);
 
             var productModels = TransformProductsToModels(products);
 
@@ -63,14 +59,6 @@ namespace API.Controllers
                 }));
 
             return productModels;
-        }
-
-        private int ParseCount(int? count)
-        {
-            if (count == null)
-                return 10;
-
-            return (int) count;
         }
     }
 }

@@ -25,18 +25,7 @@ namespace API.Controllers
         [HttpPost]
         public void AddToCart(List<CartItemInputModel> cartItemsInput, string userId)
         {
-            var cartItems = new List<CartItem>();
-            
-            cartItemsInput.ForEach(cartItem =>
-                cartItems.Add(new CartItem
-                {
-                    Quantity = cartItem.Quantity,
-                    // should remove purchase price and spotifyId from cartItem class => replaced with ProductId
-                    PurchasePrice = cartItem.Price,
-                    SpotifyId = cartItem.SpotifyId,
-                    ProductId = cartItem.ProductId,
-                    UserId = userId
-                }));
+            var cartItems = TransformCartInputsToCartItems(cartItemsInput, userId);
                 
             _cartService.AddToCart(cartItems, userId);
         }
@@ -52,6 +41,22 @@ namespace API.Controllers
         public void RemoveFromCart(string orderNumber, List<CartItemInputModel> orders)
         {
             // TODO do we need this endpoint?
+        }
+
+        private List<CartItem> TransformCartInputsToCartItems(List<CartItemInputModel> cartItemsInput, string userId)
+        {
+            var cartItems = new List<CartItem>();
+            
+            cartItemsInput.ForEach(cartItem =>
+                cartItems.Add(new CartItem
+                {
+                    Quantity = cartItem.Quantity,
+                    // should remove purchase price and spotifyId from cartItem class => replaced with ProductId
+                    ProductId = cartItem.ProductId,
+                    UserId = userId
+                }));
+                
+            return cartItems;
         }
     }
 }

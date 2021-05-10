@@ -23,16 +23,16 @@ namespace Core.Entities
         public DateTime ShippingDate { get; set; } = DateTime.Now.AddDays(3);
         
         public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
-        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
-
         public decimal OrderTotalPrice
         {
             get
             {
                 decimal totalPrice = 0;
-                CartItems.ForEach(distinctAlbum => totalPrice += distinctAlbum.PurchasePrice * distinctAlbum.Quantity);
+                CartItems.ForEach(distinctAlbum => totalPrice += distinctAlbum.Product.Price * distinctAlbum.Quantity);
                 return totalPrice;
             }
         }
+        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
+
     }
 }

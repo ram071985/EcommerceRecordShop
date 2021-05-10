@@ -6,13 +6,14 @@ namespace Core.Services.ProductServices
 {
     public interface IGetProductsService
     {
-        List<Product> GetAvailableProducts(int productCount);
-        List<Product> GetAvailableProductsByGenre(int productCount, string genre);
+        List<Product> GetAvailableProducts(int count);
+        List<Product> GetAvailableProductsByGenre(int count, string genre);
+        Product GetProductById(string id);
     }
 
     public class GetProductsService : IGetProductsService
     {
-        public List<Product> GetAvailableProducts(int productCount)
+        public List<Product> GetAvailableProducts(int count)
         {
             // TODO get product list from DB
             var products = new List<Product>
@@ -42,7 +43,7 @@ namespace Core.Services.ProductServices
             return products;
         }
 
-        public List<Product> GetAvailableProductsByGenre(int productCount, string genre)
+        public List<Product> GetAvailableProductsByGenre(int count, string genre)
         {
             // TODO get product list from DB
             var products = new List<Product>
@@ -70,6 +71,16 @@ namespace Core.Services.ProductServices
             // TODO May need to make a GetProductsByGenre Service
 
             return products;
+        }
+
+        public Product GetProductById(string id)
+        {
+            return new Product
+            {
+                SpotifyId = "3ZpoX3ij0YBUeJoGfbVH0Q",
+                Price = 35.12M,
+                Id = id
+            };
         }
     }
 }

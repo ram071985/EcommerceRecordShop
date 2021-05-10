@@ -14,10 +14,10 @@ namespace API.Controllers
     [Route("[controller]")]
     public sealed class OrderController : Controller
     {
-        private readonly OrdersService _orderService;
+        private readonly IOrdersService _orderService;
         private readonly string _path;
 
-        public OrderController(OrdersService orderService)
+        public OrderController(IOrdersService orderService)
         {
             _orderService = orderService;
             _path = Path.GetFullPath(ToString()!);
@@ -35,20 +35,17 @@ namespace API.Controllers
 
         // [Authorize]
         [HttpPost]
-        public Order PlaceOrder(string userId)
+        public Order PlaceOrder(UserIdInput userIdInput)
         {
-            if (userId == null)
+            if (userIdInput.UserId == null)
                 throw new Exception("Invalid User Id");
 
-            return _orderService.PlaceOrder(userId);
+            return _orderService.PlaceOrder(userIdInput.UserId);
         }
 
         // [Authorize]
         [HttpPatch("{orderNumber}")]
-        public void ChangeOrder(
-            string orderNumber, 
-            List<CartItemInputModel> itemsToAdd, 
-            List<CartItemInputModel> itemsToRemove)
+        public void ChangeOrder(string orderNumber)
         {
             // TODO do we need this endpoint?
         }
