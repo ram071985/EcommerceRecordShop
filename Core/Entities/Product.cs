@@ -5,6 +5,10 @@ namespace Core.Entities
 {
     public class Product
     {
+        public Product()
+        {
+        }
+        
         [Key]
         [Column(TypeName = "varchar(50)")]
         public string Id { get; set; }

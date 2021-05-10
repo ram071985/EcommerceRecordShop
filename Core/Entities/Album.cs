@@ -6,7 +6,6 @@ namespace Core.Entities
 {
     public class Album
     {
-        public short Id { get; set; }
         public string SpotifyId { get; set; }
         public string Name { get; set; }
         public string ArtistName { get; set; }
@@ -25,18 +24,13 @@ namespace Core.Entities
 
         private string ParsePopularity()
         {
-            if (Popularity > 75) return "HUGE release";
-            if (Popularity > 55) return "Big release";
-            if (Popularity > 40) return "Fairly Successful album";
-            return "album with a cult following";
+            return Popularity switch
+            {
+                > 75 => "HUGE release",
+                > 55 => "Big release",
+                > 40 => "Fairly Successful album",
+                _ => "album with a cult following"
+            };
         }
-    }
-
-    public class Track
-    {
-        public string Name { get; set; }
-        public int TrackNumber { get; set; }
-        public int Duration { get; set; }
-        public bool Explicit { get; set; }
     }
 }

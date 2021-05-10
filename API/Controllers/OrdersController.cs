@@ -5,8 +5,6 @@ using System.Linq;
 using API.Models;
 using Core.Entities;
 using Core.Services.OrderServices;
-using Core.Services.SpotifyServices;
-using Core.Services.UserServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,49 +14,41 @@ namespace API.Controllers
     [Route("[controller]")]
     public sealed class OrderController : Controller
     {
-        private readonly IPlaceOrderService _orderService;
-        private readonly ISpotifyAlbumService _albumService;
+        private readonly OrdersService _orderService;
         private readonly string _path;
 
-        public OrderController(
-            IPlaceOrderService orderService,
-            ISpotifyAlbumService albumService
-        )
+        public OrderController(OrdersService orderService)
         {
             _orderService = orderService;
-            _albumService = albumService;
             _path = Path.GetFullPath(ToString()!);
         }
 
         [Authorize]
-        [HttpGet("{username}")]
-        public string GetOrdersByUsername(string username)
+        [HttpGet("{userId}")]
+        public List<Order> GetOrdersByUserId(string userId)
         {
-            // TODO should return List<Order>()
-            return username;
+            if (userId == null)
+                throw new Exception("Invalid User Id");
+
+            return _orderService.GetOrdersByUserId(userId);
         }
 
         // [Authorize]
         [HttpPost]
-        public Order PlaceOrder([FromBody] OrderInputModel orderInputModel)
+        public Order PlaceOrder(string userId)
         {
-            var purchasedAlbums = new List<CartItem>();
-            orderInputModel.Albums.ForEach(album =>
-            {
-                purchasedAlbums.Add(new CartItem
-                {
-                    Quantity = album.Quantity,
-                    PurchasePrice = album.Price,
-                    SpotifyId = album.SpotifyId,
-                    UserId = orderInputModel.UserId
-                });
-            });
-            return _orderService.PlaceOrder(purchasedAlbums, orderInputModel.UserId);
+            if (userId == null)
+                throw new Exception("Invalid User Id");
+
+            return _orderService.PlaceOrder(userId);
         }
 
         // [Authorize]
         [HttpPatch("{orderNumber}")]
-        public void ChangeOrder(string orderNumber, [FromBody] List<CartItemInputModel> orders)
+        public void ChangeOrder(
+            string orderNumber, 
+            List<CartItemInputModel> itemsToAdd, 
+            List<CartItemInputModel> itemsToRemove)
         {
             // TODO do we need this endpoint?
         }

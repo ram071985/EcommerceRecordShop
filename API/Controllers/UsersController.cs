@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using API.Models;
+using Core.Entities;
 using Core.Services.UserServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,28 @@ namespace API.Controllers
     public sealed class UsersController : Controller
     {
         private readonly IAddUserService _addUserService;
+        private readonly IGetUserService _getUserService;
         private readonly string _path;
 
-        public UsersController(IAddUserService addUserService)
+        public UsersController(
+            IAddUserService addUserService,
+            IGetUserService getUserService)
         {
             _addUserService = addUserService;
+            _getUserService = getUserService;
             _path = Path.GetFullPath(ToString()!);
         }
 
-        [HttpGet("{username}")]// /users/aliel
-        public UserModel Get(string username)
+        // [Authorize]
+        [HttpGet("{userId}")]
+        public UserModel GetUserByUserId(string userId)
         {
-            return new UserModel();
+            if (userId == null)
+                throw new Exception("Invalid User Id");
+
+            var user = _getUserService.GetUserByUserId(userId);
+
+            return TransformUserToModel(user);
         }
         
         [HttpPost]
@@ -47,6 +58,15 @@ namespace API.Controllers
         public void DeleteUser(string username)
         {
         }
+
+        private UserModel TransformUserToModel(User user)
+        {
+            return new UserModel
+            {
+                Username = user.Username,
+                Email = user.Email,
+                WalletBalance = user.WalletBalance
+            };
+        }
     }
-    
 }

@@ -23,25 +23,33 @@ namespace API.Controllers
 
         // [Authorize]
         [HttpPost]
-        public void AddToCart([FromBody] List<CartItemInputModel> cartItems, string userId)
+        public void AddToCart(List<CartItemInputModel> cartItemsInput, string userId)
         {
-            var cart = new List<CartItem>();
+            var cartItems = new List<CartItem>();
             
-            cartItems.ForEach(album =>
-                cart.Add(new CartItem
+            cartItemsInput.ForEach(cartItem =>
+                cartItems.Add(new CartItem
                 {
-                    Quantity = album.Quantity,
-                    PurchasePrice = album.Price,
-                    SpotifyId = album.SpotifyId,
+                    Quantity = cartItem.Quantity,
+                    // should remove purchase price and spotifyId from cartItem class => replaced with ProductId
+                    PurchasePrice = cartItem.Price,
+                    SpotifyId = cartItem.SpotifyId,
+                    ProductId = cartItem.ProductId,
                     UserId = userId
                 }));
                 
-            _cartService.AddToCart(cart, userId);
+            _cartService.AddToCart(cartItems, userId);
         }
 
+        [HttpDelete("{userId}")]
+        public void ClearCart(string userId)
+        {
+            _cartService.ClearCart(userId);
+        }
+        
         // [Authorize]
         [HttpPatch("{orderNumber}")]
-        public void RemoveFromCart(string orderNumber, [FromBody] List<CartItemInputModel> orders)
+        public void RemoveFromCart(string orderNumber, List<CartItemInputModel> orders)
         {
             // TODO do we need this endpoint?
         }

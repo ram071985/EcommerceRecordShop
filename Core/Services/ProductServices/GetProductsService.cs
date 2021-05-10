@@ -6,12 +6,13 @@ namespace Core.Services.ProductServices
 {
     public interface IGetProductsService
     {
-        List<Product> GetAvailableProducts(int productCount = 1);
+        List<Product> GetAvailableProducts(int productCount);
+        List<Product> GetAvailableProductsByGenre(int productCount, string genre);
     }
 
     public class GetProductsService : IGetProductsService
     {
-        public List<Product> GetAvailableProducts(int productCount = 1)
+        public List<Product> GetAvailableProducts(int productCount)
         {
             // TODO get product list from DB
             var products = new List<Product>
@@ -35,7 +36,7 @@ namespace Core.Services.ProductServices
                     SpotifyId = "3ZpoX3ij0YBUeJoGfbVH0Q"
                 }
             };
-            // TODO ^^^^ change this to call something like _dbServices.GetProducts from db
+            // TODO ^^^^ change this to call something like _dataAccess.GetProducts from db
             // TODO May need to make a GetProductsByGenre Service
 
             return products;

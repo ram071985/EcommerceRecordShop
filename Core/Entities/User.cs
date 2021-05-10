@@ -39,14 +39,14 @@ namespace Core.Entities
         
         public decimal WalletBalance { get; set; }
 
-        public List<Order> Orders { get; set; } = new List<Order>();
+        public List<Order> Orders { get; set; } 
 
         public decimal TotalSpent
         {
             get
             {
                 decimal totalSpent = 0;
-                Orders.ForEach(order => totalSpent += order.TotalPrice);
+                Orders.ForEach(order => totalSpent += order.OrderTotalPrice);
                 return totalSpent;
             }
         }

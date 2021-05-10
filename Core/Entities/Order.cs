@@ -7,6 +7,10 @@ namespace Core.Entities
 {
     public class Order
     {
+        public Order()
+        {
+        }
+        
         [Key]
         [Column(TypeName = "varchar(50)")]
         public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -19,14 +23,14 @@ namespace Core.Entities
         public DateTime ShippingDate { get; set; } = DateTime.Now.AddDays(3);
         
         public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
-        public List<CartItem> PurchasedAlbums { get; set; } = new List<CartItem>();
+        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
 
-        public decimal TotalPrice
+        public decimal OrderTotalPrice
         {
             get
             {
                 decimal totalPrice = 0;
-                PurchasedAlbums.ForEach(distinctAlbum => totalPrice += distinctAlbum.PurchasePrice * distinctAlbum.Quantity);
+                CartItems.ForEach(distinctAlbum => totalPrice += distinctAlbum.PurchasePrice * distinctAlbum.Quantity);
                 return totalPrice;
             }
         }

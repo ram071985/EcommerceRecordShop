@@ -10,5 +10,6 @@ namespace Core.Entities
         public decimal PurchasePrice { get; set; }
         public string SpotifyId { get; set; }
         public string UserId { get; set; }
+        public string ProductId { get; set; }
     }
 }

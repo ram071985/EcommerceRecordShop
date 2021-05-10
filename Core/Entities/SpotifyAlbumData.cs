@@ -8,18 +8,25 @@ namespace Core.Entities
     {
         [JsonProperty("artists")]
         public List<Artist> Artists { get; set; }
+        
         [JsonProperty("images")]
         public List<Image> Images { get; set; }
+        
         [JsonProperty("label")]
         public string RecordLabel { get; set; }
+        
         [JsonProperty("name")]
         public string Name { get; set; }
+        
         [JsonProperty("release_date")]
         public string ReleaseDate { get; set; }
+        
         [JsonProperty("total_tracks")]
         public int TotalTracks { get; set; }
+        
         [JsonProperty("tracks")]
         public Tracks Tracks { get; set; }
+        
         [JsonProperty("popularity")]
         public int Popularity { get; set; }
     }
@@ -46,12 +53,16 @@ namespace Core.Entities
     {
         [JsonProperty("artists")]
         public List<Artist> Artists { get; set; }
+        
         [JsonProperty("explicit")]
         public bool Explicit { get; set; }
+        
         [JsonProperty("name")]
         public string Name { get; set; }
+        
         [JsonProperty("track_number")]
         public int TrackNumber { get; set; }
+        
         [JsonProperty("duration_ms")]
         public int Duration { get; set; }
     }
