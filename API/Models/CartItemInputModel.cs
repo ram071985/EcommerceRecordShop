@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace API.Models
 {
-    public class ProductPurchaseInputModel
+    public class CartItemInputModel
     {
         [JsonPropertyName("quantity")] 
         public short Quantity { get; set; }

@@ -12,6 +12,6 @@ namespace Core.DataAccess
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<PurchaseAlbum> PurchaseAlbums { get; set; }
+        public DbSet<CartItem> PurchaseAlbums { get; set; }
     }
 }

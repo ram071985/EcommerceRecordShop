@@ -6,7 +6,7 @@ namespace API.Models
     public class OrderInputModel
     {
         [JsonPropertyName("purchasedAlbumsInput")] 
-        public List<ProductPurchaseInputModel> Albums { get; set; }
+        public List<CartItemInputModel> Albums { get; set; }
         
         [JsonPropertyName("userId")] 
         public string UserId { get; set; }

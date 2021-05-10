@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities
 {
-    public class PurchaseAlbum
+    public class CartItem
     {
         [Key]
         public int Id { get; set; }

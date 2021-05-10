@@ -6,12 +6,12 @@ namespace Core.Services.ProductServices
 {
     public interface IGetProductsService
     {
-        List<Product> GetAvailableProducts();
+        List<Product> GetAvailableProducts(int productCount = 1);
     }
 
     public class GetProductsService : IGetProductsService
     {
-        public List<Product> GetAvailableProducts()
+        public List<Product> GetAvailableProducts(int productCount = 1)
         {
             // TODO get product list from DB
             var products = new List<Product>
@@ -40,7 +40,8 @@ namespace Core.Services.ProductServices
 
             return products;
         }
-        public List<Product> GetAvailableProductsByGenre(string genre, int productAmount)
+
+        public List<Product> GetAvailableProductsByGenre(int productCount, string genre)
         {
             // TODO get product list from DB
             var products = new List<Product>

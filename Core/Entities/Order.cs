@@ -19,7 +19,7 @@ namespace Core.Entities
         public DateTime ShippingDate { get; set; } = DateTime.Now.AddDays(3);
         
         public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
-        public List<PurchaseAlbum> PurchasedAlbums { get; set; } = new List<PurchaseAlbum>();
+        public List<CartItem> PurchasedAlbums { get; set; } = new List<CartItem>();
 
         public decimal TotalPrice
         {

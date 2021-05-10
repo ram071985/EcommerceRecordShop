@@ -42,10 +42,10 @@ namespace API.Controllers
         [HttpPost]
         public Order PlaceOrder([FromBody] OrderInputModel orderInputModel)
         {
-            var purchasedAlbums = new List<PurchaseAlbum>();
+            var purchasedAlbums = new List<CartItem>();
             orderInputModel.Albums.ForEach(album =>
             {
-                purchasedAlbums.Add(new PurchaseAlbum
+                purchasedAlbums.Add(new CartItem
                 {
                     Quantity = album.Quantity,
                     PurchasePrice = album.Price,
@@ -58,7 +58,7 @@ namespace API.Controllers
 
         // [Authorize]
         [HttpPatch("{orderNumber}")]
-        public void ChangeOrder(string orderNumber, [FromBody] List<ProductPurchaseInputModel> orders)
+        public void ChangeOrder(string orderNumber, [FromBody] List<CartItemInputModel> orders)
         {
             // TODO do we need this endpoint?
         }

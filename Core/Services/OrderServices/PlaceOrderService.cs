@@ -7,7 +7,7 @@ namespace Core.Services.OrderServices
 {
     public interface IPlaceOrderService
     {
-        Order PlaceOrder(List<PurchaseAlbum> albums, string userId);
+        Order PlaceOrder(List<CartItem> albums, string userId);
     }
 
     public class PlaceOrderService : IPlaceOrderService
@@ -20,7 +20,7 @@ namespace Core.Services.OrderServices
         }
         
         // TODO should return void
-        public Order PlaceOrder(List<PurchaseAlbum> purchasedAlbums, string userId)
+        public Order PlaceOrder(List<CartItem> purchasedAlbums, string userId)
         {
             var order = new Order
             {

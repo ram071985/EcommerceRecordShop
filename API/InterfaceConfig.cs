@@ -1,9 +1,8 @@
-using Core.DataAccess;
+using Core.Services.CartServices;
 using Core.Services.OrderServices;
 using Core.Services.ProductServices;
 using Core.Services.SpotifyServices;
 using Core.Services.UserServices;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +17,7 @@ namespace API
             services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
             services.AddScoped<ISpotifyAlbumService, SpotifyAlbumService>();
             services.AddScoped<IGetProductsService, GetProductsService>();
+            services.AddScoped<ICartService, CartService>();
         }
     }
 }
