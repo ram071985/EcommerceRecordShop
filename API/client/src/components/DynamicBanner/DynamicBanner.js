@@ -7,10 +7,19 @@ const DynamicBanner = (props) => {
     "https://via.placeholder.com/1200x589",
     "https://via.placeholder.com/1200x589",
     "https://via.placeholder.com/1200x589",
-    "https://via.placeholder.com/1200x589",
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const next = () => {
+    const slideIdx = activeIndex + 1 > slides.length - 1 ? 0 : activeIndex + 1;
+    setActiveIndex(slideIdx);
+  };
+
+  const prev = () => {
+    const slideIdx = activeIndex - 1 < 0 ? slides.length - 1 : activeIndex - 1;
+    setActiveIndex(slideIdx);
+  };
 
   return (
     <div className="DynamicBanner">
@@ -18,14 +27,18 @@ const DynamicBanner = (props) => {
         <Carousel
           slides={slides}
           activeIndex={activeIndex}
-          hideDefaultControls
+          variantControls="dynamicBanner"
+          prev={prev}
+          next={next}
+          hideIndicators
         />
       </div>
       <div className="productsCarousel">
         <Carousel
           slides={slides}
           activeIndex={activeIndex}
-          hideDefaultControls
+          hideControls
+          hideIndicators
         />
       </div>
     </div>
