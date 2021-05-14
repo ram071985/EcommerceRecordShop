@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import "./Carousel.scss";
 import {
   CRow,
   CCol,
@@ -9,16 +10,41 @@ import {
   CCarouselInner,
   CCarouselControl,
 } from "@coreui/react";
+import { CIcon } from "@coreui/icons-react";
+import Button from "../Button/Button";
 
 const Carousel = (props) => {
-  // const [activeIndex, setActiveIndex] = useState(0);
+  const getControls = () => {
+    if (props.hideControls) return null;
+
+    switch (props.variantControls) {
+      case "dynamicBanner":
+        return (
+          <div className="dynamicBannerControls">
+            <Button clicked={props.prev} variant="carousel">
+              <CIcon name="cilArrowThickLeft" />
+            </Button>
+            <Button clicked={props.next} variant="carousel">
+              <CIcon name="cilArrowThickRight" />
+            </Button>
+          </div>
+        );
+      default:
+        return (
+          <>
+            <CCarouselControl direction="prev" />
+            <CCarouselControl direction="next" />
+          </>
+        );
+    }
+  };
 
   return (
     <div>
       <CRow>
         <CCol sm={12}>
           <CCarousel activeIndex={props.activeIndex}>
-            {/* <CCarouselIndicators /> */}
+            {props.hideIndicators ? null : <CCarouselIndicators />}
             <CCarouselInner>
               <CCarouselItem>
                 <img
@@ -54,12 +80,7 @@ const Carousel = (props) => {
                 </CCarouselCaption>
               </CCarouselItem>
             </CCarouselInner>
-            {props.hideDefaultControls ? null : (
-              <>
-                <CCarouselControl direction="prev" />
-                <CCarouselControl direction="next" />
-              </>
-            )}
+            {getControls()}
           </CCarousel>
         </CCol>
       </CRow>

@@ -4,7 +4,7 @@ import DynamicBanner from "../../DynamicBanner/DynamicBanner";
 const Home = () => {
   return (
     <div>
-      <div>Home Page</div>
+      {/* <div>Home Page</div> */}
       <DynamicBanner />
     </div>
   );
