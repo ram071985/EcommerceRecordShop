@@ -23,9 +23,22 @@ namespace API.Controllers
             _productsService = productsService;
             _spotifyService = spotifyService;
         }
+        
+        //          5001/products   
+        [HttpGet]
+        public List<ProductModel> GetProducts()
+        {
+            var count = 5;
+            var products = _productsService.GetAvailableProducts(count);
 
+            var productModels = TransformProductsToModels(products);
+
+            return productModels;
+        }
+
+        //          5001/products/5   
         [HttpGet("{count:int}")]
-        public List<ProductModel> GetProducts(int count = 10)
+        public List<ProductModel> GetProductsByCount(int count)
         {
             var products = _productsService.GetAvailableProducts(count);
 
@@ -34,8 +47,24 @@ namespace API.Controllers
             return productModels;
         }
 
+        //          5001/products/hiphop   
+        [HttpGet("{genre}")]
+        public List<ProductModel> GetProductsByGenre(string genre)
+        {
+            if (genre == null)
+                throw new Exception("No Genre Specified");
+
+            var count = 5;
+            var products = _productsService.GetAvailableProductsByGenre(count, genre);
+
+            var productModels = TransformProductsToModels(products);
+
+            return productModels;
+        }
+
+        //          5001/products/hiphop/5   
         [HttpGet("{genre}/{count:int}")]
-        public List<ProductModel> GetProductsByGenre(string genre, int count = 10)
+        public List<ProductModel> GetProductsByGenreByCount(string genre, int count)
         {
             if (genre == null)
                 throw new Exception("No Genre Specified");
@@ -46,7 +75,8 @@ namespace API.Controllers
 
             return productModels;
         }
-
+        
+        //          5001/products/hiphop   
         private List<ProductModel> TransformProductsToModels(List<Product> products)
         {
             var productModels = new List<ProductModel>();

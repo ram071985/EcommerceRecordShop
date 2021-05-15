@@ -24,6 +24,7 @@ namespace API
         {
             services.AddControllers();
             services.AddSpaStaticFiles(config => { config.RootPath = "client/build"; });
+            
             services.AddDbContext<RecordStoreContext>(options =>
             {
                 options.UseSqlServer(_configuration["ConnectionStrings:Default"]);
