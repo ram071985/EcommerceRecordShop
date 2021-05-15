@@ -13,7 +13,43 @@ namespace Core.Services.ProductServices
 
     public class GetProductsService : IGetProductsService
     {
-        private List<Product> Products { get; } = new List<Product>
+        public List<Product> GetAvailableProducts(int count)
+        {
+            var products = new List<Product>();
+
+            if (count > 10) count = 10;
+            for (var i = 0; i < count; i++)
+            {
+                products.Add(Products[i]);
+            }
+
+            return products;
+        }
+
+        public List<Product> GetAvailableProductsByGenre(int count, string genre)
+        {
+            var products = new List<Product>();
+            
+            if (count > 10) count = 10;
+            for (var i = 0; i < count; i++)
+            {
+                products.Add(Products[i]);
+            }
+
+            return products;
+        }
+
+        public Product GetProductById(string id)
+        {
+            return new() 
+            {
+                SpotifyId = "3ZpoX3ij0YBUeJoGfbVH0Q",
+                Price = 35.12M,
+                Id = id
+            };
+        }
+        
+        private List<Product> Products { get; } = new()
         {
             new Product
             {
@@ -76,45 +112,5 @@ namespace Core.Services.ProductServices
                 SpotifyId = "30ly6F6Xl0TKmyBCU50Khv"
             }
         };
-        
-        public List<Product> GetAvailableProducts(int count)
-        {
-            // TODO get product list from DB
-            var products = new List<Product>();
-
-            if (count > 10) count = 10;
-            for (var i = 0; i < count; i++)
-            {
-                products.Add(Products[i]);
-            }
-
-            Console.WriteLine(products.Count);
-
-            return products;
-        }
-
-        public List<Product> GetAvailableProductsByGenre(int count, string genre)
-        {
-            // TODO get product list from DB
-            var products = new List<Product>();
-            
-            if (count > 10) count = 10;
-            for (var i = 0; i < count; i++)
-            {
-                products.Add(Products[i]);
-            }
-
-            return products;
-        }
-
-        public Product GetProductById(string id)
-        {
-            return new Product
-            {
-                SpotifyId = "3ZpoX3ij0YBUeJoGfbVH0Q",
-                Price = 35.12M,
-                Id = id
-            };
-        }
     }
 }
