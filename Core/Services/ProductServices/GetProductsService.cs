@@ -95,7 +95,6 @@ namespace Core.Services.ProductServices
 
         public List<Product> GetAvailableProductsByGenre(int count, string genre)
         {
-            Console.WriteLine(genre);
             // TODO get product list from DB
             var products = new List<Product>();
             

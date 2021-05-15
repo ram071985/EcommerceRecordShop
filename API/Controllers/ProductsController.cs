@@ -29,6 +29,7 @@ namespace API.Controllers
         public List<ProductModel> GetProducts()
         {
             var count = 5;
+            
             var products = _productsService.GetAvailableProducts(count);
 
             var productModels = TransformProductsToModels(products);
@@ -55,6 +56,7 @@ namespace API.Controllers
                 throw new Exception("No Genre Specified");
 
             var count = 5;
+            
             var products = _productsService.GetAvailableProductsByGenre(count, genre);
 
             var productModels = TransformProductsToModels(products);

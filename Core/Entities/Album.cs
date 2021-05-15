@@ -9,8 +9,10 @@ namespace Core.Entities
         public string SpotifyId { get; set; }
         public string Name { get; set; }
         public string ArtistName { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public string ArtistId { get; set; }
+        public string ArtistImageUrl { get; set; }
         public string ImageUrl { get; set; }
+        public DateTime ReleaseDate { get; set; }
         public string RecordLabel { get; set; }
         public int TotalTracks { get; set; }
         public int Popularity { get; set; }
