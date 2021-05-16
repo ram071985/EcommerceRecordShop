@@ -1,3 +1,5 @@
+@import "../../scss/_variables";
+
 @mixin carouselHeight($maxImageHeight, $minImageHeight) {
   .carousel-inner > .carousel-item {
     max-height: $maxImageHeight;
@@ -37,3 +39,30 @@
 }
 
 //add breakpoints to take the size of the details carousel into consideration
+@media only screen and (max-width: $screen-xl) {
+  .DynamicBanner {
+    .detailsCarousel {
+      top: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: $screen-md) {
+  .DynamicBanner {
+    .detailsCarousel {
+      width: 300px;
+      @include carouselHeight(300px, 300px);
+    }
+  }
+}
+
+@media only screen and (max-width: $screen-sm) {
+  .DynamicBanner {
+    .detailsCarousel {
+      display: none;
+    }
+    .productsCarousel {
+      margin: 0;
+    }
+  }
+}
