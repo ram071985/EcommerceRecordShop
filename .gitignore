@@ -6,6 +6,8 @@ project.lock.json
 *.pyc
 nupkg/
 tags
+coreui-free-bootstrap-admin-template-master.zip
+CORE UI
 
 # Visual Studio Code
 .vscode
