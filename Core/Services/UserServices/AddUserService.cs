@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Core.DataAccess;
 using Core.Entities;
 
 namespace Core.Services.UserServices
@@ -10,18 +12,28 @@ namespace Core.Services.UserServices
 
     public class AddUserService : IAddUserService
     {
+        private readonly RecordStoreContext _db;
+
+        public AddUserService(RecordStoreContext db)
+        {
+            _db = db;
+        }
+
         public void Add(string username, string password, string email)
         {
             var user = new User
             {
+                Id = Guid.NewGuid().ToString(),
                 Username = username,
                 Password = password,
                 Email = email,
+                WalletBalance = 3000,
                 CreatedAt = DateTime.Now,
-                WalletBalance = 1000
+                Orders = new List<Order>(),
             };
-            
-            // TODO add user to database    
+
+            _db.Add(user);
+            _db.SaveChanges();
         }
     }
 }

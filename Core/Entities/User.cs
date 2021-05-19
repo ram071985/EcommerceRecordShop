@@ -12,17 +12,6 @@ namespace Core.Entities
         {
         }
 
-        public User(string username, string password, string email)
-        {
-            Id = Guid.NewGuid().ToString();
-            Username = username;
-            Password = password;
-            Email = email;
-            WalletBalance = 3000;
-            CreatedAt = DateTime.Now;
-            Orders = new List<Order>();
-        }
-
         [Key]
         [Column(TypeName = "varchar(50)")]
         public string Id { get; set; }

@@ -23,7 +23,7 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Authenticate(UserAuthenticationInputModel user)
+        public IActionResult Authenticate(AuthenticationInputModel user)
         {
             if (user.Username == null || user.Password == null)
                 throw new Exception( $"Invalid Authentication input in {_path}.Authenticate()");

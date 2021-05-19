@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Core.Entities;
+﻿using Core.Entities;
 
 namespace API.Models
 {
