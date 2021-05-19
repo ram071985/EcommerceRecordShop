@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.Migrations
 {
     [DbContext(typeof(RecordStoreContext))]
-    [Migration("20210519192127_initial migration")]
-    partial class initialmigration
+    [Migration("20210519210014_AddRequiredAndMaxLength")]
+    partial class AddRequiredAndMaxLength
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,22 +23,22 @@ namespace Core.Migrations
 
             modelBuilder.Entity("Core.Entities.CartItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("OrderId")
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("ProductId")
+                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.Property<short>("Quantity")
                         .HasColumnType("smallint");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -64,6 +64,7 @@ namespace Core.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
@@ -79,9 +80,10 @@ namespace Core.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(25,8)");
 
                     b.Property<string>("SpotifyId")
+                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
@@ -98,16 +100,20 @@ namespace Core.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("varchar(50)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Password")
-                        .HasColumnType("varchar(50)");
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Username")
-                        .HasColumnType("varchar(50)");
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("WalletBalance")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(25,8)");
 
                     b.HasKey("Id");
 
@@ -122,7 +128,9 @@ namespace Core.Migrations
 
                     b.HasOne("Core.Entities.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
                 });
@@ -131,7 +139,9 @@ namespace Core.Migrations
                 {
                     b.HasOne("Core.Entities.User", null)
                         .WithMany("Orders")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.Order", b =>

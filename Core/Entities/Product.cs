@@ -13,10 +13,12 @@ namespace Core.Entities
         [Column(TypeName = "varchar(50)")]
         public string Id { get; set; }
         
+        [Required]
         [Column(TypeName = "varchar(50)")]
         public string SpotifyId { get; set; }
         
-        [Column(TypeName = "varchar(50)")]
+        [Required]
+        [Column(TypeName = "decimal(25,8)")]
         public decimal Price { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Core.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace Core.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(50)", nullable: false),
                     SpotifyId = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(25,8)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +29,7 @@ namespace Core.Migrations
                     Password = table.Column<string>(type: "varchar(50)", nullable: true),
                     Email = table.Column<string>(type: "varchar(50)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    WalletBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    WalletBalance = table.Column<decimal>(type: "decimal(25,8)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,11 +61,10 @@ namespace Core.Migrations
                 name: "CartItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Quantity = table.Column<short>(type: "smallint", nullable: false),
+                    Id = table.Column<string>(type: "varchar(50)", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(50)", nullable: true),
                     ProductId = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Quantity = table.Column<short>(type: "smallint", nullable: false),
                     OrderId = table.Column<string>(type: "varchar(50)", nullable: true)
                 },
                 constraints: table =>

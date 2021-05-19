@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 namespace Core.Entities
 {
@@ -26,17 +27,23 @@ namespace Core.Entities
         [Column(TypeName = "varchar(50)")]
         public string Id { get; set; }
         
-        [Column(TypeName = "varchar(50)")]
+        [Required]
+        [Column(TypeName = "varchar(100)")]
         public string Username { get; set; }
         
-        [Column(TypeName = "varchar(50)")]
+        [Required]
+        [Column(TypeName = "varchar(100)")]
         public string Password { get; set; }
         
-        [Column(TypeName = "varchar(50)")]
+        [Required]
+        [MaxLength(100)]
         public string Email { get; set; }
         
+        [Required]
         public DateTime CreatedAt { get; set; }
         
+        [Required]
+        [Column(TypeName = "decimal(25,8)")]
         public decimal WalletBalance { get; set; }
 
         public List<Order> Orders { get; set; } 
