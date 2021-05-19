@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Core.Entities
 {
+    [NotMapped]
     public class Track
     {
         public string Name { get; set; }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Core.Entities
 {
+    [NotMapped]
     public class Album
     {
         public string SpotifyId { get; set; }

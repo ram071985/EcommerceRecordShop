@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
 namespace Core.Entities
 {
+    [NotMapped]
     public class AlbumData
     {
         [JsonProperty("artists")]
@@ -31,6 +33,7 @@ namespace Core.Entities
         public int Popularity { get; set; }
     }
     
+    [NotMapped]
     public class Artist
     {
         [JsonProperty("name")]
@@ -40,6 +43,7 @@ namespace Core.Entities
         public string Id { get; set; }
     }
 
+    [NotMapped]
     public class Image
     {
         [JsonProperty("Url")]
@@ -52,6 +56,7 @@ namespace Core.Entities
         public List<Item> Items { get; set; }
     }
 
+    [NotMapped]
     public class Item
     {
         [JsonProperty("artists")]

@@ -16,6 +16,7 @@ namespace Core.Entities
         [Column(TypeName = "varchar(50)")]
         public string SpotifyId { get; set; }
         
+        [Column(TypeName = "varchar(50)")]
         public decimal Price { get; set; }
     }
 }
