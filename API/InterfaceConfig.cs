@@ -12,14 +12,14 @@ namespace API
     {
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IAddUserService, AddUserService>();
             services.AddScoped<IOrdersService, OrdersService>();
+            services.AddScoped<ICartService, CartService>();
             services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
             services.AddScoped<ISpotifyAlbumService, SpotifyAlbumService>();
             services.AddScoped<IGetProductsService, GetProductsService>();
             services.AddScoped<IAddProductsService, AddProductsService>();
-            services.AddScoped<ICartService, CartService>();
-            services.AddScoped<IGetUserService, GetUserService>();
+            services.AddScoped<IAddCustomerService, AddCustomerService>();
+            services.AddScoped<IGetCustomerService, GetCustomerService>();
         }
     }
 }

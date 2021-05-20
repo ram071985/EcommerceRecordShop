@@ -17,7 +17,7 @@ namespace Core.Entities
         
         [Required]
         [Column(TypeName = "varchar(50)")]
-        public string UserId { get; set; }
+        public string CustomerId { get; set; }
         
         [Required]
         public DateTime PurchaseDate { get; set; } = DateTime.Now;
@@ -27,6 +27,7 @@ namespace Core.Entities
         
         [Required]
         public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
+        
         public decimal OrderTotalPrice
         {
             get

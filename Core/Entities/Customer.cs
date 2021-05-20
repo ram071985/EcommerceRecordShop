@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 
 namespace Core.Entities
 {
-    public class User
+    public class Customer
     {
-        public User()
+        public Customer()
         {
         }
 
@@ -18,7 +18,7 @@ namespace Core.Entities
         
         [Required]
         [Column(TypeName = "varchar(100)")]
-        public string Username { get; set; }
+        public string CustomerName { get; set; }
         
         [Required]
         [Column(TypeName = "varchar(100)")]

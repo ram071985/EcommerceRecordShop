@@ -11,7 +11,7 @@ namespace Core.Entities
         
         [Required]
         [Column(TypeName = "varchar(50)")]
-        public string UserId { get; set; }
+        public string CustomerId { get; set; }
         
         [Required]
         [Column(TypeName = "varchar(50)")]

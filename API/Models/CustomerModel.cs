@@ -1,8 +1,8 @@
 namespace API.Models
 {
-    public class UserModel
+    public class CustomerModel
     {
-        public string Username { get; set; }
+        public string CustomerName { get; set; }
         public string Email { get; set; }
         public decimal WalletBalance { get; set; }
     }

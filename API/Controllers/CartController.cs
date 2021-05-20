@@ -53,7 +53,7 @@ namespace API.Controllers
                     Quantity = cartItem.Quantity,
                     // should remove purchase price and spotifyId from cartItem class => replaced with ProductId
                     ProductId = cartItem.ProductId,
-                    UserId = userId
+                    CustomerId = userId
                 }));
                 
             return cartItems;

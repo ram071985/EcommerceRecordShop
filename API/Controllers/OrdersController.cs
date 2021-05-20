@@ -30,17 +30,17 @@ namespace API.Controllers
             if (userId == null)
                 throw new Exception("Invalid User Id");
 
-            return _orderService.GetOrdersByUserId(userId);
+            return _orderService.GetOrdersByCustomerId(userId);
         }
 
         // [Authorize]
         [HttpPost]
-        public Order PlaceOrder(UserIdInput userIdInput)
+        public Order PlaceOrder(CustomerIdInput customerIdInput)
         {
-            if (userIdInput.UserId == null)
+            if (customerIdInput.CustomerId == null)
                 throw new Exception("Invalid User Id");
 
-            return _orderService.PlaceOrder(userIdInput.UserId);
+            return _orderService.PlaceOrder(customerIdInput.CustomerId);
         }
 
         // [Authorize]

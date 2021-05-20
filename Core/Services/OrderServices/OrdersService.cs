@@ -8,8 +8,8 @@ namespace Core.Services.OrderServices
 {
     public interface IOrdersService
     {
-        Order PlaceOrder(string userId);
-        List<Order> GetOrdersByUserId(string userId);
+        Order PlaceOrder(string customerId);
+        List<Order> GetOrdersByCustomerId(string userId);
     }
 
     public class OrdersService : IOrdersService
@@ -26,24 +26,24 @@ namespace Core.Services.OrderServices
         }
         
         // TODO return void
-        public Order PlaceOrder(string userId)
+        public Order PlaceOrder(string customerId)
         {
-            var cartItems = _cartService.GetCartItemsByUserId(userId);
+            var cartItems = _cartService.GetCartItemsByCustomerId(customerId);
             
             var order = new Order
             {
                 PurchaseDate = DateTime.Now,
-                UserId = userId,
+                CustomerId = customerId,
                 CartItems = cartItems
             };
             
-            _cartService.ClearCart(userId);
+            _cartService.ClearCart(customerId);
             
             // TODO subtract order.TotalPrice from user.Balance
             return order;
         }
         
-        public List<Order> GetOrdersByUserId(string userId)
+        public List<Order> GetOrdersByCustomerId(string userId)
         {
             // TODO get user from database by userid
             // return user.Orders

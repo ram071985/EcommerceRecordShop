@@ -2,10 +2,10 @@ using System.Text.Json.Serialization;
 
 namespace API.Models
 {
-    public class UserInputModel
+    public class CustomerInputModel
     {
-        [JsonPropertyName("username")] 
-        public string Username { get; set; }
+        [JsonPropertyName("customerName")] 
+        public string CustomerName { get; set; }
         
         [JsonPropertyName("password")] 
         public string Password { get; set; }

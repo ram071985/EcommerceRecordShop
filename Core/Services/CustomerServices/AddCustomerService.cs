@@ -5,26 +5,26 @@ using Core.Entities;
 
 namespace Core.Services.UserServices
 {
-    public interface IAddUserService
+    public interface IAddCustomerService
     {
-        void Add(string username, string password, string email);
+        void Add(string customerName, string password, string email);
     }
 
-    public class AddUserService : IAddUserService
+    public class AddCustomerService : IAddCustomerService
     {
         private readonly RecordStoreContext _db;
 
-        public AddUserService(RecordStoreContext db)
+        public AddCustomerService(RecordStoreContext db)
         {
             _db = db;
         }
 
-        public void Add(string username, string password, string email)
+        public void Add(string customerName, string password, string email)
         {
-            var user = new User
+            var customer = new Customer
             {
                 Id = Guid.NewGuid().ToString(),
-                Username = username,
+                CustomerName = customerName,
                 Password = password,
                 Email = email,
                 WalletBalance = 3000,
@@ -32,7 +32,7 @@ namespace Core.Services.UserServices
                 Orders = new List<Order>(),
             };
 
-            _db.Add(user);
+            _db.Add(customer);
             _db.SaveChanges();
         }
     }

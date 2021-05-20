@@ -10,7 +10,7 @@ namespace Core.Services.CartServices
     {
         void AddToCart(List<Entities.CartItem> albums, string userId);
         void ClearCart(string userId);
-        List<CartItem> GetCartItemsByUserId(string userId);
+        List<CartItem> GetCartItemsByCustomerId(string userId);
     }
 
     public class CartService : ICartService
@@ -24,21 +24,21 @@ namespace Core.Services.CartServices
             _productsService = productsService;
         }
 
-        public List<CartItem> GetCartItemsByUserId(string userId)
+        public List<CartItem> GetCartItemsByCustomerId(string userId)
         {
             var cartItems = new List<CartItem>
             {
                 new CartItem
                 {
                     Quantity = 2,
-                    UserId = userId,
+                    CustomerId = userId,
                     Album = _albumService.GetAlbumBySpotifyId("5qkWpkGMULLVnSHb3Sej4X"),
                     Product = _productsService.GetProductById("1")
                 },
                 new CartItem
                 {
                     Quantity = 1,
-                    UserId = userId,
+                    CustomerId = userId,
                     Album = _albumService.GetAlbumBySpotifyId("3ZpoX3ij0YBUeJoGfbVH0Q"),
                     Product = _productsService.GetProductById("1")
                 }
