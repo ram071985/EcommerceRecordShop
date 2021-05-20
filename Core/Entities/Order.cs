@@ -28,16 +28,20 @@ namespace Core.Entities
         [Required]
         public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
         
+        [NotMapped]
         public decimal OrderTotalPrice
         {
             get
             {
+                if (CartItems == null) return 0;
                 decimal totalPrice = 0;
                 CartItems.ForEach(distinctAlbum => totalPrice += distinctAlbum.Product.Price * distinctAlbum.Quantity);
                 return totalPrice;
             }
         }
-        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
+        
+        // TODO should this be a new table? Should the cart table have a column => (bool) Purchased?
+        public List<CartItem> CartItems { get; set; } 
 
     }
 }

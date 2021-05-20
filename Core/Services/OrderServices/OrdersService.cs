@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Core.DataAccess;
 using Core.Entities;
 using Core.Services.CartServices;
+using Core.Services.CustomerServices;
 using Core.Services.SpotifyServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services.OrderServices
 {
@@ -16,30 +20,47 @@ namespace Core.Services.OrderServices
     {
         private readonly ISpotifyAlbumService _albumService;
         private readonly ICartService _cartService;
+        private readonly RecordStoreContext _db;
 
         public OrdersService(
             ISpotifyAlbumService albumService,
-            ICartService cartService)
+            ICartService cartService,
+            RecordStoreContext db)
         {
             _albumService = albumService;
             _cartService = cartService;
+            _db = db;
         }
         
         // TODO return void
         public Order PlaceOrder(string customerId)
         {
-            var cartItems = _cartService.GetCartItemsByCustomerId(customerId);
-            
+            var customer = _db.Customers
+                .Include(x => x.CartItems)
+                .Include(x => x.Orders)
+                .FirstOrDefault(x => x.Id == customerId);
+
+            if (customer == null)
+                throw new Exception("no customer found with that Id");
+                
+            customer.CartItems
+                .ForEach(item => item.Product = _db.Products
+                .FirstOrDefault(x => x.Id == item.ProductId));
+                
             var order = new Order
             {
                 PurchaseDate = DateTime.Now,
                 CustomerId = customerId,
-                CartItems = cartItems
+                CartItems = customer.CartItems
             };
+            
+            customer.WalletBalance -= order.OrderTotalPrice;
             
             _cartService.ClearCart(customerId);
             
-            // TODO subtract order.TotalPrice from user.Balance
+            _db.Add(order);
+            _db.SaveChanges();
+            
             return order;
         }
         

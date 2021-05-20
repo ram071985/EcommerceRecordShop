@@ -36,11 +36,15 @@ namespace Core.Entities
         public decimal WalletBalance { get; set; }
 
         public List<Order> Orders { get; set; } 
+        
+        public List<CartItem> CartItems { get; set; } 
 
+        [NotMapped]
         public decimal TotalSpent
         {
             get
             {
+                if (Orders == null) return 0;
                 decimal totalSpent = 0;
                 Orders.ForEach(order => totalSpent += order.OrderTotalPrice);
                 return totalSpent;

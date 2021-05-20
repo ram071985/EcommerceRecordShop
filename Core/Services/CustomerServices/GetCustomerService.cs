@@ -1,18 +1,29 @@
+using System.Linq;
+using Core.DataAccess;
 using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services.CustomerServices
 {
     public interface IGetCustomerService
     {
-        Customer GetCustomerById(string userId);
+        Customer GetCustomerById(string customerId);
     }
 
     public class GetCustomerService : IGetCustomerService
     {
-        public Customer GetCustomerById(string userId)
+        private readonly RecordStoreContext _db;
+
+        public GetCustomerService(RecordStoreContext db)
         {
-            // TODO get user from database => _dbService.GetUserByUserId
-            return new Customer();
+            _db = db;
+        }
+        
+        public Customer GetCustomerById(string customerId)
+        {
+            var customer = _db.Customers.FirstOrDefault(x => x.Id == customerId); 
+            
+            return customer;
         }
     }
 }

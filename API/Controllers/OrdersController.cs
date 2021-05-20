@@ -12,35 +12,35 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public sealed class OrderController : Controller
+    public sealed class OrdersController : Controller
     {
         private readonly IOrdersService _orderService;
         private readonly string _path;
 
-        public OrderController(IOrdersService orderService)
+        public OrdersController(IOrdersService orderService)
         {
             _orderService = orderService;
             _path = Path.GetFullPath(ToString()!);
         }
 
-        [Authorize]
-        [HttpGet("{userId}")]
-        public List<Order> GetOrdersByUserId(string userId)
+        // [Authorize]
+        [HttpGet("get/{customerId}")]
+        public List<Order> GetOrdersByUserId(string customerId)
         {
-            if (userId == null)
+            if (customerId == null)
                 throw new Exception("Invalid User Id");
 
-            return _orderService.GetOrdersByCustomerId(userId);
+            return _orderService.GetOrdersByCustomerId(customerId);
         }
 
         // [Authorize]
-        [HttpPost]
-        public Order PlaceOrder(CustomerIdInput customerIdInput)
+        [HttpGet("place/{customerId}")]
+        public Order PlaceOrder(string customerId)
         {
-            if (customerIdInput.CustomerId == null)
+            if (customerId == null)
                 throw new Exception("Invalid User Id");
 
-            return _orderService.PlaceOrder(customerIdInput.CustomerId);
+            return _orderService.PlaceOrder(customerId);
         }
 
         // [Authorize]

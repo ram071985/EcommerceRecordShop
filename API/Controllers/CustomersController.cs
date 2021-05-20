@@ -33,9 +33,9 @@ namespace API.Controllers
             if (customerId == null)
                 throw new Exception("Invalid User Id");
 
-            var user = _getCustomerService.GetCustomerById(customerId);
+            var customer = _getCustomerService.GetCustomerById(customerId);
 
-            return MapCustomerToModel(user);
+            return MapCustomerToModel(customer);
         }
         
         [HttpPost]

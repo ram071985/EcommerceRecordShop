@@ -32,6 +32,10 @@ namespace API.Controllers
         [HttpPost("{customerId}")]
         public void AddToCart(List<CartItemInputModel> cartItemsInput, string customerId)
         {
+            if (customerId == null || cartItemsInput.Count == 0)
+                throw new Exception(
+                    "invalid AddToCart input... check customerId and make sure there is at least 1 cartItem");
+                    
             var cartItems = MapCartInputsToItems(cartItemsInput, customerId);
                 
             _cartService.AddToCart(cartItems);
@@ -41,6 +45,9 @@ namespace API.Controllers
         [HttpDelete("{customerId}")]
         public void ClearCart(string customerId)
         {
+            if (customerId == null)
+                throw new Exception("customerId is null");
+                
             _cartService.ClearCart(customerId);
         }
         
