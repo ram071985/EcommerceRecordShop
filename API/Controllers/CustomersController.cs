@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using API.Models;
 using Core.Entities;
-using Core.Services.UserServices;
+using Core.Services.CustomerServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Core.DataAccess;
 using Core.Entities;
 
-namespace Core.Services.UserServices
+namespace Core.Services.CustomerServices
 {
     public interface IAddCustomerService
     {

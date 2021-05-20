@@ -1,6 +1,6 @@
 using Core.Entities;
 
-namespace Core.Services.UserServices
+namespace Core.Services.CustomerServices
 {
     public interface IGetCustomerService
     {

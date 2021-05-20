@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using API.Models;
@@ -21,19 +22,26 @@ namespace API.Controllers
             _path = Path.GetFullPath(ToString()!);
         }
 
-        // [Authorize]
-        [HttpPost]
-        public void AddToCart(List<CartItemInputModel> cartItemsInput, string userId)
+        [HttpGet("{customerId}")]
+        public List<CartItem> GetCartItemsByCustomerId(string customerId)
         {
-            var cartItems = TransformCartInputsToCartItems(cartItemsInput, userId);
-                
-            _cartService.AddToCart(cartItems, userId);
+            return _cartService.GetCartItemsByCustomerId(customerId);
         }
 
-        [HttpDelete("{userId}")]
-        public void ClearCart(string userId)
+        // [Authorize]
+        [HttpPost("{customerId}")]
+        public void AddToCart(List<CartItemInputModel> cartItemsInput, string customerId)
         {
-            _cartService.ClearCart(userId);
+            var cartItems = MapCartInputsToItems(cartItemsInput, customerId);
+                
+            _cartService.AddToCart(cartItems);
+        }
+
+        // [Authorize]
+        [HttpDelete("{customerId}")]
+        public void ClearCart(string customerId)
+        {
+            _cartService.ClearCart(customerId);
         }
         
         // [Authorize]
@@ -43,17 +51,17 @@ namespace API.Controllers
             // TODO do we need this endpoint?
         }
 
-        private List<CartItem> TransformCartInputsToCartItems(List<CartItemInputModel> cartItemsInput, string userId)
+        private List<CartItem> MapCartInputsToItems(List<CartItemInputModel> cartItemsInput, string customerId)
         {
             var cartItems = new List<CartItem>();
             
             cartItemsInput.ForEach(cartItem =>
                 cartItems.Add(new CartItem
                 {
+                    Id = Guid.NewGuid().ToString(),
                     Quantity = cartItem.Quantity,
-                    // should remove purchase price and spotifyId from cartItem class => replaced with ProductId
                     ProductId = cartItem.ProductId,
-                    CustomerId = userId
+                    CustomerId = customerId
                 }));
                 
             return cartItems;

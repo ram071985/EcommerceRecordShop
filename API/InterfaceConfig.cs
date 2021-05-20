@@ -1,8 +1,8 @@
 using Core.Services.CartServices;
+using Core.Services.CustomerServices;
 using Core.Services.OrderServices;
 using Core.Services.ProductServices;
 using Core.Services.SpotifyServices;
-using Core.Services.UserServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
