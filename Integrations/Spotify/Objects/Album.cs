@@ -14,14 +14,14 @@ namespace Integrations.Spotify.Objects
         public string ArtistId { get; set; }
         public ArtistData ArtistData { get; set; }
         public string ImageUrl { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public string ReleaseDate { get; set; }
         public string RecordLabel { get; set; }
         public int TotalTracks { get; set; }
         public int Popularity { get; set; }
         public bool Explicit => Tracks.Any(track => track.Explicit);
 
-        public string Description => $"{Name} came out on {ReleaseDate.DayOfWeek}, " +
-                                     $"{ReleaseDate.Month}/{ReleaseDate.Day}/{ReleaseDate.Year} " +
+        public string Description => $"{Name} came out {(ReleaseDate.Length > 4 ? "on" : "in")} " +
+                                     $"{ReleaseDate} " +
                                      $"on {RecordLabel}{(RecordLabel.Contains("Records") ? "" : " Records")}. " +
                                      $"It was a {ParsePopularity()} for {ArtistName}. " +
                                      "Get your hands on a copy today!";

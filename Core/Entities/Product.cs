@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Integrations.Spotify.Objects;
 
 namespace Core.Entities
 {
@@ -24,5 +26,10 @@ namespace Core.Entities
         [Required]
         [Column(TypeName = "decimal(25,8)")]
         public decimal Price { get; set; }
+        
+        [NotMapped]
+        public Album Album { get; set; }
+        
+        //TODO add DateAdded?
     }
 }

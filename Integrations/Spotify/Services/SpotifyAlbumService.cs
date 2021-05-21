@@ -10,6 +10,7 @@ namespace Integrations.Spotify.Services
     public interface ISpotifyAlbumService
     {
         List<Album> GetAlbumsBySpotifyIds(IEnumerable<string> spotifyIds);
+        // TODO remove single GET?
         // Album GetAlbumBySpotifyId(string spotifyId);
     }
 
@@ -38,7 +39,7 @@ namespace Integrations.Spotify.Services
                     ArtistId = albumData.Artists[0].Id,
                     ImageUrl = albumData.Images[0].Url,
                     TotalTracks = albumData.TotalTracks,
-                    ReleaseDate = Convert.ToDateTime(albumData.ReleaseDate),
+                    ReleaseDate = albumData.ReleaseDate,
                     RecordLabel = albumData.RecordLabel,
                     SpotifyId = albumData.Id,
                     Popularity = albumData.Popularity,
@@ -109,8 +110,6 @@ namespace Integrations.Spotify.Services
 
             return jsonAlbums;
         }
-        
-        
         
         // TODO may remove these
         // public Album GetAlbumBySpotifyId(string spotifyId)

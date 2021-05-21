@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Core.DataAccess;
 using Core.Entities;
+using Integrations.Spotify.Services;
 
 namespace Core.Services.ProductServices
 {
@@ -13,40 +16,67 @@ namespace Core.Services.ProductServices
 
     public class GetProductsService : IGetProductsService
     {
+        private readonly RecordStoreContext _db;
+        private readonly ISpotifyAlbumService _albumService;
+        private readonly Random random = new Random();
+
+        public GetProductsService(RecordStoreContext db, ISpotifyAlbumService albumService)
+        {
+            _db = db;
+            _albumService = albumService;
+        }
+        
         public List<Product> GetAvailableProducts(int count)
         {
-            var products = new List<Product>();
+            // TODO implement Random
+            var allProducts = _db.Products
+                .ToList();
 
-            if (count > 10) count = 10;
+            var products = new List<Product>();
+            if (count > 5) count = 5;
             for (var i = 0; i < count; i++)
-            {
-                products.Add(Products[i]);
-            }
+                products.Add(allProducts[i]);
+
+            var spotifyIds = products
+                .Select(x => x.SpotifyId)
+                .ToList();
+                
+            var albums = _albumService.GetAlbumsBySpotifyIds(spotifyIds);
+            
+            for (var i = 0; i < products.Count; i++)
+                products[i].Album = albums[i];
 
             return products;
         }
 
         public List<Product> GetAvailableProductsByGenre(int count, string genre)
         {
+            // TODO implement Random
+            var allProductsByGenre = _db.Products
+                .Where(x => x.Genre == genre)
+                .ToList();
+
             var products = new List<Product>();
-            
-            if (count > 10) count = 10;
+            if (count > 5) count = 5;
             for (var i = 0; i < count; i++)
-            {
-                products.Add(Products[i]);
-            }
+                products.Add(allProductsByGenre[i]);
+
+            var spotifyIds = products
+                .Select(x => x.SpotifyId)
+                .ToList();
+
+            var albums = _albumService.GetAlbumsBySpotifyIds(spotifyIds);
+
+            for (var i = 0; i < products.Count; i++)
+                products[i].Album = albums[i];
 
             return products;
         }
 
         public Product GetProductById(string id)
         {
-            return new() 
-            {
-                SpotifyId = "3ZpoX3ij0YBUeJoGfbVH0Q",
-                Price = 35.12M,
-                Id = id
-            };
+            var product = _db.Products.FirstOrDefault(x => x.Id == id);
+            return product;
         }
         
         private List<Product> Products { get; } = new()
