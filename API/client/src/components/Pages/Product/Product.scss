@@ -54,7 +54,6 @@ body {
   font-size: 1.5rem;
   margin-top: 1rem;
   font-weight: 400;
-
 }
 
 .album-content {
@@ -94,7 +93,7 @@ button.dropdown-toggle {
   padding: 3px 40px;
   margin-top: 10px;
   width: 185px;
-  margin: 10px 65% 0px 0px;
+  margin: 10px 70% 0px 0px;
 }
 
 .btn-secondary.dropdown-toggle:focus {
@@ -152,11 +151,15 @@ button#cart-button {
   font-size: 0.9rem;
   border: none;
   box-shadow: none !important;
-  background-image: linear-gradient(45deg, black 50%, rgb(255, 174, 0) 50%) !important;
+  background-image: linear-gradient(
+    45deg,
+    black 50%,
+    rgb(255, 174, 0) 50%
+  ) !important;
   background-size: 250% 100% !important;
   background-position: left top !important;
   transition: background-position 0.5s ease !important;
-  margin-right: 400px;
+  margin-right: 410px;
 }
 
 button#cart-button:hover {
@@ -191,7 +194,7 @@ button#cart-button:hover {
   }
 
   button.dropdown-toggle {
-      margin-right: 430px;
+    margin-right: 447px !important;
   }
 }
 
