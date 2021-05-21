@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using Core.Entities;
-using Core.Services.SpotifyServices;
+using Integrations.Spotify.Objects;
+using Integrations.Spotify.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

@@ -23,24 +23,20 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSpaStaticFiles(config => { config.RootPath = "client/build"; });
+            services.AddSpaStaticFiles(config => config.RootPath = "client/build");
 
-            InterfaceConfig.Configure(services, _configuration);
+            InterfaceConfig.Configure(services);
             JwtConfig.Configure(services, _configuration);
-            
+
             services.AddDbContext<RecordStoreContext>(opt =>
-            {
-                opt.UseSqlServer(_configuration["ConnectionStrings:Default"]);
-            });
+                opt.UseSqlServer(_configuration["ConnectionStrings:Default"]));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -48,7 +44,7 @@ namespace API
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseAuthentication();
-            
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
@@ -57,9 +53,7 @@ namespace API
             {
                 spa.Options.SourcePath = "client";
                 if (env.IsDevelopment())
-                {
                     spa.UseReactDevelopmentServer(npmScript: "start");
-                }
             });
         }
     }

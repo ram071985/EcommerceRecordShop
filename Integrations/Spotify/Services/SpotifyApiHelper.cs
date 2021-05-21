@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Authentication;
 using System.Threading.Tasks;
-using Core.Entities;
+using Integrations.Spotify.Objects;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
-
-namespace Core.Services.SpotifyServices
+namespace Integrations.Spotify.Services
 {
     public interface ISpotifyApiHelper
     {

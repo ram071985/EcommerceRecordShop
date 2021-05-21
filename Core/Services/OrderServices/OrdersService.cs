@@ -5,7 +5,7 @@ using Core.DataAccess;
 using Core.Entities;
 using Core.Services.CartServices;
 using Core.Services.CustomerServices;
-using Core.Services.SpotifyServices;
+using Integrations.Spotify.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services.OrderServices

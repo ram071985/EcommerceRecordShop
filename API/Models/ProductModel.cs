@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Integrations.Spotify.Objects;
 
 namespace API.Models
 {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Entities
+namespace Integrations.Spotify.Objects
 {
     [NotMapped]
     public class Track

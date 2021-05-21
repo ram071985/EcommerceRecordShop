@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.DataAccess;
 using Core.Entities;
-using Core.Services.SpotifyServices;
+using Integrations.Spotify.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services.CartServices
 {
     public interface ICartService
     {
+        List<CartItem> GetCartItemsByCustomerId(string customerId);
         void AddToCart(string customerId, List<CartItem> newCartItems);
         void ClearCart(string customerId);
-        List<CartItem> GetCartItemsByCustomerId(string customerId);
     }
 
     public class CartService : ICartService
@@ -51,23 +51,26 @@ namespace Core.Services.CartServices
 
             var itemsToAdd = new List<CartItem>();
             var itemsToUpdate = new List<CartItem>();
+            
             newCartItems.ForEach(newItem =>
             {
-                if (currentCartItems.Any(current => current.ProductId == newItem.ProductId))
+                var updatedItem = currentCartItems.Find(x => x.ProductId == newItem.ProductId);
+                if (updatedItem == null)
                 {
-                    var updatedItem = currentCartItems.Find(x => x.ProductId == newItem.ProductId);
-                    if (updatedItem == null) return;
-                    updatedItem.Quantity += newItem.Quantity;
-                    itemsToUpdate.Add(updatedItem);
-                }
-                else
                     itemsToAdd.Add(newItem);
+                    return;
+                }
+
+                updatedItem.Quantity += newItem.Quantity;
+                itemsToUpdate.Add(updatedItem);
             });
 
             if (itemsToUpdate.Count > 0)
                 _db.UpdateRange(itemsToUpdate);
 
-            _db.AddRange(itemsToAdd);
+            if (itemsToAdd.Count > 0)
+                _db.AddRange(itemsToAdd);
+                
             _db.SaveChanges();
         }
 

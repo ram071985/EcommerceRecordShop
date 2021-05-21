@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
-namespace Core.Entities
+namespace Integrations.Spotify.Objects
 {
     [NotMapped]
     public class ArtistData
