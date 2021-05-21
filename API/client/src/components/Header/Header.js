@@ -22,6 +22,11 @@ const Header = (props) => {
       path: "/shop",
       clicked: () => setShowDrawer(false),
     },
+    {
+      id: "product",
+      name: "Product",
+      path: "/product"
+    }
   ];
 
   const toggleSearchbar = () => {

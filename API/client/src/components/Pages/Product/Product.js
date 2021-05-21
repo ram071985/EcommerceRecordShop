@@ -3,6 +3,7 @@ import { Table, Button } from "react-bootstrap";
 import axios from "axios";
 import { CIcon } from "@coreui/icons-react";
 import { freeSet } from "@coreui/icons";
+import "./Product.scss";
 import {
   CPopover,
   CLink,
@@ -54,7 +55,7 @@ const ProductLayout = () => {
       <div className="left-container container-fluid">
         <img id="album-img" className="img-fluid" src={image} />
       </div>
-      <div className="right-container">
+      <div className="right-container justify-content-left">
         <div className="pname-container container-fluid d-flex flex-wrap">
           <h1 className="product-details mb-0" id="artist-name">
             Kiefer
@@ -69,12 +70,10 @@ const ProductLayout = () => {
             </span>
           </div>
         </div>
-        <h1 className="product-details d-inline mr-5" id="album-name">
+        <h1 className="product-details d-inline" id="album-name">
           Happysad
         </h1>
-        <div className="price-container">
-          <h3 id="price">$20</h3>
-        </div>
+        <h3 className="text-left" id="price">$20</h3>
         <CDropdown direction="dropstart">
           <CDropdownToggle color="secondary">View tracks</CDropdownToggle>
           <CDropdownMenu className="tracks-dropdown">
@@ -97,7 +96,9 @@ const ProductLayout = () => {
             </Table>
           </CDropdownMenu>
         </CDropdown>
-        <Button id="cart-button" size="large" variant="warning">ADD TO CART</Button>
+        <Button id="cart-button" size="large" variant="warning">
+          ADD TO CART
+        </Button>
       </div>
     </div>
   );
