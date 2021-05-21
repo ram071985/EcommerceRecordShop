@@ -13,20 +13,20 @@ namespace Core.Entities
         
         [Key]
         [Column(TypeName = "varchar(50)")]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; } 
         
         [Required]
         [Column(TypeName = "varchar(50)")]
         public string CustomerId { get; set; }
         
         [Required]
-        public DateTime PurchaseDate { get; set; } = DateTime.Now;
+        public DateTime PurchaseDate { get; set; } 
         
         [Required]
-        public DateTime ShippingDate { get; set; } = DateTime.Now.AddDays(3);
+        public DateTime ShippingDate { get; set; }
         
         [Required]
-        public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
+        public DateTime CanReturnBy { get; set; }
         
         [NotMapped]
         public decimal OrderTotalPrice

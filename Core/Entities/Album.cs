@@ -12,7 +12,7 @@ namespace Core.Entities
         public string Name { get; set; }
         public string ArtistName { get; set; }
         public string ArtistId { get; set; }
-        public string ArtistImageUrl { get; set; }
+        public ArtistData ArtistData { get; set; }
         public string ImageUrl { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string RecordLabel { get; set; }

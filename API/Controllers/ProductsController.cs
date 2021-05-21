@@ -94,12 +94,12 @@ namespace API.Controllers
         {
             var productModels = new List<ProductModel>();
 
-            products.ForEach(product =>
-                productModels.Add(new ProductModel
-                {
-                    Album = _spotifyService.GetAlbumBySpotifyId(product.SpotifyId),
-                    Price = product.Price
-                }));
+            // products.ForEach(product =>
+            //     productModels.Add(new ProductModel
+            //     {
+            //         Album = _spotifyService.GetAlbumBySpotifyId(product.SpotifyId),
+            //         Price = product.Price
+            //     }));
 
             return productModels;
         }

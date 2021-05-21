@@ -31,6 +31,9 @@ namespace Core.Entities
         
         [JsonProperty("popularity")]
         public int Popularity { get; set; }
+        
+        [JsonProperty("id")]
+        public string Id { get; set; }
     }
     
     [NotMapped]

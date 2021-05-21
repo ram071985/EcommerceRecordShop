@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using API.Models;
-using Core.Entities;
 using Core.Services.CartServices;
 using Microsoft.AspNetCore.Mvc;
 using CartItem = Core.Entities.CartItem;
@@ -38,7 +38,7 @@ namespace API.Controllers
                     
             var cartItems = MapCartInputsToItems(cartItemsInput, customerId);
                 
-            _cartService.AddToCart(cartItems);
+            _cartService.AddToCart(customerId, cartItems);
         }
 
         // [Authorize]
@@ -60,18 +60,15 @@ namespace API.Controllers
 
         private List<CartItem> MapCartInputsToItems(List<CartItemInputModel> cartItemsInput, string customerId)
         {
-            var cartItems = new List<CartItem>();
-            
-            cartItemsInput.ForEach(cartItem =>
-                cartItems.Add(new CartItem
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Quantity = cartItem.Quantity,
-                    ProductId = cartItem.ProductId,
-                    CustomerId = customerId
-                }));
+            var cartItems = cartItemsInput.Select(x => new CartItem
+            {
+                Id = Guid.NewGuid().ToString(),
+                Quantity = x.Quantity,
+                ProductId = x.ProductId,
+                CustomerId = customerId
+            });
                 
-            return cartItems;
+            return cartItems.ToList();
         }
     }
 }

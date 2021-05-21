@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Core.Entities;
 using Core.Services.SpotifyServices;
@@ -20,9 +21,16 @@ namespace API.Controllers
         }
 
         [HttpGet("{albumId}")]
-        public Album Get(string albumId)
+        public List<Album> Get(string albumId)
         {
-            return _albumService.GetAlbumBySpotifyId(albumId);
+            var albumIds = new string[] {albumId};
+            return _albumService.GetAlbumsBySpotifyIds(albumIds);
+        }
+
+        [HttpPost]
+        public List<Album> GetAlbums(List<string> spotifyIds)
+        {
+            return _albumService.GetAlbumsBySpotifyIds(spotifyIds);
         }
     }
 }
