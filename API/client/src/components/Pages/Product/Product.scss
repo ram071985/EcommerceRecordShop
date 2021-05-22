@@ -60,15 +60,15 @@ body {
   margin: 10px;
 }
 
-.popover-content {
+.popover {
   background-color: red !important;
 }
 
 .popover-body {
-  color: white !important;
+  color: black !important;
   font-family: "Archivo", sans-serif !important;
-  font-size: 0.7rem;
-  padding: 1px !important;
+  font-size: 0.7rem !important;
+  padding: 5px !important;
 }
 
 .favorite-container {
@@ -198,10 +198,14 @@ button#cart-button:hover {
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
   #artist-name {
     font-size: 2rem;
     font-weight: 700;
+  }
+
+  #album-img {
+    min-width: 300px;
   }
 
   .right-container {

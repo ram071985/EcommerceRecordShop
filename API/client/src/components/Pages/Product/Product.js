@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import axios from "axios";
 import { CIcon } from "@coreui/icons-react";
+import { icons } from "../../../assets/icons/index";
 import { freeSet } from "@coreui/icons";
 import "./Product.scss";
 import {
@@ -49,7 +50,7 @@ const ProductLayout = () => {
     }
     return minutes + ":" + second;
   };
-
+console.log(icons)
   return (
     <div className="main-container d-flex">
       <div className="left-container container-fluid">
