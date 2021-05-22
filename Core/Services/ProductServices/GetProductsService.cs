@@ -76,7 +76,7 @@ namespace Core.Services.ProductServices
                 SpotifyId = "30ly6F6Xl0TKmyBCU50Khv"
             }
         };
-        
+
         public List<Product> GetAvailableProducts(int count)
         {
             // TODO get product list from DB
@@ -88,7 +88,7 @@ namespace Core.Services.ProductServices
                 products.Add(Products[i]);
             }
 
-            Console.WriteLine(products.Count);
+            // Console.WriteLine(products.Count);
 
             return products;
         }
@@ -97,7 +97,7 @@ namespace Core.Services.ProductServices
         {
             // TODO get product list from DB
             var products = new List<Product>();
-            
+
             if (count > 10) count = 10;
             for (var i = 0; i < count; i++)
             {
