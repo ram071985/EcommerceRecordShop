@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Channels;
 using Core.DataAccess;
 using Core.Entities;
 using Integrations.Spotify.Services;
@@ -31,9 +32,9 @@ namespace Core.Services.ProductServices
             // TODO implement Random
             var allProducts = _db.Products
                 .ToList();
-
+            
             var products = new List<Product>();
-            if (count > 5) count = 5;
+            if (count > 5 || count == 0) count = 5;
             for (var i = 0; i < count; i++)
                 products.Add(allProducts[i]);
 
@@ -57,7 +58,7 @@ namespace Core.Services.ProductServices
                 .ToList();
 
             var products = new List<Product>();
-            if (count > 5) count = 5;
+            if (count > 5 || count == 0) count = 5;
             for (var i = 0; i < count; i++)
                 products.Add(allProductsByGenre[i]);
 

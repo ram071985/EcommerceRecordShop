@@ -22,6 +22,7 @@ namespace Core.Services.ProductServices
         public void AddProduct(string spotifyId, string genre, decimal price)
         {
             var product = _db.Products.FirstOrDefault(x => x.SpotifyId == spotifyId);
+            
             if (product != null)
                 throw new Exception("you have already added a product with this id");
             
@@ -30,7 +31,9 @@ namespace Core.Services.ProductServices
                 Id = Guid.NewGuid().ToString(),
                 SpotifyId = spotifyId,
                 Price = price,
-                Genre = genre
+                Genre = genre,
+                DateAdded = DateTime.Now,
+                QuantityAvailable = 30
             };
 
             _db.Add(newProduct);

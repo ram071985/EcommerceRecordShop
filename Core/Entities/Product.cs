@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,10 +27,16 @@ namespace Core.Entities
         [Required]
         [Column(TypeName = "decimal(25,8)")]
         public decimal Price { get; set; }
+
+        [Required]
+        public DateTime DateAdded { get; set; }
+        
+        [Required]
+        public int QuantityAvailable { get; set; }
         
         [NotMapped]
         public Album Album { get; set; }
         
-        //TODO add DateAdded?
+        //TODO add DateAdded & Available Quanitiy
     }
 }

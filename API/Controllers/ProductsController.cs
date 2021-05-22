@@ -48,8 +48,10 @@ namespace API.Controllers
             return new ProductModel
             {
                 Id = product.Id,
-                Album = product.Album,
-                Price = product.Price
+                QuantityAvailable = product.QuantityAvailable,
+                Price = product.Price,
+                DateAdded = product.DateAdded,
+                Album = product.Album
             };
         }
 
@@ -70,8 +72,6 @@ namespace API.Controllers
         [HttpGet("random/{count:int}")]
         public List<ProductModel> GetProductsByCount(int count)
         {
-            if (count == 0) count = 5;
-
             var products = _productsService.GetAvailableProducts(count);
 
             var productModels = TransformProductsToModels(products);
@@ -102,8 +102,6 @@ namespace API.Controllers
             if (genre == null)
                 throw new Exception("No Genre Specified");
 
-            if (count == 0) count = 5;
-
             var products = _productsService.GetAvailableProductsByGenre(count, genre);
 
             var productModels = TransformProductsToModels(products);
@@ -119,6 +117,8 @@ namespace API.Controllers
                     Id = product.Id,
                     Album = product.Album,
                     Price = product.Price,
+                    QuantityAvailable = product.QuantityAvailable,
+                    DateAdded = product.DateAdded
                 });
 
             return productModels.ToList();
