@@ -1,10 +1,10 @@
 import React from "react";
-import DynamicBanner from "../../DynamicBanner/DynamicBanner";
+import DynamicBannerContainer from "../../../containers/DynamicBannerContainer/DynamicBannerContainer";
 
 const Home = () => {
   return (
     <div>
-      <DynamicBanner />
+      <DynamicBannerContainer />
     </div>
   );
 };
