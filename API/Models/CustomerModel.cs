@@ -2,8 +2,8 @@ namespace API.Models
 {
     public class CustomerModel
     {
-        public string CustomerName { get; set; }
-        public string Email { get; set; }
-        public decimal WalletBalance { get; set; }
+        public string CustomerName { get; init; }
+        public string Email { get; init; }
+        public decimal WalletBalance { get; init; }
     }
 }

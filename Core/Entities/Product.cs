@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Integrations.Spotify.Objects;
@@ -8,10 +7,6 @@ namespace Core.Entities
 {
     public class Product
     {
-        public Product()
-        {
-        }
-        
         [Key]
         [Column(TypeName = "varchar(50)")]
         public string Id { get; set; }
@@ -29,14 +24,12 @@ namespace Core.Entities
         public decimal Price { get; set; }
 
         [Required]
-        public DateTime DateAdded { get; set; }
+        public int QuantityAvailable { get; set; }
         
         [Required]
-        public int QuantityAvailable { get; set; }
+        public DateTime DateAdded { get; set; }
         
         [NotMapped]
         public Album Album { get; set; }
-        
-        //TODO add DateAdded & Available Quanitiy
     }
 }

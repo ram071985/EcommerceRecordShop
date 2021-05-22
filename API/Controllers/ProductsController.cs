@@ -27,7 +27,8 @@ namespace API.Controllers
             _spotifyService = spotifyService;
         }
 
-        [HttpPost]
+        //          5001/products/admin/
+        [HttpPost("admin")]
         public void AdminAddProducts(ProductInputModel product)
         {
             if (product.SpotifyId == null || product.Genre == null || product.Price == 0)
@@ -36,10 +37,11 @@ namespace API.Controllers
             _addProductsService.AddProduct(product.SpotifyId, product.Genre, product.Price);
         }
 
-        //          5001/products/
+        //          5001/products/592cf179-8d37-4f62-8637-ce5be936049d
         [HttpGet("{id}")]
         public ProductModel GetProductById(string id)
         {
+            Console.WriteLine(id);
             if (id == null)
                 throw new Exception("id is null");
 

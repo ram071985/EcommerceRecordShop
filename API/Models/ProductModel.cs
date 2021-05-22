@@ -5,10 +5,10 @@ namespace API.Models
 {
     public class ProductModel
     {
-        public string Id { get; set; }
-        public int QuantityAvailable { get; set; }
-        public DateTime DateAdded { get; set; }
-        public decimal Price { get; set; }
-        public Album Album { get; set; }
+        public string Id { get; init; }
+        public int QuantityAvailable { get; init; }
+        public DateTime DateAdded { get; init; }
+        public decimal Price { get; init; }
+        public Album Album { get; init; }
     }
 }

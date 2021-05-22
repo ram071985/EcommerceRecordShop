@@ -8,10 +8,6 @@ namespace Core.Entities
 {
     public class Customer
     {
-        public Customer()
-        {
-        }
-
         [Key]
         [Column(TypeName = "varchar(50)")]
         public string Id { get; set; }

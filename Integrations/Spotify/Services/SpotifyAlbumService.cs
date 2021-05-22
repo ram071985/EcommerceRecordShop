@@ -10,8 +10,6 @@ namespace Integrations.Spotify.Services
     public interface ISpotifyAlbumService
     {
         List<Album> GetAlbumsBySpotifyIds(IEnumerable<string> spotifyIds);
-        // TODO remove single GET?
-        // Album GetAlbumBySpotifyId(string spotifyId);
     }
 
     public class SpotifyAlbumService : ISpotifyAlbumService
@@ -25,7 +23,7 @@ namespace Integrations.Spotify.Services
 
         public List<Album> GetAlbumsBySpotifyIds(IEnumerable<string> spotifyIds)
         {
-            var rawAlbumData = GetAlbumsFromSpotify(spotifyIds).Result;
+            var rawAlbumData = GetDataFromSpotify("albums", spotifyIds).Result;
 
             var albumsData = rawAlbumData
                 .Select(JsonConvert.DeserializeObject<AlbumData>)
@@ -47,13 +45,13 @@ namespace Integrations.Spotify.Services
                     Tracks = albumData.Tracks.Items.ConvertAll(item => new Track
                     {
                         Explicit = item.Explicit,
-                        Duration = item.Duration / 1000,
+                        Duration = item.Duration / 1000, // transform ms to seconds
                         Name = item.Name,
                         TrackNumber = item.TrackNumber
                     })
                 }).ToList();
 
-            var rawArtistData = GetArtistsFromSpotify(albums.ConvertAll(x => x.ArtistId)).Result;
+            var rawArtistData = GetDataFromSpotify("artists", albums.ConvertAll(x => x.ArtistId)).Result;
             var artistData = rawArtistData
                 .Select(JsonConvert.DeserializeObject<ArtistData>)
                 .ToList();
@@ -64,12 +62,12 @@ namespace Integrations.Spotify.Services
             return albums;
         }
 
-        private async Task<List<string>> GetArtistsFromSpotify(List<string> spotifyIds)
+        private async Task<List<string>> GetDataFromSpotify(string requestType, IEnumerable<string> spotifyIds)
         {
             var client = await _apiHelper.InitializeClient();
 
-            var uris = new List<Uri>();
-            spotifyIds.ForEach(spotifyId => uris.Add(new Uri($"https://api.spotify.com/v1/artists/{spotifyId}")));
+            var uris = spotifyIds
+                .Select(id => new Uri($"https://api.spotify.com/v1/{requestType}/{id}"));
 
             var requests = uris
                 .Select(uri => client.GetAsync(uri))
@@ -81,107 +79,11 @@ namespace Integrations.Spotify.Services
                 .Select(async task => await task.Result.Content.ReadAsStringAsync())
                 .ToList();
 
-            var jsonArtists = new List<string>();
+            var jsonData = new List<string>();
             responses.ForEach(async res =>
-                jsonArtists.Add(item: await res));
+                jsonData.Add(item: await res));
 
-            return jsonArtists;
+            return jsonData;
         }
-
-        private async Task<List<string>> GetAlbumsFromSpotify(IEnumerable<string> spotifyIds)
-        {
-            var client = await _apiHelper.InitializeClient();
-
-            var uris = spotifyIds.Select(spotifyId => new Uri($"https://api.spotify.com/v1/albums/{spotifyId}"));
-
-            var requests = uris
-                .Select(uri => client.GetAsync(uri))
-                .ToList();
-
-            await Task.WhenAll(requests);
-
-            var responses = requests
-                .Select(async task => await task.Result.Content.ReadAsStringAsync())
-                .ToList();
-
-            var jsonAlbums = new List<string>();
-            responses.ForEach(async res =>
-                jsonAlbums.Add(item: await res));
-
-            return jsonAlbums;
-        }
-        
-        // TODO may remove these
-        // public Album GetAlbumBySpotifyId(string spotifyId)
-        // {
-        //     var albumData = GetAlbumFromSpotify(spotifyId).Result;
-        //     var spotifyAlbumData = JsonConvert.DeserializeObject<AlbumData>(albumData);
-        //
-        //     var tracks = new List<Track>();
-        //     spotifyAlbumData.Tracks.Items.ForEach(track => tracks.Add(
-        //         new Track
-        //         {
-        //             Name = track.Name,
-        //             Duration = track.Duration / 1000,
-        //             Explicit = track.Explicit,
-        //             TrackNumber = track.TrackNumber
-        //         }));
-        //
-        //     var collaborators = new List<string>();
-        //     spotifyAlbumData.Artists.ForEach(artist => collaborators.Add(artist.Name));
-        //
-        //     var artistId = spotifyAlbumData.Artists[0].Id;
-        //
-        //     var artistData = GetArtistFromSpotify(artistId).Result;
-        //     var spotifyArtistData = JsonConvert.DeserializeObject<ArtistData>(artistData);
-        //
-        //     var album = new Album
-        //     {
-        //         Name = spotifyAlbumData.Name,
-        //         ArtistName = spotifyAlbumData.Artists[0].Name,
-        //         ArtistId = spotifyAlbumData.Artists[0].Id,
-        //         ArtistData = spotifyArtistData,
-        //         ImageUrl = spotifyAlbumData.Images[0].Url,
-        //         Collaborators = collaborators,
-        //         Tracks = tracks,
-        //         TotalTracks = spotifyAlbumData.TotalTracks,
-        //         ReleaseDate = Convert.ToDateTime(spotifyAlbumData.ReleaseDate),
-        //         RecordLabel = spotifyAlbumData.RecordLabel,
-        //         SpotifyId = spotifyId,
-        //         Popularity = spotifyAlbumData.Popularity
-        //     };
-        //
-        //     return album;
-        // }
-        //
-        //
-        // private async Task<string> GetAlbumFromSpotify(string spotifyId)
-        // {
-        //     var client = await _apiHelper.InitializeClient();
-        //
-        //     var url = $"https://api.spotify.com/v1/albums/{spotifyId}";
-        //
-        //     var response = await client.GetAsync(url);
-        //
-        //     if (!response.IsSuccessStatusCode)
-        //         throw new Exception("invalid response from spotify");
-        //
-        //     return await response.Content.ReadAsStringAsync();
-        // }
-        //
-        // private async Task<string> GetArtistFromSpotify(string artistId)
-        // {
-        //     var client = await _apiHelper.InitializeClient();
-        //
-        //     var url = $"https://api.spotify.com/v1/artists/{artistId}";
-        //
-        //     var response = await client.GetAsync(url);
-        //
-        //     if (!response.IsSuccessStatusCode)
-        //         throw new Exception("invalid response from spotify");
-        //
-        //     return await response.Content.ReadAsStringAsync();
-        // }
-        //
     }
 }

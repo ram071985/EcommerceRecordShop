@@ -4,7 +4,7 @@ using Integrations.Spotify.Objects;
 
 namespace Core.Entities
 {
-    public class CartItem
+    public class OrderItem
     {
         [Key]
         [Column(TypeName = "varchar(50)")]
