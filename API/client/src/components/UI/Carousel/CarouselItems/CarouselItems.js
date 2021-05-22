@@ -12,6 +12,7 @@ const CarouselItems = (props) => {
           alt={slide.alt}
           title={slide.title}
           subtitle={slide.subtitle}
+          blackbars={props.blackbars}
         />
       ))}
     </CCarouselInner>

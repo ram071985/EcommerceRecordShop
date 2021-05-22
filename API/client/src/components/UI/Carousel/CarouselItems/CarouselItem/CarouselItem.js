@@ -1,10 +1,19 @@
 import React from "react";
 import { CCarouselItem, CCarouselCaption } from "@coreui/react";
+import "./CarouselItem.scss";
 
 const CarouselItem = (props) => {
+  let imageClass = ["d-block"];
+  //TODO: Create context for this.
+  if (props.blackbars) {
+    imageClass.push("blackbars");
+  } else {
+    imageClass.push("w-100");
+  }
   return (
-    <CCarouselItem>
-      <img className="d-block w-100" src={props.src} alt={props.alt} />
+    <CCarouselItem className="CarouselItem">
+      {/* w-100 */}
+      <img className={imageClass.join(" ")} src={props.src} alt={props.alt} />
 
       <CCarouselCaption>
         <h3>{props.title}</h3>

@@ -17,6 +17,7 @@ const DynamicBanner = (props) => {
           prev={props.prev}
           next={props.next}
           hideIndicators
+          blackbars={false}
         />
       </div>
       <div className="productsCarousel">
@@ -27,6 +28,7 @@ const DynamicBanner = (props) => {
           activeIndex={props.activeIndex}
           hideControls={width <= 576 ? false : true}
           hideIndicators={width <= 576 ? false : true}
+          blackbars={true}
         />
       </div>
     </div>

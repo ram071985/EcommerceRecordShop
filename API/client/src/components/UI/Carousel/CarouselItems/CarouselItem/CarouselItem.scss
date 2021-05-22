@@ -1,0 +1,14 @@
+@import "../../../../../scss/variables";
+.CarouselItem {
+  background-color: #000;
+}
+
+.blackbars {
+  margin: auto;
+}
+
+@media only screen and (max-width: $screen-sm) {
+  .blackbars {
+    width: 100%;
+  }
+}
