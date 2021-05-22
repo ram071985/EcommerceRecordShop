@@ -16,8 +16,10 @@ const CarouselItem = (props) => {
       <img className={imageClass.join(" ")} src={props.src} alt={props.alt} />
 
       <CCarouselCaption>
-        <h3>{props.title}</h3>
-        <p>{props.subtitle}</p>
+        <div className="dropShadow">
+          <h3>{props.title}</h3>
+          <p>{props.subtitle}</p>
+        </div>
       </CCarouselCaption>
     </CCarouselItem>
   );
