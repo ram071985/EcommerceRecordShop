@@ -10,7 +10,10 @@ const NavbarLinks = (props) => {
 
   return (
     <>
-      <CNavbarBrand onClick={() => history.push("/home")}>
+      <CNavbarBrand
+        style={{ cursor: "pointer" }}
+        onClick={() => history.push("/home")}
+      >
         NavbarBrand
       </CNavbarBrand>
 
