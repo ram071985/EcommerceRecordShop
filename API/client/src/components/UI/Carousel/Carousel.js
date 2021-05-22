@@ -19,10 +19,10 @@ const Carousel = (props) => {
       case "dynamicBanner":
         return (
           <div className="dynamicBannerControls">
-            <Button clicked={props.prev} variant="carousel">
+            <Button clicked={props.prev} variant="carouselBtn">
               <CIcon name="cilArrowThickLeft" />
             </Button>
-            <Button clicked={props.next} variant="carousel">
+            <Button clicked={props.next} variant="carouselBtn">
               <CIcon name="cilArrowThickRight" />
             </Button>
           </div>
@@ -43,7 +43,7 @@ const Carousel = (props) => {
         <CCol sm={12}>
           <CCarousel activeIndex={props.activeIndex} animate={props.animate}>
             {props.hideIndicators ? null : <CCarouselIndicators />}
-            <CarouselItems slides={props.slides} />
+            <CarouselItems slides={props.slides} blackbars={props.blackbars} />
             {getControls()}
           </CCarousel>
         </CCol>

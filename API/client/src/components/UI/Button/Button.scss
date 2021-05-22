@@ -14,12 +14,12 @@
   outline: none;
 }
 
-.carousel {
+.carouselBtn {
   background-color: $accentColor;
 }
 
-.carousel:hover,
-.carousel:active {
+.carouselBtn:hover,
+.carouselBtn:active {
   background-color: $primaryColor;
   color: $secondaryColor;
 }
