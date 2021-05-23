@@ -31,7 +31,7 @@ namespace API
             });
 
             InterfaceConfig.Configure(services, _configuration);
-            JwtConfig.Configure(services, _configuration);
+            //JwtConfig.Configure(services, _configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

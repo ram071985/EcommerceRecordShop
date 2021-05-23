@@ -10,7 +10,7 @@ body {
 
 .right-container {
   padding: 0px 0px 0px 35px;
-  width: 800px;
+  width: 900px;
 }
 .left-container {
   display: inline;
@@ -166,35 +166,15 @@ button#cart-button:hover {
   background-position: right bottom !important;
 }
 
-@media screen and (max-width: 640px) {
+#artistImage {
+  height: 131px;
+  margin-left: 55px !important;
+  display: inline-block;
+}
+
+@media screen and (max-width: 1300px) {
   .main-container {
-    flex-direction: column !important;
-  }
-
-  .product-details {
-    margin-top: 2rem;
-  }
-
-  #album-img {
-    margin: 0 auto !important;
-  }
-
-  #artist-name {
     margin: 0 !important;
-    font-size: 1.5rem !important;
-  }
-
-  .right-container {
-    padding-top: 30px !important;
-  }
-
-  #price {
-    font-size: 1rem !important;
-    display: block !important;
-  }
-
-  button.dropdown-toggle {
-    margin-right: 447px !important;
   }
 }
 
@@ -209,7 +189,7 @@ button#cart-button:hover {
   }
 
   .right-container {
-    padding: 0px 0px 0px 10px;
+    padding: 0px 0px 0px 18px !important;
     margin-right: 7rem !important;
   }
 
@@ -233,11 +213,49 @@ button#cart-button:hover {
   .album-name-div {
     display: block;
   }
+
+  #artistImage {
+    height: 115px;
+    display: inline-block;
+  }
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 725px) {
   .main-container {
+    flex-direction: column !important;
+  }
+
+  .product-details {
+    margin-top: 2rem;
+  }
+
+  #album-img {
+    margin: 0 auto !important;
+  }
+
+  #artist-name {
     margin: 0 !important;
+    font-size: 1.5rem !important;
+  }
+
+  .right-container {
+    padding: 30px 0px 0px 18px !important;
+    margin-right: 7rem !important;
+  }
+
+  #price {
+    font-size: 1rem !important;
+    display: block !important;
+  }
+
+  button.dropdown-toggle {
+    margin-right: 447px !important;
+  }
+
+  #artistImage {
+    height: 105px !important;
+    margin-left: 80px !important;
+    display: inline-block;
   }
 }
 
