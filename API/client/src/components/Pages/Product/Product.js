@@ -9,13 +9,8 @@ import {
   CPopover,
   CLink,
   CDropdown,
-  CButton,
-  CDropdownDivider,
-  CDropdownHeader,
-  CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
-  CDataTable,
 } from "@coreui/react";
 
 const ProductLayout = () => {
@@ -76,6 +71,7 @@ const ProductLayout = () => {
         <h1 className="product-details d-inline" id="album-name">
           {albumResults.name}
         </h1>
+        <h6 className="text-left mt-1">{albumResults.recordLabel}</h6>
         <h3 className="text-left" id="price">
           $20
         </h3>
