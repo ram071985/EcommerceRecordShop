@@ -1,9 +1,17 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json;
 using Newtonsoft.Json;
 
 namespace Integrations.Spotify.Objects
 {
+    [NotMapped]
+    public class AlbumsData
+    {
+        [JsonProperty("albums")]
+        public List<AlbumData> AlbumsList { get; set; }
+    }
+    
     [NotMapped]
     public class AlbumData
     {

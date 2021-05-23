@@ -30,9 +30,7 @@ namespace API
                 };
             });
 
-            // TODO will need to pass in an instance of a database authentication class 
-            services.AddSingleton<IGenerateJwtToken>(
-                new GenerateJwtToken(key));
+            services.AddSingleton<IGenerateJwtToken>(new GenerateJwtToken(key));
         }
     }
 }

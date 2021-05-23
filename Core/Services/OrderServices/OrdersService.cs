@@ -65,7 +65,8 @@ namespace Core.Services.OrderServices
                     })
             };
 
-            order.TotalOrderPrice = order.OrderItems.Sum(item => item.Product?.Price * item.Quantity) ?? 0;
+            order.TotalOrderPrice = order.OrderItems
+                .Sum(item => item.Product?.Price * item.Quantity) ?? 0;
 
             customer.WalletBalance -= order.TotalOrderPrice;
 
@@ -89,7 +90,8 @@ namespace Core.Services.OrderServices
             var orders = PopulateAlbums(dbOrders);
 
             orders.ForEach(order =>
-                order.TotalOrderPrice = order.OrderItems.Sum(item => item.Product.Price * item.Quantity));
+                order.TotalOrderPrice = order.OrderItems
+                    .Sum(item => item.Product.Price * item.Quantity));
 
             return orders;
         }
@@ -99,7 +101,8 @@ namespace Core.Services.OrderServices
             foreach (var order in orders)
             {
                 order.OrderItems.ForEach(item =>
-                    item.Product = _db.Products.FirstOrDefault(product => product.Id == item.ProductId));
+                    item.Product = _db.Products
+                        .FirstOrDefault(product => product.Id == item.ProductId));
 
                 var spotifyIds = order.OrderItems
                     .Select(item => item.Product.SpotifyId)

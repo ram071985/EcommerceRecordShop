@@ -65,7 +65,7 @@ namespace Core.Services.ProductServices
             var products = new List<Product>();
 
             {
-                if (count is > 5 or 0) count = 5;
+                if (count is > 8 or 0) count = 8;
                 for (var i = 0; i < count; i++)
                     products.Add(dbProducts[i]);
             }

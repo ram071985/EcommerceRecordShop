@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Authorize]
-    [ApiController]
-    [Route("[controller]")]
+    [Authorize, ApiController, Route("[controller]")]
     public sealed class AuthenticationController : Controller
     {
         private readonly IGenerateJwtToken _generateJwtToken;
@@ -21,8 +19,7 @@ namespace API.Controllers
             _path = Path.GetFullPath(ToString()!);
         }
 
-        [AllowAnonymous]
-        [HttpPost]
+        [AllowAnonymous, HttpPost]
         public IActionResult Authenticate(AuthenticationInputModel user)
         {
             if (user.Username == null || user.Password == null)

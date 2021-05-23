@@ -25,11 +25,9 @@ namespace Integrations.Spotify.Services
         {
             var rawAlbumData = GetDataFromSpotify("albums", spotifyIds).Result;
 
-            var albumsData = rawAlbumData
-                .Select(JsonConvert.DeserializeObject<AlbumData>)
-                .ToList();
+            var albumsData = JsonConvert.DeserializeObject<AlbumsData>(rawAlbumData);
 
-            var albums = albumsData.Select(albumData =>
+            var albums = albumsData.AlbumsList.Select(albumData =>
                 new Album
                 {
                     Name = albumData.Name,
@@ -52,36 +50,28 @@ namespace Integrations.Spotify.Services
                 }).ToList();
 
             var rawArtistData = GetDataFromSpotify("artists", albums.ConvertAll(x => x.ArtistId)).Result;
-            var artistData = rawArtistData
-                .Select(JsonConvert.DeserializeObject<ArtistData>)
-                .ToList();
+            
+            var artistsData = JsonConvert.DeserializeObject<ArtistsData>(rawArtistData);
 
             for (var i = 0; i < albums.Count; i++)
-                albums[i].ArtistData = artistData[i];
+                albums[i].ArtistData = artistsData.ArtistsList[i];
 
             return albums;
         }
 
-        private async Task<List<string>> GetDataFromSpotify(string requestType, IEnumerable<string> spotifyIds)
+        private async Task<string> GetDataFromSpotify(string requestType, IEnumerable<string> spotifyIds)
         {
             var client = await _apiHelper.InitializeClient();
 
-            var uris = spotifyIds
-                .Select(id => new Uri($"https://api.spotify.com/v1/{requestType}/{id}"));
-
-            var requests = uris
-                .Select(uri => client.GetAsync(uri))
-                .ToList();
-
-            await Task.WhenAll(requests);
-
-            var responses = requests
-                .Select(async task => await task.Result.Content.ReadAsStringAsync())
-                .ToList();
-
-            var jsonData = new List<string>();
-            responses.ForEach(async res =>
-                jsonData.Add(item: await res));
+            var queryParameterIds = spotifyIds.Aggregate((x, y) => x + "," + y);
+            
+            var uri = new Uri($"https://api.spotify.com/v1/{requestType}?ids={queryParameterIds}");
+            
+            var request = client.GetAsync(uri);
+            
+            var response = request.Result.Content.ReadAsStringAsync();
+            
+            var jsonData = await response;
 
             return jsonData;
         }

@@ -1,5 +1,4 @@
 using API.Middleware;
-using API.Models;
 using Core.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,8 +27,8 @@ namespace API
             InterfaceConfig.Configure(services);
             JwtConfig.Configure(services, _configuration);
 
-            services.AddDbContext<RecordStoreContext>(opt =>
-                opt.UseSqlServer(_configuration["ConnectionStrings:Default"]));
+            services.AddDbContext<RecordStoreContext>(options =>
+                options.UseSqlServer(_configuration["ConnectionStrings:Default"]));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -52,6 +51,7 @@ namespace API
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "client";
+                
                 if (env.IsDevelopment())
                     spa.UseReactDevelopmentServer(npmScript: "start");
             });

@@ -5,6 +5,13 @@ using Newtonsoft.Json;
 namespace Integrations.Spotify.Objects
 {
     [NotMapped]
+    public class ArtistsData
+    {
+        [JsonProperty("artists")]
+        public List<ArtistData> ArtistsList { get; set; }
+    }
+    
+    [NotMapped]
     public class ArtistData
     {
         [JsonProperty("images")]

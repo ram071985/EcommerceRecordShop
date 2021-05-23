@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using Core.DataAccess;
 using Core.Entities;
 using Integrations.Spotify.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Services.CartServices
 {
@@ -52,18 +52,19 @@ namespace Core.Services.CartServices
 
             var itemsToAdd = new List<CartItem>();
             var itemsToUpdate = new List<CartItem>();
-            
+
             newCartItems.ForEach(newItem =>
             {
-                var updatedItem = currentCartItems.Find(x => x.ProductId == newItem.ProductId);
-                if (updatedItem == null)
+                var itemToUpdate = currentCartItems
+                    .Find(item => item.ProductId == newItem.ProductId);
+                if (itemToUpdate == null)
                 {
                     itemsToAdd.Add(newItem);
                     return;
                 }
 
-                updatedItem.Quantity += newItem.Quantity;
-                itemsToUpdate.Add(updatedItem);
+                itemToUpdate.Quantity += newItem.Quantity;
+                itemsToUpdate.Add(itemToUpdate);
             });
 
             if (itemsToUpdate.Count > 0)
@@ -71,13 +72,15 @@ namespace Core.Services.CartServices
 
             if (itemsToAdd.Count > 0)
                 _db.AddRange(itemsToAdd);
-                
+
             _db.SaveChanges();
         }
 
         public void ClearCart(string customerId)
         {
-            var cartItems = _db.CartItems.Where(x => x.CustomerId == customerId);
+            var cartItems = _db.CartItems
+                .Where(item => item.CustomerId == customerId);
+
             _db.CartItems.RemoveRange(cartItems);
             _db.SaveChanges();
         }

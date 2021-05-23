@@ -1,16 +1,13 @@
-using System;
-using System.IO;
 using API.Models;
 using Core.Entities;
 using Core.Services.CustomerServices;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
 
-        // [Authorize]
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    [ApiController, Route("[controller]")]
     public sealed class CustomersController : Controller
     {
         private readonly IAddCustomerService _addCustomerService;
@@ -26,6 +23,7 @@ namespace API.Controllers
             _path = Path.GetFullPath(ToString()!);
         }
 
+        //      5001/customers/{customerId}
         // [Authorize]
         [HttpGet("{customerId}")]
         public CustomerModel GetCustomerById(string customerId)
@@ -35,9 +33,10 @@ namespace API.Controllers
 
             var customer = _getCustomerService.GetCustomerById(customerId);
 
-            return MapCustomerToModel(customer);
+            return MapCustomerModel(customer);
         }
         
+        //      5001/customers
         [HttpPost]
         public void AddCustomer(CustomerInputModel customerInput)
         {
@@ -47,21 +46,23 @@ namespace API.Controllers
             _addCustomerService.Add(customerInput.CustomerName, customerInput.Password, customerInput.Email);
         }
 
+        //      5001/customers
         // [Authorize]
         [HttpPatch]
-        public void PatchUser(CustomerInputModel customerInput)
+        public void PatchCustomer(CustomerInputModel customerInput)
         {
         }
 
+        //      5001/customers/{customerId}
         // [Authorize]
         [HttpDelete("{customerId}")]
-        public void DeleteUser(string customerId)
+        public void DeleteCustomer(string customerId)
         {
         }
 
-        private CustomerModel MapCustomerToModel(Customer customer)
+        private static CustomerModel MapCustomerModel(Customer customer)
         {
-            return new CustomerModel
+            return new()
             {
                 CustomerName = customer.CustomerName,
                 Email = customer.Email,

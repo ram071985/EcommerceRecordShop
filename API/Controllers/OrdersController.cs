@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using API.Models;
 using Core.Entities;
 using Core.Services.OrderServices;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    [ApiController, Route("[controller]")]
     public sealed class OrdersController : Controller
     {
         private readonly IOrdersService _orderService;
@@ -23,6 +20,7 @@ namespace API.Controllers
             _path = Path.GetFullPath(ToString()!);
         }
 
+        //      5001/orders/get/{customerId}
         // [Authorize]
         [HttpGet("get/{customerId}")]
         public List<Order> GetOrdersByUserId(string customerId)
@@ -34,6 +32,7 @@ namespace API.Controllers
             return _orderService.GetOrdersByCustomerId(customerId);
         }
 
+        //      5001/orders/place/{orderNumber}
         // [Authorize]
         [HttpGet("place/{customerId}")]
         public Order PlaceOrder(string customerId)
@@ -43,12 +42,13 @@ namespace API.Controllers
 
             return _orderService.PlaceOrder(customerId);
         }
-
+        
+        //      5001/orders/{orderNumber}
         // [Authorize]
         [HttpPatch("{orderNumber}")]
-        public void ChangeOrder(string orderNumber)
+        public void ReturnItem(string orderNumber, List<ReturnInputModel> orderInputs)
         {
-            // TODO do we need this endpoint?
+            
         }
     }
 }

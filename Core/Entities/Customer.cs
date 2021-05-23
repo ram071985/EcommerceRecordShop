@@ -31,6 +31,7 @@ namespace Core.Entities
         [Column(TypeName = "decimal(25,8)")]
         public decimal WalletBalance { get; set; }
 
+        [NotMapped]
         public decimal TotalSpent =>  Orders?.Sum(order => order.TotalOrderPrice) ?? 0; 
         
         public List<Order> Orders { get; set; }

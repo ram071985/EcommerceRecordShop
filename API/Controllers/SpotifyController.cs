@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    [ApiController, Route("[controller]")]
     public sealed class SpotifyController : Controller
     {
         private readonly ISpotifyAlbumService _albumService;
@@ -22,7 +21,7 @@ namespace API.Controllers
         [HttpGet("{albumId}")]
         public List<Album> Get(string albumId)
         {
-            var albumIds = new string[] {albumId};
+            var albumIds = new[] {albumId};
             return _albumService.GetAlbumsBySpotifyIds(albumIds);
         }
 
