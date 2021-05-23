@@ -9,25 +9,25 @@ namespace Core.Entities
     {
         [Key]
         [Column(TypeName = "varchar(50)")]
-        public string Id { get; set; }
+        public string Id { get; init; }
         
         [Required]
         [Column(TypeName = "varchar(50)")]
-        public string SpotifyId { get; set; }
+        public string SpotifyId { get; init; }
         
         [Required]
         [Column(TypeName = "varchar(50)")]
-        public string Genre { get; set; }
+        public string Genre { get; init; }
         
         [Required]
         [Column(TypeName = "decimal(25,8)")]
-        public decimal Price { get; set; }
+        public decimal Price { get; init; }
 
         [Required]
-        public int QuantityAvailable { get; set; }
+        public int QuantityAvailable { get; init; }
         
         [Required]
-        public DateTime DateAdded { get; set; }
+        public DateTime DateAdded { get; init; }
         
         [NotMapped]
         public Album Album { get; set; }

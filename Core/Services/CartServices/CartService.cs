@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.DataAccess;
@@ -30,8 +29,10 @@ namespace Core.Services.CartServices
 
         public List<CartItem> GetCartItemsByCustomerId(string customerId)
         {
-            var cartItems = _db.CartItems.Where(x => x.CustomerId == customerId)
-                .Include(x => x.Product).ToList();
+            var cartItems = _db.CartItems
+                .Where(x => x.CustomerId == customerId)
+                .Include(x => x.Product)
+                .ToList();
 
             var albumIds = cartItems.Select(item => item.Product.SpotifyId);
             var albums = _albumService.GetAlbumsBySpotifyIds(albumIds);

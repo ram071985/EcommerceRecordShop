@@ -58,7 +58,7 @@ namespace API.Controllers
             // TODO do we need this endpoint?
         }
 
-        private List<CartItem> MapCartInputsToItems(List<CartItemInputModel> cartItemsInput, string customerId)
+        private static List<CartItem> MapCartInputsToItems(List<CartItemInputModel> cartItemsInput, string customerId)
         {
             var cartItems = cartItemsInput.Select(x => new CartItem
             {

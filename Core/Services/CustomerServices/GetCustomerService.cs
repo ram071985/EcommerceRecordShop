@@ -1,7 +1,6 @@
 using System.Linq;
 using Core.DataAccess;
 using Core.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services.CustomerServices
 {

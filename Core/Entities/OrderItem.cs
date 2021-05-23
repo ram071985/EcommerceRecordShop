@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Integrations.Spotify.Objects;
 
 namespace Core.Entities
 {
@@ -8,22 +7,15 @@ namespace Core.Entities
     {
         [Key]
         [Column(TypeName = "varchar(50)")]
-        public string Id { get; set; }
+        public string Id { get; init; }
         
         [Required]
         [Column(TypeName = "varchar(50)")]
-        public string CustomerId { get; set; }
+        public string ProductId { get; init; }
         
         [Required]
-        [Column(TypeName = "varchar(50)")]
-        public string ProductId { get; set; }
-        
-        [Required]
-        public short Quantity { get; set; }
+        public short Quantity { get; init; }
         
         public Product Product { get; set; }
-        
-        [NotMapped]
-        public Album Album { get; set; }
     }
 }

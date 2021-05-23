@@ -8,15 +8,15 @@ namespace Core.Entities
     {
         [Key]
         [Column(TypeName = "varchar(50)")]
-        public string Id { get; set; }
+        public string Id { get; init; }
         
         [Required]
         [Column(TypeName = "varchar(50)")]
-        public string CustomerId { get; set; }
+        public string CustomerId { get; init; }
         
         [Required]
         [Column(TypeName = "varchar(50)")]
-        public string ProductId { get; set; }
+        public string ProductId { get; init; }
         
         [Required]
         public short Quantity { get; set; }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace Core.Entities
 {
@@ -10,41 +10,31 @@ namespace Core.Entities
     {
         [Key]
         [Column(TypeName = "varchar(50)")]
-        public string Id { get; set; }
-        
+        public string Id { get; init; }
+
         [Required]
         [Column(TypeName = "varchar(100)")]
-        public string CustomerName { get; set; }
-        
+        public string CustomerName { get; init; }
+
         [Required]
         [Column(TypeName = "varchar(100)")]
-        public string Password { get; set; }
-        
-        [Required]
-        [MaxLength(100)]
-        public string Email { get; set; }
-        
-        [Required]
-        public DateTime CreatedAt { get; set; }
-        
+        public string Password { get; init; }
+
+        [Required] 
+        [MaxLength(100)] 
+        public string Email { get; init; }
+
+        [Required] 
+        public DateTime CreatedAt { get; init; }
+
         [Required]
         [Column(TypeName = "decimal(25,8)")]
         public decimal WalletBalance { get; set; }
 
-        public List<Order> Orders { get; set; } 
+        public decimal TotalSpent =>  Orders?.Sum(order => order.TotalOrderPrice) ?? 0; 
         
-        public List<CartItem> CartItems { get; set; } 
+        public List<Order> Orders { get; set; }
 
-        [NotMapped]
-        public decimal TotalSpent
-        {
-            get
-            {
-                if (Orders == null) return 0;
-                decimal totalSpent = 0;
-                Orders.ForEach(order => totalSpent += order.OrderTotalPrice);
-                return totalSpent;
-            }
-        }
+        public List<CartItem> CartItems { get; set; }
     }
 }

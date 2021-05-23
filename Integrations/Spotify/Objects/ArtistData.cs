@@ -16,6 +16,5 @@ namespace Integrations.Spotify.Objects
     {
         [JsonProperty("url")]
         public string Url { get; set; }
-        
     }
 }

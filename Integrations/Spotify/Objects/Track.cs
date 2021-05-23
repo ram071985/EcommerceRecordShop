@@ -5,9 +5,9 @@ namespace Integrations.Spotify.Objects
     [NotMapped]
     public class Track
     {
-        public string Name { get; set; }
-        public int TrackNumber { get; set; }
-        public int Duration { get; set; }
-        public bool Explicit { get; set; }
+        public string Name { get; init; }
+        public int TrackNumber { get; init; }
+        public int Duration { get; init; }
+        public bool Explicit { get; init; }
     }
 }

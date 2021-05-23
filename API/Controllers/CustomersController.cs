@@ -54,8 +54,8 @@ namespace API.Controllers
         }
 
         // [Authorize]
-        [HttpDelete("{customerName}")]
-        public void DeleteUser(string customerName)
+        [HttpDelete("{customerId}")]
+        public void DeleteUser(string customerId)
         {
         }
 

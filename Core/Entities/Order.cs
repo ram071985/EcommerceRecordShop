@@ -23,18 +23,9 @@ namespace Core.Entities
         
         [Required]
         public DateTime CanReturnBy { get; init; }
-        
-        [NotMapped]
-        public decimal OrderTotalPrice
-        {
-            get
-            {
-                if (OrderItems == null) return 0;
-                decimal totalPrice = 0;
-                OrderItems.ForEach(distinctAlbum => totalPrice += distinctAlbum.Product.Price * distinctAlbum.Quantity);
-                return totalPrice;
-            }
-        }
+
+        [NotMapped] 
+        public decimal TotalOrderPrice { get; set; }
         
         public List<OrderItem> OrderItems { get; init; } 
     }
