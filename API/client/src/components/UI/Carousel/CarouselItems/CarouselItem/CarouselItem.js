@@ -4,7 +4,6 @@ import "./CarouselItem.scss";
 
 const CarouselItem = (props) => {
   let imageClass = ["d-block"];
-  //TODO: Create context for this.
   if (props.blackbars) {
     imageClass.push("blackbars");
   } else {
@@ -12,10 +11,13 @@ const CarouselItem = (props) => {
   }
   return (
     <CCarouselItem className="CarouselItem">
-      {/* w-100 */}
+      <div
+        className="backgroundImg"
+        style={{ backgroundImage: `url(${props.src})` }}
+      ></div>
       <img className={imageClass.join(" ")} src={props.src} alt={props.alt} />
 
-      <CCarouselCaption>
+      <CCarouselCaption className="captions">
         <div className="dropShadow">
           <h3>{props.title}</h3>
           <p>{props.subtitle}</p>
