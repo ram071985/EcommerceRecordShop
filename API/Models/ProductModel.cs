@@ -6,9 +6,10 @@ namespace API.Models
     public class ProductModel
     {
         public string Id { get; init; }
+        public decimal Price { get; init; }
         public int QuantityAvailable { get; init; }
         public DateTime DateAdded { get; init; }
-        public decimal Price { get; init; }
+        public string Genre { get; init; }
         public Album Album { get; init; }
     }
 }

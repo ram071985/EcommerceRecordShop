@@ -1,25 +1,34 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core.DataAccess;
 using Core.Entities;
 
 namespace Core.Services.CustomerServices
 {
-    public interface IAddCustomerService
+    public interface ICustomerService
     {
-        void Add(string customerName, string password, string email);
+        Customer GetCustomerById(string customerId);
+        void AddCustomer(string customerName, string password, string email);
     }
 
-    public class AddCustomerService : IAddCustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly RecordStoreContext _db;
 
-        public AddCustomerService(RecordStoreContext db)
+        public CustomerService(RecordStoreContext db)
         {
             _db = db;
         }
+        
+        public Customer GetCustomerById(string customerId)
+        {
+            var customer = _db.Customers.FirstOrDefault(x => x.Id == customerId); 
+            
+            return customer;
+        }
 
-        public void Add(string customerName, string password, string email)
+        public void AddCustomer(string customerName, string password, string email)
         {
             var customer = new Customer
             {

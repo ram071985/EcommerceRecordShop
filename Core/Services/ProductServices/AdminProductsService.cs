@@ -5,16 +5,16 @@ using Core.Entities;
 
 namespace Core.Services.ProductServices
 {
-    public interface IAddProductsService
+    public interface IAdminProductsService
     {
         void AddProduct(string spotifyId, string genre, decimal price);
     }
     
-    public class AddProductsService : IAddProductsService
+    public class AdminProductsService : IAdminProductsService
     {
         private readonly RecordStoreContext _db;
 
-        public AddProductsService(RecordStoreContext db)
+        public AdminProductsService(RecordStoreContext db)
         {
             _db = db;
         }

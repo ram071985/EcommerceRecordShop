@@ -12,25 +12,11 @@ namespace API.Controllers
     public sealed class ProductsController : Controller
     {
         private readonly string[] _validGenres = {"hiphop", "rock", "punk"};
-        private readonly IAddProductsService _addProductsService;
-        private readonly IGetProductsService _productsService;
+        private readonly IProductsService _productsService;
 
-        public ProductsController(
-            IAddProductsService addProductsService,
-            IGetProductsService productsService)
+        public ProductsController(IProductsService productsService)
         {
-            _addProductsService = addProductsService;
             _productsService = productsService;
-        }
-
-        //          5001/products/admin/
-        [HttpPost("admin")]
-        public void AdminAddProducts(ProductInputModel product)
-        {
-            if (product.SpotifyId == null || product.Genre == null || product.Price == 0)
-                throw new Exception("Invalid Product");
-
-            _addProductsService.AddProduct(product.SpotifyId, product.Genre, product.Price);
         }
 
         //          5001/products/592cf179-8d37-4f62-8637-ce5be936049d
@@ -58,7 +44,7 @@ namespace API.Controllers
         [HttpGet("random")]
         public List<ProductModel> GetProducts()
         {
-            var defaultCount = 8;
+            var defaultCount = 5;
 
             var products = _productsService.GetAvailableProducts(defaultCount);
 
@@ -83,7 +69,7 @@ namespace API.Controllers
             if (genre == null || !_validGenres.Contains(genre))
                 throw new Exception("Genre either null or invalid");
 
-            var defaultCount = 8;
+            var defaultCount = 5;
 
             var products = _productsService.GetAvailableProductsByGenre(defaultCount, genre);
 
@@ -111,7 +97,8 @@ namespace API.Controllers
                 Album = product.Album,
                 Price = product.Price,
                 QuantityAvailable = product.QuantityAvailable,
-                DateAdded = product.DateAdded
+                DateAdded = product.DateAdded,
+                Genre = product.Genre
             }).ToList();
         }
     }

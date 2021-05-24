@@ -34,11 +34,14 @@ namespace Core.Services.CartServices
                 .Include(x => x.Product)
                 .ToList();
 
+            if (cartItems.Count == 0) return new List<CartItem>();
+
             var albumIds = cartItems.Select(item => item.Product.SpotifyId);
+            
             var albums = _albumService.GetAlbumsBySpotifyIds(albumIds);
 
             for (var i = 0; i < cartItems.Count; i++)
-                cartItems[i].Album = albums[i];
+                cartItems[i].Product.Album = albums[i];
 
             return cartItems;
         }

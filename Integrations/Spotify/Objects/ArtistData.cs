@@ -16,6 +16,9 @@ namespace Integrations.Spotify.Objects
     {
         [JsonProperty("images")]
         public List<ArtistImageUrl> ArtistImageUrls { get; set; }
+        
+        [JsonProperty("genres")]
+        public List<string> Genres { get; set; }
     }
 
     [NotMapped]

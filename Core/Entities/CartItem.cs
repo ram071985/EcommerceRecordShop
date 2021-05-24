@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Integrations.Spotify.Objects;
 
 namespace Core.Entities
 {
@@ -22,8 +21,5 @@ namespace Core.Entities
         public short Quantity { get; set; }
         
         public Product Product { get; set; }
-        
-        [NotMapped]
-        public Album Album { get; set; }
     }
 }

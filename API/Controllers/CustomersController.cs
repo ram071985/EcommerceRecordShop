@@ -10,16 +10,12 @@ namespace API.Controllers
     [ApiController, Route("[controller]")]
     public sealed class CustomersController : Controller
     {
-        private readonly IAddCustomerService _addCustomerService;
-        private readonly IGetCustomerService _getCustomerService;
+        private readonly ICustomerService _customerService;
         private readonly string _path;
 
-        public CustomersController(
-            IAddCustomerService addCustomerService,
-            IGetCustomerService getCustomerService)
+        public CustomersController(ICustomerService customerService)
         {
-            _addCustomerService = addCustomerService;
-            _getCustomerService = getCustomerService;
+            _customerService = customerService;
             _path = Path.GetFullPath(ToString()!);
         }
 
@@ -31,19 +27,19 @@ namespace API.Controllers
             if (customerId == null)
                 throw new Exception("Invalid User Id");
 
-            var customer = _getCustomerService.GetCustomerById(customerId);
+            var customer = _customerService.GetCustomerById(customerId);
 
             return MapCustomerModel(customer);
         }
-        
+
         //      5001/customers
         [HttpPost]
         public void AddCustomer(CustomerInputModel customerInput)
         {
             if (customerInput.CustomerName == null || customerInput.Password == null || customerInput.Email == null)
                 throw new Exception("invalid input");
-            
-            _addCustomerService.Add(customerInput.CustomerName, customerInput.Password, customerInput.Email);
+
+            _customerService.AddCustomer(customerInput.CustomerName, customerInput.Password, customerInput.Email);
         }
 
         //      5001/customers

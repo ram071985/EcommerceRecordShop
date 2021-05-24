@@ -1,3 +1,4 @@
+using Core.DataAccess;
 using Core.Services.CartServices;
 using Core.Services.CustomerServices;
 using Core.Services.OrderServices;
@@ -13,10 +14,10 @@ namespace API
         {
             services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
             services.AddScoped<ISpotifyAlbumService, SpotifyAlbumService>();
-            services.AddScoped<IAddProductsService, AddProductsService>();
-            services.AddScoped<IGetProductsService, GetProductsService>();
-            services.AddScoped<IAddCustomerService, AddCustomerService>();
-            services.AddScoped<IGetCustomerService, GetCustomerService>();
+            services.AddScoped<IAdminProductsService, AdminProductsService>();
+            services.AddScoped<IAdminProductSeedService, AdminProductSeedService>();
+            services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IOrdersService, OrdersService>();
         }

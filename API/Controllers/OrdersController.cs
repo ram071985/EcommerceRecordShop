@@ -27,12 +27,11 @@ namespace API.Controllers
         {
             if (customerId == null)
                 throw new Exception("Invalid User Id");
-
             
             return _orderService.GetOrdersByCustomerId(customerId);
         }
 
-        //      5001/orders/place/{orderNumber}
+        //      5001/orders/place/{customerId}
         // [Authorize]
         [HttpGet("place/{customerId}")]
         public Order PlaceOrder(string customerId)

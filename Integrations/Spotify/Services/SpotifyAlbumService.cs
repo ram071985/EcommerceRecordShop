@@ -50,7 +50,7 @@ namespace Integrations.Spotify.Services
                 }).ToList();
 
             var rawArtistData = GetDataFromSpotify("artists", albums.ConvertAll(x => x.ArtistId)).Result;
-            
+
             var artistsData = JsonConvert.DeserializeObject<ArtistsData>(rawArtistData);
 
             for (var i = 0; i < albums.Count; i++)
@@ -64,13 +64,13 @@ namespace Integrations.Spotify.Services
             var client = await _apiHelper.InitializeClient();
 
             var queryParameterIds = spotifyIds.Aggregate((x, y) => x + "," + y);
-            
+
             var uri = new Uri($"https://api.spotify.com/v1/{requestType}?ids={queryParameterIds}");
-            
+
             var request = client.GetAsync(uri);
-            
+
             var response = request.Result.Content.ReadAsStringAsync();
-            
+
             var jsonData = await response;
 
             return jsonData;

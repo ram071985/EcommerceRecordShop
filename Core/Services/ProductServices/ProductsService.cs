@@ -7,20 +7,20 @@ using Integrations.Spotify.Services;
 
 namespace Core.Services.ProductServices
 {
-    public interface IGetProductsService
+    public interface IProductsService
     {
         Product GetProductById(string id);
         List<Product> GetAvailableProducts(int count);
         List<Product> GetAvailableProductsByGenre(int count, string genre);
     }
 
-    public class GetProductsService : IGetProductsService
+    public class ProductsService : IProductsService
     {
         private readonly RecordStoreContext _db;
         private readonly ISpotifyAlbumService _albumService;
-        private readonly Random random = new Random();
+        private readonly Random _random = new();
 
-        public GetProductsService(RecordStoreContext db, ISpotifyAlbumService albumService)
+        public ProductsService(RecordStoreContext db, ISpotifyAlbumService albumService)
         {
             _db = db;
             _albumService = albumService;
@@ -33,12 +33,12 @@ namespace Core.Services.ProductServices
             if (product == null)
                 throw new Exception("no product with specified Id");
 
-            var albums = _albumService.GetAlbumsBySpotifyIds(new []{product.SpotifyId});
-            
+            var albums = _albumService.GetAlbumsBySpotifyIds(new[] {product.SpotifyId});
+
             if (albums.Count == 0) return null;
-            
+
             product.Album = albums[0];
-            
+
             return product;
         }
 
@@ -56,18 +56,24 @@ namespace Core.Services.ProductServices
                 .Where(x => x.Genre == genre)
                 .ToList();
 
+            // TODO we wont need this line when we add more products to the database
+            if (count is > 6 or < 1) count = 5;
+
             return PopulateAlbums(allProductsByGenre, count);
         }
 
         private List<Product> PopulateAlbums(IReadOnlyList<Product> dbProducts, int count)
         {
-            // TODO implement Random
+            var shuffledProducts = dbProducts
+                .OrderBy(x => _random.Next())
+                .ToList();
+
             var products = new List<Product>();
 
             {
-                if (count is > 8 or 0) count = 8;
+                if (count is > 10 or < 1) count = 5;
                 for (var i = 0; i < count; i++)
-                    products.Add(dbProducts[i]);
+                    products.Add(shuffledProducts[i]);
             }
 
             var spotifyIds = products
