@@ -1,61 +1,91 @@
-using System;
-using System.Collections.Generic;
+using Core.DataAccess;
 using Core.Entities;
-using Core.Services.ProductServices;
-using Core.Services.SpotifyServices;
+using Integrations.Spotify.Services;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Services.CartServices
 {
     public interface ICartService
     {
-        void AddToCart(List<Entities.CartItem> albums, string userId);
-        void ClearCart(string userId);
-        List<CartItem> GetCartItemsByUserId(string userId);
+        List<CartItem> GetCartItemsByCustomerId(string customerId);
+        void AddToCart(string customerId, List<CartItem> newCartItems);
+        void ClearCart(string customerId);
     }
 
     public class CartService : ICartService
     {
+        private readonly RecordStoreContext _db;
         private readonly ISpotifyAlbumService _albumService;
-        private readonly IGetProductsService _productsService;
 
-        public CartService(ISpotifyAlbumService albumService,IGetProductsService productsService)
+        public CartService(
+            RecordStoreContext db,
+            ISpotifyAlbumService albumService)
         {
+            _db = db;
             _albumService = albumService;
-            _productsService = productsService;
         }
 
-        public List<CartItem> GetCartItemsByUserId(string userId)
+        public List<CartItem> GetCartItemsByCustomerId(string customerId)
         {
-            var cartItems = new List<CartItem>
-            {
-                new CartItem
-                {
-                    Quantity = 2,
-                    UserId = userId,
-                    Album = _albumService.GetAlbumBySpotifyId("5qkWpkGMULLVnSHb3Sej4X"),
-                    Product = _productsService.GetProductById("1")
-                },
-                new CartItem
-                {
-                    Quantity = 1,
-                    UserId = userId,
-                    Album = _albumService.GetAlbumBySpotifyId("3ZpoX3ij0YBUeJoGfbVH0Q"),
-                    Product = _productsService.GetProductById("1")
-                }
-            };
+            var cartItems = _db.CartItems
+                .Where(x => x.CustomerId == customerId)
+                .Include(x => x.Product)
+                .ToList();
+
+            if (cartItems.Count == 0) return new List<CartItem>();
+
+            var albumIds = cartItems.Select(item => item.Product.SpotifyId);
             
+            var albums = _albumService.GetAlbumsBySpotifyIds(albumIds);
+
+            for (var i = 0; i < cartItems.Count; i++)
+                cartItems[i].Product.Album = albums[i];
+
             return cartItems;
         }
 
-        // TODO should return void
-        public void AddToCart(List<CartItem> cartItems, string userId)
+        public void AddToCart(string customerId, List<CartItem> newCartItems)
         {
-            // Add items to cartTable
+            var currentCartItems = _db.CartItems
+                .Where(x => x.CustomerId == customerId)
+                .Include(x => x.Product)
+                .ToList();
+
+            var itemsToAdd = new List<CartItem>();
+            var itemsToUpdate = new List<CartItem>();
+
+            newCartItems.ForEach(newItem =>
+            {
+                var itemToUpdate = currentCartItems
+                    .Find(item => item.ProductId == newItem.ProductId);
+                if (itemToUpdate == null)
+                {
+                    itemsToAdd.Add(newItem);
+                    return;
+                }
+
+                itemToUpdate.Quantity += newItem.Quantity;
+                itemsToUpdate.Add(itemToUpdate);
+            });
+
+            if (itemsToUpdate.Count > 0)
+                _db.UpdateRange(itemsToUpdate);
+
+            if (itemsToAdd.Count > 0)
+                _db.AddRange(itemsToAdd);
+
+            _db.SaveChanges();
         }
 
-        public void ClearCart(string userId)
+        public void ClearCart(string customerId)
         {
-            // _dbService.ClearCart(userId)
+            var cartItems = _db.CartItems
+                .Where(item => item.CustomerId == customerId);
+
+            _db.CartItems.RemoveRange(cartItems);
+            _db.SaveChanges();
         }
     }
 }

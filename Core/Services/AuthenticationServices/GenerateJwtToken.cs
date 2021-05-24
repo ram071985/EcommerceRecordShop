@@ -34,23 +34,20 @@ namespace Core.Services.AuthenticationServices
             // TODO this is where the db should be called => _dataAccess.GetUserAuth(username, password);
             if (!_users.Any(user => user.Key == username && user.Value == password))
                 return null;
-            
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(_key);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, username)
-                }),
+                Subject = new ClaimsIdentity(new Claim[] {new(ClaimTypes.Name, username)}),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey),
                     SecurityAlgorithms.HmacSha256Signature)
             };
-            
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            
+
             return tokenHandler.WriteToken(token);
         }
     }
