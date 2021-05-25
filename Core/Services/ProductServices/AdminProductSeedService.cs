@@ -4,9 +4,9 @@ namespace Core.Services.ProductServices
 {
     internal class ProductSeedItem
     {
-        public decimal Price { get; set; }
-        public string Genre { get; set; }
-        public string SpotifyId { get; set; }
+        public decimal Price { get; init; }
+        public string Genre { get; init; }
+        public string SpotifyId { get; init; }
     }
 
     public interface IAdminProductSeedService
@@ -26,9 +26,8 @@ namespace Core.Services.ProductServices
         public void SeedDatabase()
         {
             _productSeeds.ForEach(seed =>
-            {
-                _adminProductsService.AddProduct(seed.SpotifyId, seed.Genre, seed.Price);
-            });
+                _adminProductsService
+                    .AddProduct(seed.SpotifyId, seed.Genre, seed.Price));
         }
 
         private readonly List<ProductSeedItem> _productSeeds = new()
