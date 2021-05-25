@@ -41,7 +41,7 @@ namespace Core.Services.OrderServices
                 throw new Exception("no customer found with that Id");
 
             if (customer.CartItems?.Count == 0 || customer.CartItems == null)
-                throw new Exception("there are no items in the users cart");
+                throw new Exception("there are no items in the customer's cart");
 
             customer.CartItems
                 .ForEach(cartItem => cartItem.Product = _db.Products
@@ -70,12 +70,20 @@ namespace Core.Services.OrderServices
 
             customer.WalletBalance -= order.TotalOrderPrice;
 
+            var productsToUpdate = order.OrderItems.Select(x => x.Product).ToList();
+
+            for (var i = 0; i < productsToUpdate.Count; i++)
+                productsToUpdate[i].QuantityAvailable -= order.OrderItems[i].Quantity;
+
             _cartService.ClearCart(customerId);
 
             _db.Add(order);
             _db.AddRange(order.OrderItems);
             _db.Update(customer);
+            _db.UpdateRange(productsToUpdate);
             _db.SaveChanges();
+
+            PopulateAlbums(new List<Order> {order});
 
             return order;
         }
