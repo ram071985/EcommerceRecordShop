@@ -73,7 +73,7 @@ const DynamicBannerContainer = () => {
           next={next}
         />
       ) : (
-        <LoadingSpinner />
+        <LoadingSpinner style={{ marginTop: "100px" }} />
       )}
     </div>
   );
