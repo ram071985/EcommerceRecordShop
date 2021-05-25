@@ -24,7 +24,7 @@ namespace Core.Entities
         public decimal Price { get; init; }
 
         [Required]
-        public int QuantityAvailable { get; init; }
+        public int QuantityAvailable { get; set; }
         
         [Required]
         public DateTime DateAdded { get; init; }
