@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.DataAccess;
 using Core.Entities;
+using Microsoft.Extensions.Configuration;
 
 namespace Core.Services.CustomerServices
 {
@@ -15,9 +16,11 @@ namespace Core.Services.CustomerServices
     public class CustomerService : ICustomerService
     {
         private readonly RecordStoreContext _db;
+        private readonly string _hardSalt;
 
-        public CustomerService(RecordStoreContext db)
+        public CustomerService(IConfiguration configuration, RecordStoreContext db)
         {
+            _hardSalt = configuration["PasswordSalt"];
             _db = db;
         }
         
@@ -30,11 +33,13 @@ namespace Core.Services.CustomerServices
 
         public void AddCustomer(string customerName, string password, string email)
         {
+            var hashedPassword = HashPassword(password);
+            
             var customer = new Customer
             {
                 Id = Guid.NewGuid().ToString(),
                 CustomerName = customerName,
-                Password = password,
+                Password = hashedPassword,
                 Email = email,
                 WalletBalance = 3000,
                 CreatedAt = DateTime.Now,
@@ -43,6 +48,13 @@ namespace Core.Services.CustomerServices
 
             _db.Add(customer);
             _db.SaveChanges();
+        }
+
+        private string HashPassword(string password)
+        {
+            var passwordToHash = password + _hardSalt;
+            var passwordSalt = BCrypt.Net.BCrypt.GenerateSalt();
+            return BCrypt.Net.BCrypt.HashPassword(passwordToHash, passwordSalt);
         }
     }
 }

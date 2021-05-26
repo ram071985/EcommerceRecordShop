@@ -1,9 +1,21 @@
+<<<<<<< HEAD
 //using System.Text;
 //using Core.Services.AuthenticationServices;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 //using Microsoft.Extensions.Configuration;
 //using Microsoft.Extensions.DependencyInjection;
 //using Microsoft.IdentityModel.Tokens;
+=======
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using Core.DataAccess;
+using Core.Services.AuthenticationServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+>>>>>>> 4104fb9 (add Bcrypt and hardcoded salt)
 
 //namespace API
 //{
@@ -31,7 +43,7 @@
                 };
             });
 
-            services.AddSingleton<IGenerateJwtToken>(new GenerateJwtToken(key));
+            services.AddScoped<IGenerateJwtToken, GenerateJwtToken>();
         }
     }
 }

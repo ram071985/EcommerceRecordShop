@@ -1,9 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Core.DataAccess;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Core.Services.AuthenticationServices
@@ -16,23 +17,19 @@ namespace Core.Services.AuthenticationServices
     public class GenerateJwtToken : IGenerateJwtToken
     {
         private readonly string _key;
+        private readonly RecordStoreContext _db;
+        private readonly string _hardSalt;
 
-        // TODO temp... this should be authenticated against the database
-        private readonly Dictionary<string, string> _users = new Dictionary<string, string>
+        public GenerateJwtToken(IConfiguration configuration, RecordStoreContext db)
         {
-            {"user1", "password1"},
-            {"user2", "password2"}
-        };
-
-        public GenerateJwtToken(string key)
-        {
-            _key = key;
+            _key = configuration["JwtKey"];
+            _hardSalt = configuration["PasswordSalt"];
+            _db = db;
         }
 
         public string Authenticate(string username, string password)
         {
-            // TODO this is where the db should be called => _dataAccess.GetUserAuth(username, password);
-            if (!_users.Any(user => user.Key == username && user.Value == password))
+            if (!AuthenticateCustomer(username, password))
                 return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -40,7 +37,7 @@ namespace Core.Services.AuthenticationServices
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[] {new(ClaimTypes.Name, username)}),
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.Now.AddDays(30),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey),
                     SecurityAlgorithms.HmacSha256Signature)
@@ -49,6 +46,15 @@ namespace Core.Services.AuthenticationServices
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+        
+        private bool AuthenticateCustomer(string username, string password)
+        {
+            var customer = _db.Customers.FirstOrDefault(x => x.CustomerName == username);
+
+            if (customer == null) return false;
+            
+            return BCrypt.Net.BCrypt.Verify(password + _hardSalt, customer.Password);
         }
     }
 }

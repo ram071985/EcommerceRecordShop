@@ -21,12 +21,16 @@ namespace API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<RecordStoreContext>(options =>
+                options.UseSqlServer(_configuration["ConnectionStrings:Default"]));
+                
             services.AddControllers();
             services.AddSpaStaticFiles(config => config.RootPath = "client/build");
 
 <<<<<<< HEAD
             InterfaceConfig.Configure(services);
             JwtConfig.Configure(services, _configuration);
+<<<<<<< HEAD
 
             services.AddDbContext<RecordStoreContext>(options =>
                 options.UseSqlServer(_configuration["ConnectionStrings:Default"]));
@@ -34,6 +38,8 @@ namespace API
             InterfaceConfig.Configure(services, _configuration);
             //JwtConfig.Configure(services, _configuration);
 >>>>>>> nav-product-test
+=======
+>>>>>>> 4104fb9 (add Bcrypt and hardcoded salt)
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
