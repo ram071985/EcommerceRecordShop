@@ -1,8 +1,8 @@
 import axios from "../../config/api/index";
 
-const fetchProducts = async (count) => {
+const fetchRandomProducts = async (count) => {
   try {
-    const res = await axios.get(`/products/${count}`);
+    const res = await axios.get(`/products/random/${count}`);
     if (res.status !== 200) {
       const data = res.data;
       throw new Error("Fetch Products API call failed");
@@ -10,8 +10,8 @@ const fetchProducts = async (count) => {
 
     return res.data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
-export { fetchProducts };
+export { fetchRandomProducts };
