@@ -24,11 +24,16 @@ namespace API
             services.AddControllers();
             services.AddSpaStaticFiles(config => config.RootPath = "client/build");
 
+<<<<<<< HEAD
             InterfaceConfig.Configure(services);
             JwtConfig.Configure(services, _configuration);
 
             services.AddDbContext<RecordStoreContext>(options =>
                 options.UseSqlServer(_configuration["ConnectionStrings:Default"]));
+=======
+            InterfaceConfig.Configure(services, _configuration);
+            //JwtConfig.Configure(services, _configuration);
+>>>>>>> nav-product-test
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

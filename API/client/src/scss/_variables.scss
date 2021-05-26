@@ -6,21 +6,37 @@ $screen-xl: 1200px;
 $screen-xxl: 1300px;
 $screen-full: 1400px;
 
+// padding
+$noPadding: 0px;
+
+// element display
+$blockDisplay: block;
+$inlineDisplay: inline;
+$inlineBlockDisplay: inline-block;
+
 // Colors
 $textDarkColor: #000000;
 $textLightColor: #ffffff;
 
+// $pageBackgroundColor
 $primaryColor: #000000;
 $primaryLight1Color: #4d4b4b;
-$primaryLight2Color: #7e7e7e;
+$primaryLight2Color: #ebedef;
 
 $secondaryColor: #ffffff;
 $secondaryDark1Color: #cacaca;
 
-$accentColor: #fdcf41;
+$accentColor: rgb(255, 174, 0);
 $accentLight1Color: #f7d46c;
 $accentLight2Color: #fde49a;
 $accentLight3Color: #fcecbd;
 
 $warningColor: #c43256;
 $warningLight1Color: #c432571f;
+
+//product text
+$productLineHeight: 1.1;
+
+// buttons
+$noBoxShadow: none;
+$noBorder: none;

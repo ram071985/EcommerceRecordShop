@@ -1,7 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300&display=swap");
-body {
-  font-family: "Archivo", sans-serif !important;
-}
+@import "./../../../scss/variables";
+
 /*  main-containers */
 .main-container {
   padding: 20px 15px;
@@ -10,31 +8,30 @@ body {
 
 .right-container {
   padding: 0px 0px 0px 35px;
-  width: 800px;
+  width: 900px;
 }
 .left-container {
-  display: inline;
+  display: $inlineDisplay;
 }
 
 .pname-container {
-  display: inline;
+  display: $inlineDisplay;
   max-height: 3rem;
-  padding: 0px !important;
+  padding: $noPadding !important;
 }
 
 .price-container {
-  display: block !important;
+  display: $blockDisplay !important;
 }
 
 .left-col {
-  display: block;
+  display: $blockDisplay;
   max-width: 700px !important;
-  padding: 0 !important;
+  padding: $noPadding !important;
 }
 
 .product-details {
-  font-family: "Archivo", sans-serif !important;
-  line-height: 1.1;
+  line-height: $productLineHeight;
 }
 
 #artist-name {
@@ -49,57 +46,46 @@ body {
 }
 
 #price {
-  line-height: 1.1;
-  display: block;
+  line-height: $productLineHeight;
+  display: $blockDisplay;
   font-size: 1.5rem;
   margin-top: 1rem;
   font-weight: 400;
-
 }
 
 .album-content {
   margin: 10px;
 }
 
-.popover-content {
-  background-color: red !important;
-}
-
 .popover-body {
-  color: white !important;
-  font-family: "Archivo", sans-serif !important;
-  font-size: 0.7rem;
-  padding: 1px !important;
-}
-
-.favorite-container {
-  color: white !important;
+  color: $textDarkColor;
+  font-size: 0.7rem !important;
+  padding: 5px !important;
 }
 
 .wishlist-link {
-  color: black;
+  color: $textDarkColor;
 }
 
 .wishlist-link:hover {
-  color: rgb(255, 174, 0);
+  color: $accentColor;
 }
 
 button.dropdown-toggle {
   background: rgb(254, 254, 254) !important;
   border-radius: 0px;
-  color: black;
-  font-family: "Archivo", sans-serif !important;
+  color: $textDarkColor;
   font-size: 0.8rem;
   font-weight: 400 !important;
   padding: 3px 40px;
   margin-top: 10px;
   width: 185px;
-  margin: 10px 60% 0px 0px;
+  margin: 10px 70% 0px 0px;
 }
 
 .btn-secondary.dropdown-toggle:focus {
   color: rgb(55, 55, 55) !important;
-  box-shadow: none !important;
+  box-shadow: $noBoxShadow !important;
 }
 
 .btn-secondary.dropdown-toggle:hover {
@@ -123,10 +109,10 @@ hr {
 
 td,
 th {
-  border: 0.5px solid black;
+  border: 0.5px solid $textDarkColor;
   text-align: left;
   padding: 3px 4px !important;
-  border: none;
+  border: $noBorder;
 }
 
 td {
@@ -143,27 +129,89 @@ table {
 }
 
 button#cart-button {
-  color: white !important;
+  color: $textLightColor !important;
   font-weight: 600;
   border-radius: 0;
   height: 50px;
   width: 185px;
   margin-top: 5rem;
   font-size: 0.9rem;
-  border: none;
-  box-shadow: none !important;
-  background-image: linear-gradient(45deg, black 50%, rgb(255, 174, 0) 50%) !important;
+  border: $noBorder;
+  box-shadow: $noBoxShadow !important;
+  background-image: linear-gradient(
+    45deg,
+    black 50%,
+    rgb(255, 174, 0) 50%
+  ) !important;
   background-size: 250% 100% !important;
   background-position: left top !important;
   transition: background-position 0.5s ease !important;
-  margin-right: 400px;
+  margin-right: 410px;
 }
 
 button#cart-button:hover {
   background-position: right bottom !important;
 }
 
-@media screen and (max-width: 640px) {
+#artistImage {
+  height: 131px;
+  margin-left: 55px !important;
+  display: $inlineDisplay;
+}
+
+.record-lable-text {
+  font-size: 0.75rem !important;
+}
+
+@media screen and (max-width: 1300px) {
+  .main-container {
+    margin: 0 !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #artist-name {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  #album-img {
+    min-width: 300px;
+  }
+
+  .right-container {
+    padding: 0px 0px 0px 18px !important;
+    margin-right: 7rem !important;
+  }
+
+  #price {
+    font-size: 1.5rem;
+  }
+
+  #album-name {
+    font-size: 1.4rem;
+  }
+
+  .right-container {
+    padding: 0px 0px 0px 35px;
+    width: 625px;
+  }
+
+  .icon {
+    display: $inlineDisplay;
+  }
+
+  .album-name-div {
+    display: $blockDisplay;
+  }
+
+  #artistImage {
+    height: 115px;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width: 725px) {
   .main-container {
     flex-direction: column !important;
   }
@@ -182,74 +230,22 @@ button#cart-button:hover {
   }
 
   .right-container {
-    padding-top: 30px !important;
-  }
-
-  #price {
-    font-size: 1rem !important;
-    display: block !important;
-  }
-
-  button.dropdown-toggle {
-      margin-right: 430px;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  #artist-name {
-    font-size: 2rem;
-    font-weight: 700;
-  }
-
-  .right-container {
-    padding: 0px 0px 0px 10px;
+    padding: 30px 0px 0px 18px !important;
     margin-right: 7rem !important;
   }
 
   #price {
-    font-size: 1.5rem;
+    font-size: 1rem !important;
+    display: $blockDisplay !important;
   }
 
-  #album-name {
-    font-size: 1.4rem;
+  button.dropdown-toggle {
+    margin-right: 447px !important;
   }
 
-  .right-container {
-    padding: 0px 0px 0px 35px;
-    width: 625px;
-  }
-
-  .icon {
-    display: inline;
-  }
-
-  .album-name-div {
-    display: block;
+  #artistImage {
+    height: 105px !important;
+    margin-left: 80px !important;
+    display: $inlineBlockDisplay;
   }
 }
-
-@media screen and (max-width: 1300px) {
-  .main-container {
-    margin: 0 !important;
-  }
-}
-
-/* @media screen and (min-width: 960px) {
-  /* .album-items-row {
-    margin: auto !important;
-  } 
-} */
-
-/* @media screen and (max-width: 670px) {
-  .album-items-row {
-    display: block !important;
-  }
-
-  .right-container {
-    display: block !important;
-  }
-
-  .main-container {
-    display: block;
-  }
-} */
