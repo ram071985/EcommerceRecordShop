@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DynamicBanner from "../../components/DynamicBanner/DynamicBanner";
 import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
-import { fetchProducts } from "../../services/api/products";
+import { fetchRandomProducts } from "../../services/api/products";
 
 const DynamicBannerContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,7 +9,7 @@ const DynamicBannerContainer = () => {
   const [artistsSlides, setArtistsSlides] = useState([]);
 
   useEffect(() => {
-    fetchProducts(5)
+    fetchRandomProducts(5)
       .then((res) => {
         const newAlbumSlides = [];
         const newArtistSlides = [];
@@ -17,7 +17,7 @@ const DynamicBannerContainer = () => {
           const {
             artistId,
             imageUrl,
-            artistImageUrl,
+            artistData,
             name,
             recordLabel,
             artistName,
@@ -33,7 +33,7 @@ const DynamicBannerContainer = () => {
 
           newArtistSlides.push({
             id: artistId,
-            src: artistImageUrl,
+            src: artistData.artistImageUrls[1].url,
             alt: `Artist ${artistName}`,
             title: artistName,
             subtitle: recordLabel,

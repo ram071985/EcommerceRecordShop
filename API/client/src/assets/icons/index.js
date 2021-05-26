@@ -5,7 +5,7 @@ import {
   cilArrowThickRight,
 } from "@coreui/icons";
 
-export const icons = Object.assign(
+const icons = Object.assign(
   {},
   {
     cilUser,
@@ -14,3 +14,4 @@ export const icons = Object.assign(
     cilArrowThickRight,
   }
 );
+export { icons };
