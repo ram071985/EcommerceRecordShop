@@ -1,15 +1,15 @@
-using System.Collections.Generic;
-using System.IO;
+using System;
 using API.Models;
 using Core.Entities;
 using Core.Services.CartServices;
 using Microsoft.AspNetCore.Mvc;
-using CartItem = Core.Entities.CartItem;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    [ApiController, Route("[controller]/{customerId}")]
     public sealed class CartController : Controller
     {
         private readonly ICartService _cartService;
@@ -21,41 +21,57 @@ namespace API.Controllers
             _path = Path.GetFullPath(ToString()!);
         }
 
+        //      5001/cart/{customerId}
+        // [Authorize]
+        [HttpGet]
+        public List<CartItem> GetCartItemsByCustomerId(string customerId)
+        {
+            return _cartService.GetCartItemsByCustomerId(customerId);
+        }
+
+        //      5001/cart/{customerId}
         // [Authorize]
         [HttpPost]
-        public void AddToCart(List<CartItemInputModel> cartItemsInput, string userId)
+        public void AddToCart(List<CartItemInputModel> cartItemsInput, string customerId)
         {
-            var cartItems = TransformCartInputsToCartItems(cartItemsInput, userId);
-                
-            _cartService.AddToCart(cartItems, userId);
+            if (customerId == null || cartItemsInput.Count == 0)
+                throw new Exception("invalid AddToCart => customerId or List of cartInputModel invalid");
+
+            var cartItems = MapCartItems(cartItemsInput, customerId);
+
+            _cartService.AddToCart(customerId, cartItems);
         }
 
-        [HttpDelete("{userId}")]
-        public void ClearCart(string userId)
-        {
-            _cartService.ClearCart(userId);
-        }
-        
+        //      5001/cart/{customerId}
         // [Authorize]
-        [HttpPatch("{orderNumber}")]
-        public void RemoveFromCart(string orderNumber, List<CartItemInputModel> orders)
+        [HttpDelete]
+        public void ClearCart(string customerId)
         {
-            // TODO do we need this endpoint?
+            if (customerId == null)
+                throw new Exception("customerId is null");
+
+            _cartService.ClearCart(customerId);
         }
 
-        private List<CartItem> TransformCartInputsToCartItems(List<CartItemInputModel> cartItemsInput, string userId)
+        //      5001/cart/{customerId}
+        // [Authorize]
+        [HttpPatch]
+        public void RemoveFromCart(string customerId, List<CartRemoveInputModel> itemsToRemove)
         {
-            var cartItems = new List<CartItem>();
-            
-            cartItemsInput.ForEach(cartItem =>
-                cartItems.Add(new CartItem
+        }
+
+        private static List<CartItem> MapCartItems(IEnumerable<CartItemInputModel> cartItemsInput, string customerId)
+        {
+            var cartItems = cartItemsInput
+                .Select(inputModel => new CartItem
                 {
-                    Quantity = cartItem.Quantity,
-                    // should remove purchase price and spotifyId from cartItem class => replaced with ProductId
-                    ProductId = cartItem.ProductId,
-                    UserId = userId
-                }));
-                
+                    Id = Guid.NewGuid().ToString(),
+                    Quantity = inputModel.Quantity,
+                    ProductId = inputModel.ProductId,
+                    CustomerId = customerId
+                })
+                .ToList();
+
             return cartItems;
         }
     }

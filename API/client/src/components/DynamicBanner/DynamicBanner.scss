@@ -1,0 +1,69 @@
+@import "../../scss/_variables";
+
+@mixin carouselHeight($maxImageHeight, $minImageHeight) {
+  .carousel-inner > .carousel-item {
+    max-height: $maxImageHeight;
+    min-height: $minImageHeight;
+  }
+
+  img {
+    max-height: $maxImageHeight;
+    min-height: $minImageHeight;
+  }
+}
+
+.DynamicBanner {
+  position: relative;
+  .detailsCarousel {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    z-index: 1;
+    width: 410px;
+    padding: 25px 20px 25px 30px;
+
+    @include carouselHeight(343px, 343px);
+
+    .controls {
+      position: absolute;
+      top: 1;
+    }
+  }
+  .productsCarousel {
+    position: relative;
+    box-sizing: border-box;
+    margin-left: 20%;
+
+    @include carouselHeight(589px, 400px);
+  }
+}
+
+//add breakpoints to take the size of the details carousel into consideration
+@media only screen and (max-width: $screen-xl) {
+  .DynamicBanner {
+    .detailsCarousel {
+      top: 60px;
+    }
+  }
+}
+
+@media only screen and (max-width: $screen-md) {
+  .DynamicBanner {
+    .detailsCarousel {
+      top: 65px;
+      width: 350px;
+      @include carouselHeight(300px, 300px);
+    }
+  }
+}
+
+@media only screen and (max-width: $screen-sm) {
+  .DynamicBanner {
+    .detailsCarousel {
+      display: none;
+    }
+    .productsCarousel {
+      margin: 0;
+    }
+  }
+}

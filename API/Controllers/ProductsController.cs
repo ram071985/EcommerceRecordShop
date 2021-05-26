@@ -1,96 +1,105 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using API.Models;
 using Core.Entities;
 using Core.Services.ProductServices;
-using Core.Services.SpotifyServices;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    [ApiController, Route("[controller]")]
     public sealed class ProductsController : Controller
     {
-        private readonly IGetProductsService _productsService;
-        private readonly ISpotifyAlbumService _spotifyService;
+        private readonly string[] _validGenres = {"hiphop", "rock", "punk"};
+        private readonly IProductsService _productsService;
 
-        public ProductsController(
-            IGetProductsService productsService,
-            ISpotifyAlbumService spotifyService)
+        public ProductsController(IProductsService productsService)
         {
             _productsService = productsService;
-            _spotifyService = spotifyService;
         }
-        
-        //          5001/products   
-        [HttpGet]
+
+        //          5001/products/592cf179-8d37-4f62-8637-ce5be936049d
+        [HttpGet("{productId}")]
+        public ProductModel GetProductById(string productId)
+        {
+            Console.WriteLine(productId);
+            if (productId == null)
+                throw new Exception("id is null");
+
+            var product = _productsService.GetProductById(productId);
+
+            return new ProductModel
+            {
+                Id = product.Id,
+                QuantityAvailable = product.QuantityAvailable,
+                Price = product.Price,
+                DateAdded = product.DateAdded,
+                Album = product.Album
+            };
+        }
+
+        //          5001/products/random   
+        // [Authorize]
+        [HttpGet("random")]
         public List<ProductModel> GetProducts()
         {
-            var count = 5;
-            
-            var products = _productsService.GetAvailableProducts(count);
+            var defaultCount = 5;
 
-            var productModels = TransformProductsToModels(products);
+            var products = _productsService.GetAvailableProducts(defaultCount);
 
-            return productModels;
+            return MapProductModels(products);
         }
 
-        //          5001/products/5   
-        [HttpGet("{count:int}")]
+        //          5001/products/random/5   
+        // [Authorize]
+        [HttpGet("random/{count:int}")]
         public List<ProductModel> GetProductsByCount(int count)
         {
             var products = _productsService.GetAvailableProducts(count);
 
-            var productModels = TransformProductsToModels(products);
-
-            return productModels;
+            return MapProductModels(products);
         }
 
-        //          5001/products/hiphop   
-        [HttpGet("{genre}")]
+        //          5001/products/genre/hiphop   
+        // [Authorize]
+        [HttpGet("genre/{genre}")]
         public List<ProductModel> GetProductsByGenre(string genre)
         {
-            if (genre == null)
-                throw new Exception("No Genre Specified");
+            if (genre == null || !_validGenres.Contains(genre))
+                throw new Exception("Genre either null or invalid");
 
-            var count = 5;
-            
-            var products = _productsService.GetAvailableProductsByGenre(count, genre);
+            var defaultCount = 5;
 
-            var productModels = TransformProductsToModels(products);
+            var products = _productsService.GetAvailableProductsByGenre(defaultCount, genre);
 
-            return productModels;
+            return MapProductModels(products);
         }
 
-        //          5001/products/hiphop/5   
-        [HttpGet("{genre}/{count:int}")]
-        public List<ProductModel> GetProductsByGenreByCount(string genre, int count)
+        //          5001/products/genre/hiphop/5   
+        // [Authorize]
+        [HttpGet("genre/{genre}/{count:int}")]
+        public List<ProductModel> GetProductsByGenreAndCount(string genre, int count)
         {
-            if (genre == null)
-                throw new Exception("No Genre Specified");
+            if (genre == null || !_validGenres.Contains(genre))
+                throw new Exception("Genre either null or invalid");
 
             var products = _productsService.GetAvailableProductsByGenre(count, genre);
 
-            var productModels = TransformProductsToModels(products);
-
-            return productModels;
+            return MapProductModels(products);
         }
-        
-        //          5001/products/hiphop   
-        private List<ProductModel> TransformProductsToModels(List<Product> products)
+
+        private List<ProductModel> MapProductModels(IEnumerable<Product> products)
         {
-            var productModels = new List<ProductModel>();
-
-            products.ForEach(product =>
-                productModels.Add(new ProductModel
-                {
-                    Album = _spotifyService.GetAlbumBySpotifyId(product.SpotifyId),
-                    Price = product.Price
-                }));
-
-            return productModels;
+            return products.Select(product => new ProductModel
+            {
+                Id = product.Id,
+                Album = product.Album,
+                Price = product.Price,
+                QuantityAvailable = product.QuantityAvailable,
+                DateAdded = product.DateAdded,
+                Genre = product.Genre
+            }).ToList();
         }
     }
 }

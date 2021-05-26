@@ -1,13 +1,12 @@
-using System;
+using System.Collections.Generic;
 using System.IO;
-using Core.Entities;
-using Core.Services.SpotifyServices;
+using Integrations.Spotify.Objects;
+using Integrations.Spotify.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    [ApiController, Route("[controller]")]
     public sealed class SpotifyController : Controller
     {
         private readonly ISpotifyAlbumService _albumService;
@@ -20,9 +19,16 @@ namespace API.Controllers
         }
 
         [HttpGet("{albumId}")]
-        public Album Get(string albumId)
+        public List<Album> Get(string albumId)
         {
-            return _albumService.GetAlbumBySpotifyId(albumId);
+            var albumIds = new[] {albumId};
+            return _albumService.GetAlbumsBySpotifyIds(albumIds);
+        }
+
+        [HttpPost]
+        public List<Album> GetAlbums(List<string> spotifyIds)
+        {
+            return _albumService.GetAlbumsBySpotifyIds(spotifyIds);
         }
     }
 }

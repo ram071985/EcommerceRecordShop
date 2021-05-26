@@ -7,32 +7,26 @@ namespace Core.Entities
 {
     public class Order
     {
-        public Order()
-        {
-        }
-        
         [Key]
         [Column(TypeName = "varchar(50)")]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; init; } 
         
+        [Required]
         [Column(TypeName = "varchar(50)")]
-        public string UserId { get; set; }
+        public string CustomerId { get; init; }
         
-        public DateTime PurchaseDate { get; set; } = DateTime.Now;
+        [Required]
+        public DateTime PurchaseDate { get; init; } 
         
-        public DateTime ShippingDate { get; set; } = DateTime.Now.AddDays(3);
+        [Required]
+        public DateTime ShippingDate { get; init; }
         
-        public DateTime CanReturnBy { get; set; } = DateTime.Now.AddDays(30);
-        public decimal OrderTotalPrice
-        {
-            get
-            {
-                decimal totalPrice = 0;
-                CartItems.ForEach(distinctAlbum => totalPrice += distinctAlbum.Product.Price * distinctAlbum.Quantity);
-                return totalPrice;
-            }
-        }
-        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
+        [Required]
+        public DateTime CanReturnBy { get; init; }
 
+        [NotMapped] 
+        public decimal TotalOrderPrice { get; set; }
+        
+        public List<OrderItem> OrderItems { get; init; } 
     }
 }

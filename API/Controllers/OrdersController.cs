@@ -1,53 +1,53 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using API.Models;
 using Core.Entities;
 using Core.Services.OrderServices;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public sealed class OrderController : Controller
+    [ApiController, Route("[controller]")]
+    public sealed class OrdersController : Controller
     {
         private readonly IOrdersService _orderService;
         private readonly string _path;
 
-        public OrderController(IOrdersService orderService)
+        public OrdersController(IOrdersService orderService)
         {
             _orderService = orderService;
             _path = Path.GetFullPath(ToString()!);
         }
 
-        [Authorize]
-        [HttpGet("{userId}")]
-        public List<Order> GetOrdersByUserId(string userId)
-        {
-            if (userId == null)
-                throw new Exception("Invalid User Id");
-
-            return _orderService.GetOrdersByUserId(userId);
-        }
-
+        //      5001/orders/get/{customerId}
         // [Authorize]
-        [HttpPost]
-        public Order PlaceOrder(UserIdInput userIdInput)
+        [HttpGet("get/{customerId}")]
+        public List<Order> GetOrdersByUserId(string customerId)
         {
-            if (userIdInput.UserId == null)
+            if (customerId == null)
                 throw new Exception("Invalid User Id");
-
-            return _orderService.PlaceOrder(userIdInput.UserId);
+            
+            return _orderService.GetOrdersByCustomerId(customerId);
         }
 
+        //      5001/orders/place/{customerId}
+        // [Authorize]
+        [HttpGet("place/{customerId}")]
+        public Order PlaceOrder(string customerId)
+        {
+            if (customerId == null)
+                throw new Exception("Invalid User Id");
+
+            return _orderService.PlaceOrder(customerId);
+        }
+        
+        //      5001/orders/{orderNumber}
         // [Authorize]
         [HttpPatch("{orderNumber}")]
-        public void ChangeOrder(string orderNumber)
+        public void ReturnItem(string orderNumber, List<ReturnInputModel> orderInputs)
         {
-            // TODO do we need this endpoint?
+            
         }
     }
 }

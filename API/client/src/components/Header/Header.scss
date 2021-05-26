@@ -1,11 +1,13 @@
 @import "./../../scss/variables";
 
+$solidBgColor: rgba(
+  $color: $secondaryColor,
+  $alpha: 1,
+);
+
 header {
+  position: relative;
   width: 100%;
-  .headerContent {
-    max-width: 1440px;
-    margin: auto;
-  }
   ion-icon {
     color: $primaryColor;
     width: 100%;
@@ -24,5 +26,14 @@ header {
 
 .customNavbar {
   color: $primaryColor;
-  background-color: $secondaryColor;
+  background-color: rgba($color: $secondaryColor, $alpha: 0.5);
+  transition: background-color ease-in 0.3s;
+}
+
+.customNavbar:hover {
+  background-color: $solidBgColor;
+}
+
+.solid {
+  background-color: $solidBgColor;
 }
