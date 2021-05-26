@@ -1,4 +1,7 @@
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using Core.DataAccess;
 using Core.Services.AuthenticationServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +33,7 @@ namespace API
                 };
             });
 
-            services.AddSingleton<IGenerateJwtToken>(new GenerateJwtToken(key));
+            services.AddScoped<IGenerateJwtToken, GenerateJwtToken>();
         }
     }
 }

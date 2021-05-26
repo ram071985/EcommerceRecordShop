@@ -21,14 +21,14 @@ namespace API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<RecordStoreContext>(options =>
+                options.UseSqlServer(_configuration["ConnectionStrings:Default"]));
+                
             services.AddControllers();
             services.AddSpaStaticFiles(config => config.RootPath = "client/build");
 
             InterfaceConfig.Configure(services);
             JwtConfig.Configure(services, _configuration);
-
-            services.AddDbContext<RecordStoreContext>(options =>
-                options.UseSqlServer(_configuration["ConnectionStrings:Default"]));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
