@@ -49,7 +49,7 @@ namespace API.Controllers
         {
         }
 
-        //      5001/customers/{customerId}
+        //      5001/customers/deactivate{customerId}
         // [Authorize]
         [HttpPatch("deactivate/{customerId}")]
         public void DeactivateCustomer(string customerId)
@@ -57,7 +57,7 @@ namespace API.Controllers
             _customerService.DeactivateCustomer(customerId);
         }
 
-        //      5001/customers/{customerId}
+        //      5001/customers/activate/{customerId}
         // [Authorize]
         [HttpPatch("activate/{customerId}")]
         public void ActivateCustomer(string customerId)

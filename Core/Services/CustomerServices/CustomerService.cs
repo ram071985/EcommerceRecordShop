@@ -15,6 +15,7 @@ namespace Core.Services.CustomerServices
         void AddCustomer(string customerName, string password, string email);
         void DeactivateCustomer(string customerId);
         void ActivateCustomer(string customerId);
+        bool CustomerIsActive(string customerId);
     }
 
     public class CustomerService : ICustomerService
@@ -32,6 +33,12 @@ namespace Core.Services.CustomerServices
         {
             var customer = _db.Customers.FirstOrDefault(x => x.Id == customerId);
 
+            if (customer == null)
+                throw new Exception("customer is null");
+                
+            if (!customer.IsActive)
+                throw new Exception("customer is not active");
+                
             return customer;
         }
 
@@ -69,7 +76,7 @@ namespace Core.Services.CustomerServices
             if (customer == null)
                 throw new Exception("customer with this id is null");
 
-            if (customer.IsActive) return;
+            if (!customer.IsActive) return;
 
             customer.IsActive = false;
 
@@ -87,12 +94,22 @@ namespace Core.Services.CustomerServices
             if (customer == null)
                 throw new Exception("customer with this id is null");
 
-            if (!customer.IsActive) return;
+            if (customer.IsActive) return;
 
             customer.IsActive = true;
 
             _db.Update(customer);
             _db.SaveChanges();
+        }
+
+        public bool CustomerIsActive(string customerId)
+        {
+            var customer = _db.Customers.FirstOrDefault(x => x.Id == customerId);
+
+            if (customer == null)
+                throw new Exception("customer is null");
+
+            return customer.IsActive;
         }
 
         private string HashPassword(string password)

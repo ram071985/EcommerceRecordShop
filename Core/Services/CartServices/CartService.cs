@@ -1,9 +1,11 @@
+using System;
 using Core.DataAccess;
 using Core.Entities;
 using Integrations.Spotify.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Services.CustomerServices;
 
 namespace Core.Services.CartServices
 {
@@ -17,18 +19,24 @@ namespace Core.Services.CartServices
     public class CartService : ICartService
     {
         private readonly RecordStoreContext _db;
+        private readonly ICustomerService _customerService;
         private readonly ISpotifyAlbumService _albumService;
 
         public CartService(
             RecordStoreContext db,
+            ICustomerService customerService,
             ISpotifyAlbumService albumService)
         {
             _db = db;
+            _customerService = customerService;
             _albumService = albumService;
         }
 
         public List<CartItem> GetCartItemsByCustomerId(string customerId)
         {
+            if (!_customerService.CustomerIsActive(customerId))
+                throw new Exception("customer is not active");
+                
             var cartItems = _db.CartItems
                 .Where(x => x.CustomerId == customerId)
                 .Include(x => x.Product)
@@ -48,6 +56,9 @@ namespace Core.Services.CartServices
 
         public void AddToCart(string customerId, List<CartItem> newCartItems)
         {
+            if (!_customerService.CustomerIsActive(customerId))
+                throw new Exception("customer is not active");
+                
             var currentCartItems = _db.CartItems
                 .Where(x => x.CustomerId == customerId)
                 .Include(x => x.Product)
@@ -81,6 +92,9 @@ namespace Core.Services.CartServices
 
         public void ClearCart(string customerId)
         {
+            if (!_customerService.CustomerIsActive(customerId))
+                throw new Exception("customer is not active");
+                
             var cartItems = _db.CartItems
                 .Where(item => item.CustomerId == customerId);
 

@@ -4,6 +4,7 @@ using System.Linq;
 using Core.DataAccess;
 using Core.Entities;
 using Core.Services.CartServices;
+using Core.Services.CustomerServices;
 using Integrations.Spotify.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,20 +20,26 @@ namespace Core.Services.OrderServices
     {
         private readonly ISpotifyAlbumService _albumService;
         private readonly ICartService _cartService;
+        private readonly ICustomerService _customerService;
         private readonly RecordStoreContext _db;
 
         public OrdersService(
             ISpotifyAlbumService albumService,
             ICartService cartService,
+            ICustomerService customerService,
             RecordStoreContext db)
         {
             _albumService = albumService;
             _cartService = cartService;
+            _customerService = customerService;
             _db = db;
         }
 
         public Order PlaceOrder(string customerId)
         {
+            if (!_customerService.CustomerIsActive(customerId))
+                throw new Exception("customer is not active");
+                
             var customer = _db.Customers
                 .Include(c => c.CartItems)
                 .FirstOrDefault(c => c.Id == customerId);
@@ -90,6 +97,9 @@ namespace Core.Services.OrderServices
 
         public List<Order> GetOrdersByCustomerId(string customerId)
         {
+            if (!_customerService.CustomerIsActive(customerId))
+                throw new Exception("customer is not active");
+                
             var dbOrders = _db.Orders
                 .Where(order => order.CustomerId == customerId)
                 .Include(order => order.OrderItems)

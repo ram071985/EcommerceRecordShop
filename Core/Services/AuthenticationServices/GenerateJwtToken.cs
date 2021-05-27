@@ -55,6 +55,9 @@ namespace Core.Services.AuthenticationServices
             var customer = _db.Customers.FirstOrDefault(x => x.CustomerName == username);
 
             if (customer == null) return false;
+            
+            if (!customer.IsActive)
+                throw new Exception("customer is not active");
 
             return Bcrypt.Verify(password + _hardSalt, customer.Password);
         }
