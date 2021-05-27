@@ -30,6 +30,9 @@ namespace Core.Entities
         [Required]
         [Column(TypeName = "decimal(25,8)")]
         public decimal WalletBalance { get; set; }
+        
+        [Required]
+        public bool IsActive { get; set; } 
 
         [NotMapped]
         public decimal TotalSpent =>  Orders?.Sum(order => order.TotalOrderPrice) ?? 0; 

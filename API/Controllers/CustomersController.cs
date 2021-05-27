@@ -51,18 +51,28 @@ namespace API.Controllers
 
         //      5001/customers/{customerId}
         // [Authorize]
-        [HttpDelete("{customerId}")]
-        public void DeleteCustomer(string customerId)
+        [HttpPatch("deactivate/{customerId}")]
+        public void DeactivateCustomer(string customerId)
         {
+            _customerService.DeactivateCustomer(customerId);
         }
 
+        //      5001/customers/{customerId}
+        // [Authorize]
+        [HttpPatch("activate/{customerId}")]
+        public void ActivateCustomer(string customerId)
+        {
+            _customerService.ActivateCustomer(customerId);
+        }
+        
         private static CustomerModel MapCustomerModel(Customer customer)
         {
             return new()
             {
                 CustomerName = customer.CustomerName,
                 Email = customer.Email,
-                WalletBalance = customer.WalletBalance
+                WalletBalance = customer.WalletBalance,
+                IsActive = customer.IsActive
             };
         }
     }

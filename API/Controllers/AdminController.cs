@@ -28,8 +28,8 @@ namespace API.Controllers
             _seedService.SeedDatabase();
         }
 
-        //          5001/admin/add_product
-        [HttpPost("add_product")]
+        //          5001/admin/add
+        [HttpPost("add")]
         public void AdminAddProducts(ProductInputModel product)
         {
             if (product.SpotifyId == null || product.Genre == null || product.Price == 0)

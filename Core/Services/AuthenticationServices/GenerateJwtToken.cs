@@ -6,6 +6,7 @@ using System.Text;
 using Core.DataAccess;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Bcrypt = BCrypt.Net.BCrypt;
 
 namespace Core.Services.AuthenticationServices
 {
@@ -17,10 +18,12 @@ namespace Core.Services.AuthenticationServices
     public class GenerateJwtToken : IGenerateJwtToken
     {
         private readonly string _key;
-        private readonly RecordStoreContext _db;
         private readonly string _hardSalt;
+        private readonly RecordStoreContext _db;
 
-        public GenerateJwtToken(IConfiguration configuration, RecordStoreContext db)
+        public GenerateJwtToken(
+            IConfiguration configuration,
+            RecordStoreContext db)
         {
             _key = configuration["JwtKey"];
             _hardSalt = configuration["PasswordSalt"];
@@ -29,8 +32,7 @@ namespace Core.Services.AuthenticationServices
 
         public string Authenticate(string username, string password)
         {
-            if (!AuthenticateCustomer(username, password))
-                return null;
+            if (!AuthenticateCustomer(username, password)) return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(_key);
@@ -47,14 +49,14 @@ namespace Core.Services.AuthenticationServices
 
             return tokenHandler.WriteToken(token);
         }
-        
+
         private bool AuthenticateCustomer(string username, string password)
         {
             var customer = _db.Customers.FirstOrDefault(x => x.CustomerName == username);
 
             if (customer == null) return false;
-            
-            return BCrypt.Net.BCrypt.Verify(password + _hardSalt, customer.Password);
+
+            return Bcrypt.Verify(password + _hardSalt, customer.Password);
         }
     }
 }
