@@ -37,7 +37,6 @@ namespace Core.Services.ProductServices
             };
 
             _db.Add(newProduct);
-            _db.SaveChanges();
         }
     }
 }

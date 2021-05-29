@@ -21,6 +21,10 @@ namespace Core.Services.AuthenticationServices
         private readonly string _hardSalt;
         private readonly RecordStoreContext _db;
 
+        static GenerateJwtToken()
+        {
+            
+        }
         public GenerateJwtToken(
             IConfiguration configuration,
             RecordStoreContext db)
@@ -52,7 +56,8 @@ namespace Core.Services.AuthenticationServices
 
         private bool AuthenticateCustomer(string username, string password)
         {
-            var customer = _db.Customers.FirstOrDefault(x => x.CustomerName == username);
+            var customer = _db.Customers
+                .FirstOrDefault(x => x.CustomerName == username);
 
             if (customer == null) return false;
             

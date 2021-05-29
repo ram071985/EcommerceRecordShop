@@ -42,6 +42,8 @@ namespace API
 
             app.UseMiddleware<ExceptionMiddleware>();
 
+            app.UseMiddleware<EntityMiddleware>();
+
             app.UseAuthentication();
 
             app.UseAuthorization();

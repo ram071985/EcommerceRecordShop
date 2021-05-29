@@ -88,7 +88,6 @@ namespace Core.Services.OrderServices
             _db.AddRange(order.OrderItems);
             _db.Update(customer);
             _db.UpdateRange(productsToUpdate);
-            _db.SaveChanges();
 
             PopulateAlbums(new List<Order> {order});
 

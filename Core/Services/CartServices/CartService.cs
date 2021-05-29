@@ -99,7 +99,7 @@ namespace Core.Services.CartServices
                 .Where(item => item.CustomerId == customerId);
 
             _db.CartItems.RemoveRange(cartItems);
-            _db.SaveChanges();
+            // _db.SaveChanges();
         }
     }
 }

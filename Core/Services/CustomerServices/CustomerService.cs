@@ -47,7 +47,7 @@ namespace Core.Services.CustomerServices
             var dbCustomer = _db.Customers.FirstOrDefault(x => x.CustomerName == customerName);
 
             if (dbCustomer != null)
-                throw new Exception("already a customer with this customername");
+                throw new Exception("already a customer with this customer name");
 
             var hashedPassword = HashPassword(password);
 
@@ -64,7 +64,6 @@ namespace Core.Services.CustomerServices
             };
 
             _db.Add(customer);
-            _db.SaveChanges();
         }
 
         public void DeactivateCustomer(string customerId)
@@ -84,7 +83,6 @@ namespace Core.Services.CustomerServices
                 _db.RemoveRange(customer.CartItems);
 
             _db.Update(customer);
-            _db.SaveChanges();
         }
 
         public void ActivateCustomer(string customerId)
@@ -99,7 +97,6 @@ namespace Core.Services.CustomerServices
             customer.IsActive = true;
 
             _db.Update(customer);
-            _db.SaveChanges();
         }
 
         public bool CustomerIsActive(string customerId)
