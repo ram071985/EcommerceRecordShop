@@ -19,15 +19,14 @@ namespace API.Controllers
             _productsService = productsService;
         }
 
-        //          5001/products/592cf179-8d37-4f62-8637-ce5be936049d
+        //          5001/products/{customerId}
         [HttpGet("{productId}")]
-        public ProductModel GetProductById(string productId)
+        public ProductModel GetProductById(string customerId)
         {
-            Console.WriteLine(productId);
-            if (productId == null)
+            if (customerId == null)
                 throw new Exception("id is null");
 
-            var product = _productsService.GetProductById(productId);
+            var product = _productsService.GetProductById(customerId);
 
             return new ProductModel
             {
