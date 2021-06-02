@@ -12,14 +12,15 @@ namespace API
     {
         public static void Configure(IServiceCollection services)
         {
-            services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
-            services.AddScoped<ISpotifyAlbumService, SpotifyAlbumService>();
             services.AddScoped<IAdminProductsService, AdminProductsService>();
             services.AddScoped<IAdminProductSeedService, AdminProductSeedService>();
-            services.AddScoped<IProductsService, ProductsService>();
-            services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IGenerateJwtToken, GenerateJwtToken>();
             services.AddScoped<IOrdersService, OrdersService>();
+            services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
+            services.AddScoped<ISpotifyAlbumService, SpotifyAlbumService>();
         }
     }
 }

@@ -1,26 +1,19 @@
-Info 0    [09:50:52.147] Starting TS Server
-Info 1    [09:50:52.147] Version: 4.3.2
-Info 2    [09:50:52.147] Arguments: /home/stanzu10/.nvm/versions/node/v14.16.1/bin/node /home/stanzu10/.nvm/versions/node/v14.16.1/bin/tsserver --logFile /home/stanzu10/Dev/git/record/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/4b1c2d0adbd73cf5adfe084e2743095f/tscancellation*
-Info 3    [09:50:52.147] Platform: linux NodeVersion: 14 CaseSensitive: true
-Info 4    [09:50:52.147] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
-Info 5    [09:50:52.161] Search path: /home/stanzu10/Dev/git/record/API/client/src
-Info 6    [09:50:52.162] For info: /home/stanzu10/Dev/git/record/API/client/src/App.js :: No config files found.
-Info 7    [09:50:52.166] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
-Info 8    [09:50:54.378] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true Elapsed: 2212.210146999918ms
-Info 9    [09:50:54.378] Project '/dev/null/inferredProject1*' (Inferred)
-Info 10   [09:50:54.378] 	Files (320)
+Info 0    [17:56:45.814] Starting TS Server
+Info 1    [17:56:45.814] Version: 4.3.2
+Info 2    [17:56:45.814] Arguments: /home/stanzu10/.nvm/versions/node/v14.16.1/bin/node /home/stanzu10/.nvm/versions/node/v14.16.1/bin/tsserver --logFile /home/stanzu10/Dev/git/record/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/17e2ee7566a23bc5481a245923939c0c/tscancellation*
+Info 3    [17:56:45.814] Platform: linux NodeVersion: 14 CaseSensitive: true
+Info 4    [17:56:45.814] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [17:56:45.828] Search path: /home/stanzu10/Dev/git/record/API/client/src/components/Header
+Info 6    [17:56:45.829] For info: /home/stanzu10/Dev/git/record/API/client/src/components/Header/Header.js :: No config files found.
+Info 7    [17:56:45.833] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 8    [17:56:47.851] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true Elapsed: 2018.1201370004565ms
+Info 9    [17:56:47.851] Project '/dev/null/inferredProject1*' (Inferred)
+Info 10   [17:56:47.851] 	Files (177)
 
-Info 11   [09:50:54.378] -----------------------------------------------
-Info 12   [09:50:54.402] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject1*
-Info 13   [09:50:55.231] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject1* Version: 1 structureChanged: true Elapsed: 828.4463740000501ms
-Info 14   [09:50:55.231] Project '/dev/null/autoImportProviderProject1*' (AutoImportProvider)
-Info 15   [09:50:55.231] 	Files (93)
+Info 11   [17:56:47.852] -----------------------------------------------
+Info 12   [17:56:47.885] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject1*
+Info 13   [17:56:48.842] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject1* Version: 1 structureChanged: true Elapsed: 957.1849540006369ms
+Info 14   [17:56:48.842] Project '/dev/null/autoImportProviderProject1*' (AutoImportProvider)
+Info 15   [17:56:48.842] 	Files (217)
 
-Info 16   [09:50:55.231] -----------------------------------------------
-Info 17   [09:50:58.067] Format host information updated
-Info 18   [09:50:58.320] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
-Info 19   [09:50:58.377] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 2 structureChanged: false Elapsed: 57.05613899976015ms
-Info 20   [09:50:58.377] Different program with same set of files:: structureIsReused:: 2
-Info 21   [09:52:00.303] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
-Info 22   [09:52:00.356] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 3 structureChanged: false Elapsed: 51.98269800003618ms
-Info 23   [09:52:00.356] Different program with same set of files:: structureIsReused:: 2
+Info 16   [17:56:48.842] -----------------------------------------------

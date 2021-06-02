@@ -1,8 +1,4 @@
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
-using Core.DataAccess;
-using Core.Services.AuthenticationServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +10,7 @@ namespace API
    {
        public static void Configure(IServiceCollection services, IConfiguration configuration)
        {
-           var key = configuration["JwtKey"];
+           var jwtKey = configuration["JwtKey"];
 
             services.AddAuthentication(options =>
             {
@@ -27,13 +23,11 @@ namespace API
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
             });
-
-            services.AddScoped<IGenerateJwtToken, GenerateJwtToken>();
         }
     }
 }
