@@ -1,19 +1,93 @@
-Info 0    [17:56:45.814] Starting TS Server
-Info 1    [17:56:45.814] Version: 4.3.2
-Info 2    [17:56:45.814] Arguments: /home/stanzu10/.nvm/versions/node/v14.16.1/bin/node /home/stanzu10/.nvm/versions/node/v14.16.1/bin/tsserver --logFile /home/stanzu10/Dev/git/record/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/17e2ee7566a23bc5481a245923939c0c/tscancellation*
-Info 3    [17:56:45.814] Platform: linux NodeVersion: 14 CaseSensitive: true
-Info 4    [17:56:45.814] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
-Info 5    [17:56:45.828] Search path: /home/stanzu10/Dev/git/record/API/client/src/components/Header
-Info 6    [17:56:45.829] For info: /home/stanzu10/Dev/git/record/API/client/src/components/Header/Header.js :: No config files found.
-Info 7    [17:56:45.833] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
-Info 8    [17:56:47.851] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true Elapsed: 2018.1201370004565ms
-Info 9    [17:56:47.851] Project '/dev/null/inferredProject1*' (Inferred)
-Info 10   [17:56:47.851] 	Files (177)
+Info 0    [16:02:03.918] Starting TS Server
+Info 1    [16:02:03.918] Version: 4.3.2
+Info 2    [16:02:03.918] Arguments: /home/stanzu10/.nvm/versions/node/v14.16.1/bin/node /home/stanzu10/.nvm/versions/node/v14.16.1/bin/tsserver --logFile /home/stanzu10/Dev/git/record/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/224e267a16a7645f97d7bdee8444813a/tscancellation*
+Info 3    [16:02:03.918] Platform: linux NodeVersion: 14 CaseSensitive: true
+Info 4    [16:02:03.918] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [16:02:03.929] Search path: /home/stanzu10/Dev/git/record/API/client/src/components/DynamicBanner
+Info 6    [16:02:03.930] For info: /home/stanzu10/Dev/git/record/API/client/src/components/DynamicBanner/DynamicBanner.js :: No config files found.
+Info 7    [16:02:03.934] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 8    [16:02:05.837] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true Elapsed: 1903.3722449988127ms
+Info 9    [16:02:05.838] Project '/dev/null/inferredProject1*' (Inferred)
+Info 10   [16:02:05.838] 	Files (215)
 
-Info 11   [17:56:47.852] -----------------------------------------------
-Info 12   [17:56:47.885] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject1*
-Info 13   [17:56:48.842] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject1* Version: 1 structureChanged: true Elapsed: 957.1849540006369ms
-Info 14   [17:56:48.842] Project '/dev/null/autoImportProviderProject1*' (AutoImportProvider)
-Info 15   [17:56:48.842] 	Files (217)
+Info 11   [16:02:05.838] -----------------------------------------------
+Info 12   [16:02:05.865] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject1*
+Info 13   [16:02:06.769] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject1* Version: 1 structureChanged: true Elapsed: 904.2994470000267ms
+Info 14   [16:02:06.770] Project '/dev/null/autoImportProviderProject1*' (AutoImportProvider)
+Info 15   [16:02:06.770] 	Files (216)
 
-Info 16   [17:56:48.842] -----------------------------------------------
+Info 16   [16:02:06.770] -----------------------------------------------
+Info 17   [16:02:27.393] Search path: /home/stanzu10/Dev/git/record/API/client/src/components/Pages/Home
+Info 18   [16:02:27.393] For info: /home/stanzu10/Dev/git/record/API/client/src/components/Pages/Home/Home.js :: No config files found.
+Info 19   [16:02:27.394] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
+Info 20   [16:02:27.554] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 1 structureChanged: true Elapsed: 159.8789429999888ms
+Info 21   [16:02:27.554] Project '/dev/null/inferredProject2*' (Inferred)
+Info 22   [16:02:27.554] 	Files (221)
+
+Info 23   [16:02:27.554] -----------------------------------------------
+Info 24   [16:02:27.576] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject2*
+Info 25   [16:02:27.638] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject2* Version: 1 structureChanged: true Elapsed: 62.05219600349665ms
+Info 26   [16:02:27.638] Project '/dev/null/autoImportProviderProject2*' (AutoImportProvider)
+Info 27   [16:02:27.638] 	Files (215)
+
+Info 28   [16:02:27.638] -----------------------------------------------
+Info 29   [16:02:27.640] `remove Project::
+Info 30   [16:02:27.640] Project '/dev/null/inferredProject1*' (Inferred)
+Info 31   [16:02:27.640] 	Files (215)
+
+Info 32   [16:02:27.640] -----------------------------------------------
+Info 33   [16:02:27.640] Project '/dev/null/autoImportProviderProject1*' (AutoImportProvider)
+Info 34   [16:02:27.640] 	Files (216)
+
+Info 35   [16:02:27.640] -----------------------------------------------
+Info 36   [16:02:27.643] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
+Info 37   [16:02:27.673] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 2 structureChanged: false Elapsed: 29.75272299721837ms
+Info 38   [16:02:27.673] Different program with same set of files:: structureIsReused:: 2
+Info 39   [16:02:35.824] Starting updateGraphWorker: Project: /dev/null/inferredProject3*
+Info 40   [16:02:35.935] Finishing updateGraphWorker: Project: /dev/null/inferredProject3* Version: 1 structureChanged: true Elapsed: 110.59428299963474ms
+Info 41   [16:02:35.935] Project '/dev/null/inferredProject3*' (Inferred)
+Info 42   [16:02:35.935] 	Files (215)
+
+Info 43   [16:02:35.935] -----------------------------------------------
+Info 44   [16:02:35.952] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject3*
+Info 45   [16:02:36.008] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject3* Version: 1 structureChanged: true Elapsed: 56.20798599720001ms
+Info 46   [16:02:36.008] Project '/dev/null/autoImportProviderProject3*' (AutoImportProvider)
+Info 47   [16:02:36.008] 	Files (216)
+
+Info 48   [16:02:36.008] -----------------------------------------------
+Info 49   [16:02:46.206] Search path: /home/stanzu10/Dev/git/record/API/client/src/services/api
+Info 50   [16:02:46.206] For info: /home/stanzu10/Dev/git/record/API/client/src/services/api/products.js :: No config files found.
+Info 51   [16:02:46.206] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
+Info 52   [16:02:46.209] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 3 structureChanged: true Elapsed: 2.431452002376318ms
+Info 53   [16:02:46.209] Project '/dev/null/inferredProject2*' (Inferred)
+Info 54   [16:02:46.209] 	Files (0)
+
+Info 55   [16:02:46.209] -----------------------------------------------
+Info 56   [16:02:46.209] Project '/dev/null/autoImportProviderProject2*' (AutoImportProvider)
+Info 57   [16:02:46.209] 	Files (215)
+
+Info 58   [16:02:46.209] -----------------------------------------------
+Info 59   [16:02:46.209] Starting updateGraphWorker: Project: /dev/null/inferredProject4*
+Info 60   [16:02:46.294] Finishing updateGraphWorker: Project: /dev/null/inferredProject4* Version: 1 structureChanged: true Elapsed: 84.39818799868226ms
+Info 61   [16:02:46.294] Project '/dev/null/inferredProject4*' (Inferred)
+Info 62   [16:02:46.294] 	Files (210)
+
+Info 63   [16:02:46.294] -----------------------------------------------
+Info 64   [16:02:46.310] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject4*
+Info 65   [16:02:46.381] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject4* Version: 1 structureChanged: true Elapsed: 70.9012239985168ms
+Info 66   [16:02:46.381] Project '/dev/null/autoImportProviderProject4*' (AutoImportProvider)
+Info 67   [16:02:46.381] 	Files (217)
+
+Info 68   [16:02:46.381] -----------------------------------------------
+Info 69   [16:02:46.382] `remove Project::
+Info 70   [16:02:46.382] Project '/dev/null/inferredProject2*' (Inferred)
+Info 71   [16:02:46.382] 	Files (0)
+
+Info 72   [16:02:46.382] -----------------------------------------------
+Info 73   [16:02:46.382] Project '/dev/null/autoImportProviderProject2*' (AutoImportProvider)
+Info 74   [16:02:46.382] 	Files (215)
+
+Info 75   [16:02:46.382] -----------------------------------------------
+Info 76   [16:02:46.384] Starting updateGraphWorker: Project: /dev/null/inferredProject4*
+Info 77   [16:02:46.404] Finishing updateGraphWorker: Project: /dev/null/inferredProject4* Version: 2 structureChanged: false Elapsed: 20.542566001415253ms
+Info 78   [16:02:46.404] Different program with same set of files:: structureIsReused:: 2

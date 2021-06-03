@@ -21,6 +21,7 @@ namespace API
             services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<ISpotifyApiHelper, SpotifyApiHelper>();
             services.AddScoped<ISpotifyAlbumService, SpotifyAlbumService>();
+            services.AddScoped<ISpotifySearchService, SpotifySearchService>();
         }
     }
 }

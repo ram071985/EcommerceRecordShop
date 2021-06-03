@@ -19,6 +19,9 @@ namespace Integrations.Spotify.Objects
         
         [JsonProperty("genres")]
         public List<string> Genres { get; set; }
+        
+        [JsonProperty("name")] 
+        public string Name { get; set; }
     }
 
     [NotMapped]
