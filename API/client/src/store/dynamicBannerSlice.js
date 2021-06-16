@@ -29,12 +29,12 @@ const dynamicBannerSlice = createSlice({
     prev(state) {
       state.activeIndex =
         state.activeIndex - 1 < 0
-          ? state.artistsSlides.length - 1
+          ? state.artistSlides.length - 1
           : state.activeIndex - 1;
     },
     next(state) {
       state.activeIndex =
-        state.activeIndex + 1 > state.artistsSlides.length - 1
+        state.activeIndex + 1 > state.artistSlides.length - 1
           ? 0
           : state.activeIndex + 1;
     },

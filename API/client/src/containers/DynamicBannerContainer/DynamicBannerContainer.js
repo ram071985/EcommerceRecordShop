@@ -1,81 +1,37 @@
 import React, { useState, useEffect } from "react";
 import DynamicBanner from "../../components/DynamicBanner/DynamicBanner";
 import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
-import { fetchRandomProducts } from "../../services/api/products";
-import { useDispatch } from "react-redux";
+// import { fetchRandomProducts } from "../../services/api/products";
+import { useDispatch, useSelector } from "react-redux";
 import { getRandomProducts } from "../../store/dynamicBannerSlice";
+import { dynamicBannerActions } from "../../store/dynamicBannerSlice";
 
 const DynamicBannerContainer = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
-  const [albumSlides, setAlbumSlides] = useState([]);
-  const [artistsSlides, setArtistsSlides] = useState([]);
+  const { albumSlides, artistSlides, activeIndex, status } = useSelector(
+    (state) => state.dynamicBanner
+  );
 
   useEffect(() => {
-    //Testing
     dispatch(getRandomProducts({ count: 5 }));
-    fetchRandomProducts(5)
-      .then((res) => {
-        const newAlbumSlides = [];
-        const newArtistSlides = [];
-        res.map((product) => {
-          const {
-            artistId,
-            imageUrl,
-            artistData,
-            name,
-            recordLabel,
-            artistName,
-          } = product.album;
-
-          newAlbumSlides.push({
-            id: artistId,
-            src: imageUrl,
-            alt: `Album ${name}`,
-            title: name,
-            subtitle: recordLabel,
-          });
-
-          newArtistSlides.push({
-            id: artistId,
-            src: artistData.artistImageUrls[1].url,
-            alt: `Artist ${artistName}`,
-            title: artistName,
-            subtitle: recordLabel,
-          });
-        });
-
-        setAlbumSlides(newAlbumSlides);
-        setArtistsSlides(newArtistSlides);
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   }, [dispatch]);
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const next = () => {
-    const slideIdx =
-      activeIndex + 1 > artistsSlides.length - 1 ? 0 : activeIndex + 1;
-    setActiveIndex(slideIdx);
+  const prevHandler = () => {
+    dispatch(dynamicBannerActions.prev());
   };
 
-  const prev = () => {
-    const slideIdx =
-      activeIndex - 1 < 0 ? artistsSlides.length - 1 : activeIndex - 1;
-    setActiveIndex(slideIdx);
+  const nextHandler = () => {
+    dispatch(dynamicBannerActions.next());
   };
   return (
     <div>
-      {!isLoading ? (
+      {status === "success" ? (
         <DynamicBanner
-          detailsSlides={artistsSlides}
+          detailsSlides={artistSlides}
           productsSlides={albumSlides}
           activeIndex={activeIndex}
-          prev={prev}
-          next={next}
+          prev={prevHandler}
+          next={nextHandler}
         />
       ) : (
         <LoadingSpinner style={{ marginTop: "100px" }} />
