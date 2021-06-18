@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "./store/configStore";
 
 //Global CoreUI icons
-import { icons } from "./assets/icons";
+import icons from "./assets/icons";
 React.icons = icons;
 
 ReactDOM.render(

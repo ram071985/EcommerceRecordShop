@@ -14,4 +14,4 @@ const icons = Object.assign(
     cilArrowThickRight,
   }
 );
-export { icons };
+export default icons;
