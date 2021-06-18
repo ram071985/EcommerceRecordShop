@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./DynamicBanner.scss";
 import Carousel from "../UI/Carousel/Carousel";
 import useWindowDimensions from "../../hooks/useWindowDimensions/useWindowDimensions";

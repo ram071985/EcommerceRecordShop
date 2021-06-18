@@ -8,7 +8,7 @@ const fetchRandomProducts = async (count) => {
       throw new Error("Fetch Products API call failed");
     }
 
-    return res.data;
+    return res;
   } catch (error) {
     throw error;
   }

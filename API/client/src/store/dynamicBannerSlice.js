@@ -1,18 +1,15 @@
-import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchRandomProducts } from "../services/api/products";
+import { APIStatus } from "./constants/apiStatus";
 
 export const getRandomProducts = createAsyncThunk(
   "dynamicBanner/getRandomProducts",
-  async ({ count }) => {
+  async ({ count }, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`/products/random/${count}`);
-      if (res.status !== 200) {
-        throw new Error("Fetch Products API call failed");
-      }
-
-      return res.data;
+      const response = await fetchRandomProducts(count);
+      return response.data;
     } catch (error) {
-      throw error;
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -41,7 +38,7 @@ const dynamicBannerSlice = createSlice({
   },
   extraReducers: {
     [getRandomProducts.pending]: (state) => {
-      state.status = "loading";
+      state.status = APIStatus.LOADING;
     },
     [getRandomProducts.fulfilled]: (state, { payload }) => {
       payload.map((product) => {
@@ -71,10 +68,10 @@ const dynamicBannerSlice = createSlice({
         });
       });
 
-      state.status = "success";
+      state.status = APIStatus.SUCCESS;
     },
     [getRandomProducts.rejected]: (state, action) => {
-      state.status = "failed";
+      state.status = APIStatus.FAILED;
     },
   },
 });

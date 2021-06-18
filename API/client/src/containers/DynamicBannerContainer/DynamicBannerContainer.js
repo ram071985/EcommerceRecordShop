@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import DynamicBanner from "../../components/DynamicBanner/DynamicBanner";
 import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
-// import { fetchRandomProducts } from "../../services/api/products";
 import { useDispatch, useSelector } from "react-redux";
 import { getRandomProducts } from "../../store/dynamicBannerSlice";
 import { dynamicBannerActions } from "../../store/dynamicBannerSlice";
+import { APIStatus } from "../../store/constants/apiStatus";
 
 const DynamicBannerContainer = () => {
   const dispatch = useDispatch();
@@ -23,9 +23,12 @@ const DynamicBannerContainer = () => {
   const nextHandler = () => {
     dispatch(dynamicBannerActions.next());
   };
-  return (
-    <div>
-      {status === "success" ? (
+
+  const dynamicBannerHandler = () => {
+    if (status === APIStatus.LOADING) {
+      return <LoadingSpinner style={{ marginTop: "100px" }} />;
+    } else if (status === APIStatus.SUCCESS) {
+      return (
         <DynamicBanner
           detailsSlides={artistSlides}
           productsSlides={albumSlides}
@@ -33,11 +36,15 @@ const DynamicBannerContainer = () => {
           prev={prevHandler}
           next={nextHandler}
         />
-      ) : (
-        <LoadingSpinner style={{ marginTop: "100px" }} />
-      )}
-    </div>
-  );
+      );
+    } else if (status === APIStatus.FAILED) {
+      return (
+        <div>Oops, we've encountered an error. Could not load banner.</div>
+      );
+    }
+  };
+
+  return <div>{dynamicBannerHandler()}</div>;
 };
 
 export default DynamicBannerContainer;
