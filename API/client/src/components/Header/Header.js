@@ -1,6 +1,8 @@
 import { CNavbar, CToggler } from "@coreui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { headerActions } from "../../store/headerSlice";
 import "./Header.scss";
 
 import NavbarLinks from "./NavbarLinks/NavbarLinks";
@@ -8,71 +10,58 @@ import DrawerModal from "./DrawerModal/DrawerModal";
 import DrawerMenu from "./DrawerMenu/DrawerMenu";
 import Searchbar from "./Searchbar/Searchbar";
 
-// TODO: Remove shop from navbar when the drawer is open. Copy the logic similar to Collapsible Navbar.
-
-const Header = (props) => {
+const Header = () => {
   let location = useLocation();
-  const [showDrawer, setShowDrawer] = useState(false);
-  const [showSearchbar, setShowSearchbar] = useState(false);
-
-  const [loggedIn] = useState(true);
-  const [headerIsSolid, setHeaderIsSolid] = useState(true);
+  const dispatch = useDispatch();
+  const { openDrawer, showSearchbar, loggedIn, headerIsSolid } = useSelector(
+    (state) => state.header
+  );
 
   useEffect(() => {
-    if (location.pathname === "/home" || location.pathname === "/") {
-      setHeaderIsSolid(false);
-    } else {
-      setHeaderIsSolid(true);
-    }
-  }, [location.pathname]);
+    dispatch(headerActions.updateHeaderTransparency(location.pathname));
+  }, [location.pathname, openDrawer, showSearchbar, dispatch]);
 
   const drawerLinks = [
     {
       id: "shop",
       name: "Shop",
       path: "/shop",
-      clicked: () => setShowDrawer(false),
+      clicked: () => dispatch(headerActions.closeDrawer()),
     },
   ];
 
-  const toggleSearchbar = () => {
-    const newValue = !showSearchbar;
-    setShowSearchbar(newValue);
-  };
+  const toggleSearchbarHandler = () =>
+    dispatch(headerActions.toggleSearchbar());
+  const hideSearchbarHandler = () => dispatch(headerActions.hideSearchbar());
 
-  const toggleDrawer = () => {
-    const newValue = !showDrawer;
-    setShowDrawer(newValue);
-  };
-
-  const isNavbarSolid = () => showSearchbar || showDrawer || headerIsSolid;
+  const toggleDrawerHandler = () => dispatch(headerActions.toggleDrawer());
+  const closeDrawerHandler = () => dispatch(headerActions.closeDrawer());
 
   return (
     <header style={{ position: `${headerIsSolid ? "relative" : "absolute"}` }}>
       <div className="headerContent">
         <CNavbar
-          className={`customNavbar ${isNavbarSolid() ? "solid" : ""}`}
+          className={`customNavbar ${headerIsSolid ? "solid" : ""}`}
           sticky
           light
           expandable="sm"
         >
-          {loggedIn ? <CToggler inNavbar onClick={toggleDrawer} /> : null}
+          {loggedIn ? (
+            <CToggler inNavbar onClick={toggleDrawerHandler} />
+          ) : null}
           <NavbarLinks
             loggedIn={loggedIn}
-            drawerIsOpen={showDrawer}
+            drawerIsOpen={openDrawer}
             links={drawerLinks}
-            showSearchbar={toggleSearchbar}
+            showSearchbar={toggleSearchbarHandler}
           />
         </CNavbar>
 
         {loggedIn ? (
-          <Searchbar
-            active={showSearchbar}
-            close={() => setShowSearchbar(false)}
-          />
+          <Searchbar active={showSearchbar} close={hideSearchbarHandler} />
         ) : null}
 
-        <DrawerModal isOpen={showDrawer} close={() => setShowDrawer(false)}>
+        <DrawerModal isOpen={openDrawer} close={closeDrawerHandler}>
           <DrawerMenu links={drawerLinks} />
         </DrawerModal>
       </div>
