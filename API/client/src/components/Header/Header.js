@@ -29,10 +29,7 @@ const Header = () => {
       clicked: () => dispatch(headerActions.closeDrawer()),
     },
   ];
-
-  const toggleSearchbarHandler = () =>
-    dispatch(headerActions.toggleSearchbar());
-  const hideSearchbarHandler = () => dispatch(headerActions.hideSearchbar());
+  const closeSearchbarHandler = () => dispatch(headerActions.closeSearchbar());
 
   const toggleDrawerHandler = () => dispatch(headerActions.toggleDrawer());
   const closeDrawerHandler = () => dispatch(headerActions.closeDrawer());
@@ -53,12 +50,11 @@ const Header = () => {
             loggedIn={loggedIn}
             drawerIsOpen={openDrawer}
             links={drawerLinks}
-            showSearchbar={toggleSearchbarHandler}
           />
         </CNavbar>
 
         {loggedIn ? (
-          <Searchbar active={showSearchbar} close={hideSearchbarHandler} />
+          <Searchbar active={showSearchbar} close={closeSearchbarHandler} />
         ) : null}
 
         <DrawerModal isOpen={openDrawer} close={closeDrawerHandler}>

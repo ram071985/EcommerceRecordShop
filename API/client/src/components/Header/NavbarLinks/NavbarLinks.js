@@ -3,10 +3,12 @@ import { CNavbarBrand } from "@coreui/react";
 import LoggedInNavbar from "./LoggedInNavbar/LoggedInNavbar";
 import LoggedOutNavbar from "./LoggedOutNavbar/LoggedOutNavbar";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./NavbarLinks.scss";
 
 const NavbarLinks = (props) => {
   const history = useHistory();
+  const { loggedIn } = useSelector((state) => state.header);
 
   return (
     <>
@@ -17,14 +19,7 @@ const NavbarLinks = (props) => {
         NavbarBrand
       </CNavbarBrand>
 
-      {props.loggedIn ? (
-        <LoggedInNavbar
-          links={props.links}
-          showSearchbar={props.showSearchbar}
-        />
-      ) : (
-        <LoggedOutNavbar />
-      )}
+      {loggedIn ? <LoggedInNavbar links={props.links} /> : <LoggedOutNavbar />}
     </>
   );
 };

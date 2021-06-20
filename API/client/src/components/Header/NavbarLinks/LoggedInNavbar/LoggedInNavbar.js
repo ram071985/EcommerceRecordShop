@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LoggedInNavbar.scss";
 import {
   CNavbarNav,
@@ -10,11 +10,14 @@ import {
   CDropdownItem,
 } from "@coreui/react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { headerActions } from "../../../../store/headerSlice";
 import useWindowDimensions from "../../../../hooks/useWindowDimensions/useWindowDimensions";
 
 const LoggedInNavbar = (props) => {
   const history = useHistory();
   const { width } = useWindowDimensions();
+  const dispatch = useDispatch();
 
   const handleCartLink = () => {
     console.log("Load Cart");
@@ -23,6 +26,9 @@ const LoggedInNavbar = (props) => {
   const handleLogOut = () => {
     console.log("Loggin out");
   };
+
+  const toggleSearchbarHandler = () =>
+    dispatch(headerActions.toggleSearchbar());
 
   const navbarLeft = (
     <CNavbarNav
@@ -45,7 +51,7 @@ const LoggedInNavbar = (props) => {
       className="ml-auto"
     >
       <CButton
-        onClick={props.showSearchbar}
+        onClick={toggleSearchbarHandler}
         style={{ width: "50px", height: "37px" }}
       >
         <ion-icon name="search"></ion-icon>

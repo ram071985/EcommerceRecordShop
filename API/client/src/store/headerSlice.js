@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Searchbar from "../components/Header/Searchbar/Searchbar";
 
 const headerSlice = createSlice({
   name: "header",
@@ -16,7 +15,7 @@ const headerSlice = createSlice({
     toggleDrawer(state) {
       state.openDrawer = !state.openDrawer;
     },
-    hideSearchbar(state) {
+    closeSearchbar(state) {
       state.showSearchbar = false;
     },
     closeDrawer(state) {
